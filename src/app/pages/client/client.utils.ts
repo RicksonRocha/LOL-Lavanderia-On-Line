@@ -1,0 +1,1 @@
+export const dateFormatter = (date: Date) => date.toLocaleString()
