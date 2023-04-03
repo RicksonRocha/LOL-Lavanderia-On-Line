@@ -3,13 +3,12 @@
       <div class="header-body">
         <!-- Card stats -->
         <div class="row">
-
           <div class="col" *ngFor="let report of reports">
             <div class="card card-stats mb-4 mb-xl-0 border border-5 border-{{report.color}}">
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-{{report.color}} mb-0">{{report.title}}</h5>
+                    <h5 class="card-title text-uppercase text-{{report.color}} mb-0">{{report.label}}</h5>
                     <span class="h2 font-weight-bold mb-0">{{report.total}}</span>
                   </div>
                   <!-- <div class="col-auto">
@@ -21,79 +20,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="col">
-            <div class="card card-stats mb-4 mb-xl-0">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Em aberto</h5>
-                    <span class="h2 font-weight-bold mb-0">2,356</span>
-                  </div>
-                  <div class="col-auto">
-                    <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                      <i class="fas fa-chart-pie"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card card-stats mb-4 mb-xl-0">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Rejeitado</h5>
-                    <span class="h2 font-weight-bold mb-0">924</span>
-                  </div>
-                  <div class="col-auto">
-                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                      <i class="fas fa-users"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card card-stats mb-4 mb-xl-0">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Cancelado</h5>
-                    <span class="h2 font-weight-bold mb-0">49,65%</span>
-                  </div>
-                  <div class="col-auto">
-                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                      <i class="fas fa-percent"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="card card-stats mb-4 mb-xl-0">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Aguardando pagamento</h5>
-                    <span class="h2 font-weight-bold mb-0">49,65%</span>
-                  </div>
-                  <div class="col-auto">
-                    <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                      <i class="fas fa-percent"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
         </div>
       </div>
     </div>
@@ -110,11 +36,11 @@
             <h3 class="text-white mb-0">
               Pedidos
               <div class="btn-group float-right" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary" (click)="handleStatus('tudo')">Tudo</button>
-                <button type="button" class="btn btn-secondary" (click)="handleStatus('aberto')">Abertos</button>
-                <button type="button" class="btn btn-secondary" (click)="handleStatus('aguardando')">Aguardando pagamento</button>
-                <button type="button" class="btn btn-secondary" (click)="handleStatus('rejeitado')">Rejeitado</button>
-                <button type="button" class="btn btn-secondary" (click)="handleStatus('cancelado')">Cancelado</button>
+                <button type="button" class="btn btn-info" (click)="handleStatus('tudo')">Tudo</button>
+                <button type="button" class="btn btn-warning" (click)="handleStatus('aberto')">Abertos</button>
+                <button type="button" class="btn btn-success" (click)="handleStatus('aguardando')">Aguardando pagamento</button>
+                <button type="button" class="btn btn-danger" (click)="handleStatus('rejeitado')">Rejeitado</button>
+                <button type="button" class="btn btn-primary" (click)="handleStatus('cancelado')">Cancelado</button>
               </div>
             </h3>
           </div>          
