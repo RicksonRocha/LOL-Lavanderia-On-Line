@@ -48,7 +48,7 @@ const TABLEHEADS: ITableHeads[] = [
 const REPORTS: IReport[] = [
     {title: 'tudo', label: 'Total', total: 1, color: 'info'},
     {title: 'aberto', label: 'Abertos', total: 1, color: 'warning'},
-    {title: 'rejeitado', label: 'Rejeitados,', total: 1, color: 'error'},
+    {title: 'rejeitado', label: 'Rejeitados', total: 1, color: 'error'},
     {title: 'cancelado', label: 'Cancelados', total: 1, color: 'primary'},
     {title: 'aguardando', label: 'Aguardando pagamento', total: 1, color: 'success'},
 ]
