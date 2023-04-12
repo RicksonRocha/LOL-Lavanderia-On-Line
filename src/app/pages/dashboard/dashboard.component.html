@@ -37,18 +37,7 @@
           <tr id='addr0' data-id="0" class="hidden">
           <td data-name="name">
             <select name="sel0" class="form-control">
-              <option value="">Selecione uma opção</option>
-              <option value="1">Jeans</option>
-              <option value="2">Camisa</option>
-              <option value="3">Camiseta</option>
-              <option value="4">Calça</option>
-              <option value="5">Bermuda</option>
-              <option value="6">Moleton</option>
-              <option value="7">Roupa de cama</option>
-              <option value="8">Panos</option>
-              <option value="9">Roupa íntima</option>
-              <option value="10">Meias</option>
-              <option value="11">Sapato</option>
+              <option *ngFor="let option of options;" value="{{option.value}}">{{option.label}}</option>
             </select>
           </td>
           <td data-name="name">
