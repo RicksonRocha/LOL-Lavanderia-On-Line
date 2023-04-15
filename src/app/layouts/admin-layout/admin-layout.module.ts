@@ -9,6 +9,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClientComponent } from 'src/app/pages/client/client.component';
+import { PurchaseComponent } from 'src/app/pages/purchase/purchase.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -20,6 +21,6 @@ import { ClientComponent } from 'src/app/pages/client/client.component';
     NgbModule,
     ClipboardModule,
   ],
-  declarations: [DashboardComponent, ClientComponent],
+  declarations: [DashboardComponent, ClientComponent, PurchaseComponent],
 })
 export class AdminLayoutModule {}
