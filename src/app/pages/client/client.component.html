@@ -1,90 +1,102 @@
 <div class="header bg-gradient-danger pb-7 pt-5 pt-md-8">
-    <div class="container-fluid">
-      <div class="header-body">
-        <!-- Card stats -->
-        <div class="row">
-          <div class="col" *ngFor="let report of reports">
-            <div class="card card-stats mb-4 mb-xl-0 border border-5 border-{{report.color}}">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h5 class="card-title text-uppercase text-{{report.color}} mb-0">{{report.label}}</h5>
-                    <span class="h2 font-weight-bold mb-0">{{report.total}}</span>
-                  </div>
-                  <!-- <div class="col-auto">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col" *ngFor="let report of reports">
+          <div class="card card-stats mb-4 mb-xl-0 border border-5 border-{{ report.color }}">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-{{ report.color }} mb-0">
+                    {{ report.label }}
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0">{{ report.total }}</span>
+                </div>
+                <!-- <div class="col-auto">
                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
                       <i class="fas fa-chart-bar"></i>
                     </div>
                   </div> -->
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 <div class="container-fluid mt--7">
-    <!-- Table -->
-    
-    <!-- Dark table -->
-    <div class="row mt-5">
-      <div class="col">
-        <div class="card bg-default shadow">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="text-white mb-0">
-              Pedidos
-              <div class="btn-group float-right" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-info" (click)="handleStatus('tudo')">Tudo</button>
-                <button type="button" class="btn btn-warning" (click)="handleStatus('aberto')">Abertos</button>
-                <button type="button" class="btn btn-success" (click)="handleStatus('aguardando')">Aguardando pagamento</button>
-                <button type="button" class="btn btn-danger" (click)="handleStatus('rejeitado')">Rejeitado</button>
-                <button type="button" class="btn btn-primary" (click)="handleStatus('cancelado')">Cancelado</button>
-              </div>
-            </h3>
-          </div>          
+  <!-- Table -->
 
-          <div class="table-responsive">
-            <table class="table align-items-center table-dark table-flush">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
-                    {{head.title}}
-                  </th>                  
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let order of orders; index as i; first as isFirst">
-                  <th scope="row">
-                    <div class="media align-items-center">                      
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">{{order.orderId}}</span>
-                      </div>
+  <!-- Dark table -->
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">
+            Pedidos
+            <div class="btn-group float-right" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-info" (click)="handleStatus('tudo')">
+                Tudo
+              </button>
+              <button type="button" class="btn btn-warning" (click)="handleStatus('aberto')">
+                Abertos
+              </button>
+              <button type="button" class="btn btn-success" (click)="handleStatus('aguardando')">
+                Aguardando pagamento
+              </button>
+              <button type="button" class="btn btn-danger" (click)="handleStatus('rejeitado')">
+                Rejeitado
+              </button>
+              <button type="button" class="btn btn-primary" (click)="handleStatus('cancelado')">
+                Cancelado
+              </button>
+            </div>
+          </h3>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                  {{ head.title }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders; index as i; first as isFirst">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{ order.orderId }}</span>
                     </div>
-                  </th>
-                  <td>{{order.date}}</td>
-                  <td>{{order.status}}</td>
-                  <td>
-                    <span class="badge badge-dot mr-4">
-                      {{order.price}}
-                    </span>
-                  </td>                                    
-                  <td class="text-right">
-                    <div ngbDropdown placement="bottom-right">
-                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="javascript:void(0)">Pagar</a>
-                      </div>
+                  </div>
+                </th>
+                <td>{{ order.date }}</td>
+                <td>{{ order.status }}</td>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    {{ order.price }}
+                  </span>
+                </td>
+                <td class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" href="javascript:void(0)">Pagar</a>
                     </div>
-                  </td>
-                </tr>                
-              </tbody>
-            </table>
-          </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+</div>
