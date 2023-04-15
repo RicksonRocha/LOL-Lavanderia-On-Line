@@ -30,6 +30,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     $(document).ready(function () {
+      $(document).on('click', '.close', function () {
+        $(this).parent().hide();
+      });
+
       $('#add_row').on('click', function () {
         // Dynamic Rows Code
 
@@ -71,16 +75,6 @@ export class DashboardComponent implements OnInit {
           }
         });
 
-        // add delete button and td
-        /*
-          $("<td></td>").append(
-              $("<button class='btn btn-danger glyphicon glyphicon-remove row-remove'></button>")
-                  .click(function() {
-                      $(this).closest("tr").remove();
-                  })
-          ).appendTo($(tr));
-          */
-
         // add the new row
         $(tr).appendTo($('#tab_logic'));
 
@@ -113,5 +107,13 @@ export class DashboardComponent implements OnInit {
 
       $('#add_row').trigger('click');
     });
+  }
+
+  public handleAlert() {
+    alert('Orçamento rejeitado!');
+  }
+
+  public handleAlert2() {
+    alert('Orçamento aceito!');
   }
 }

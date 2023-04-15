@@ -1,5 +1,54 @@
 <div class="header bg-gradient-danger pb-7 pt-5 pt-md-8">
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-5">
+               <div class="row d-flex align-items-center mb-2">
+                 <div class="col-auto">
+                   <div class="icon icon-shape bg-white text-danger rounded-circle shadow">
+                     <i class="fa fa-shopping-cart"></i>
+                   </div>
+                 </div>
+                 <div class="col">
+                   <h2 class="text-white">Filtre por data</h2>
+                 </div>
+               </div>
+      
+               <div class="card card-stats mb-4 mb-xl-0 border border-5 border-primary">
+                 <div class="card-body">
+                   <form role="form">
+                     <div class="form-group mb-4">
+                       <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                            <label class="form-check-label">Data de início</label>
+                        </div>
+                       </div>
+                       <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                            <input class="form-control input-sm" id="start-date" type="date">
+                        </div>
+                       </div>
+                     </div>
+                     <div class="form-group mb-4">
+                       <div class="input-group input-group-alternative">
+                           <div class="input-group-prepend">
+                               <label class="custom-label">Data de fim</label>
+                           </div>
+                       </div>
+                       <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                            <input class="form-control input-sm" id="end-date" type="date">
+                        </div>
+                    </div>
+                     </div>
+                     <div>
+                       <button type="button" class="btn btn-primary my-4">Pesquisar</button>
+                     </div>
+                   </form>
+                 </div>
+               </div>
+             </div>
+           </div>
+        <br>
       <div class="header-body">
         <!-- Card stats -->
         <div class="row">
@@ -38,9 +87,10 @@
               <div class="btn-group float-right" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-info" (click)="handleStatus('tudo')">Tudo</button>
                 <button type="button" class="btn btn-warning" (click)="handleStatus('aberto')">Abertos</button>
-                <button type="button" class="btn btn-success" (click)="handleStatus('aguardando')">Aguardando pagamento</button>
-                <button type="button" class="btn btn-danger" (click)="handleStatus('rejeitado')">Rejeitado</button>
-                <button type="button" class="btn btn-primary" (click)="handleStatus('cancelado')">Cancelado</button>
+                <button type="button" class="btn btn-dark" (click)="handleStatus('recolhido')">Recolhido</button>
+                <button type="button" class="btn btn-primary" (click)="handleStatus('aguardando')">Aguardando pagamento</button>       
+                <button type="button" class="btn btn-warning" (click)="handleStatus('pago')">Pago</button>
+                <button type="button" class="btn btn-success" (click)="handleStatus('finalizado')">Finalizado</button>
               </div>
             </h3>
           </div>          
@@ -76,8 +126,9 @@
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert()">Pagar</a>
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert2()">Cancelar</a>
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert()">Confirmar retirada</a>
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert2()">Confirmar lavagem</a>
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert3()">Confirmar pagamento</a>
                       </div>
                     </div>
                   </td>

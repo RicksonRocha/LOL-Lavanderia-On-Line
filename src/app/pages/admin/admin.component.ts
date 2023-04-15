@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { currencyFormatter, dateFormatter } from '../utils';
-import { IOrders, IStatus, ITableHeads, ORDERS, REPORTS, TABLEHEADS } from './client.types';
+import { IOrders, IStatus, ITableHeads, ORDERS, REPORTS, TABLEHEADS } from './admin.types';
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.scss'],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss'],
 })
-export class ClientComponent implements OnInit {
+export class AdminComponent implements OnInit {
   public status: IStatus = 'aberto';
   public orders: IOrders[];
   public tableHeads: ITableHeads[];
@@ -37,10 +37,14 @@ export class ClientComponent implements OnInit {
   }
 
   public handleAlert() {
-    alert('Pagamento efetuado!');
+    alert('Pedido retirado!');
   }
 
   public handleAlert2() {
-    alert('Pedido cancelado!');
+    alert('Pedido lavado!');
+  }
+
+  public handleAlert3() {
+    alert('Pedido pago!');
   }
 }
