@@ -26,7 +26,9 @@
                   </div>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-primary my-4">Pesquisar</button>
+                  <button type="button" class="btn btn-primary my-4" (click)="handleSearch()">
+                    Pesquisar
+                  </button>
                 </div>
               </form>
             </div>
@@ -38,9 +40,6 @@
 </div>
 
 <div class="container-fluid mt--7">
-  <!-- Table -->
-
-  <!-- Dark table -->
   <div class="row mt-5">
     <div class="col">
       <div class="card bg-default shadow">
@@ -55,35 +54,57 @@
                 <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
                   {{ head.title }}
                 </th>
-                <th scope="col">número do pedido</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let order of orders; index as i; first as isFirst">
+              <tr *ngIf="isTableVisible">
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{ order.orderId }}</span>
+                      <span class="mb-0 text-sm">{{ purchase.id }}</span>
                     </div>
                   </div>
                 </th>
-                <td>{{ order.date }}</td>
-                <td>{{ order.status }}</td>
+                <td>{{ purchase.deadline }}</td>
                 <td>
                   <span class="badge badge-dot mr-4">
-                    {{ order.price }}
+                    {{ purchase.status }}
                   </span>
                 </td>
-                <td class="text-right">
-                  <div ngbDropdown placement="bottom-right">
-                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)">Pagar</a>
+                <td>{{ purchase.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">Roupas do pedido</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" *ngFor="let head of clothesHeads; index as i; first as isFirst">
+                  {{ head.title }}
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngIf="isTableVisible">
+              <tr *ngFor="let item of purchase.items; index as i; first as isFirst">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{ item.name }}</span>
                     </div>
                   </div>
+                </th>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    {{ item.quantity }}
+                  </span>
                 </td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.deadline }}</td>
               </tr>
             </tbody>
           </table>
