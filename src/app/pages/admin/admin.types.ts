@@ -1,5 +1,15 @@
 import { currencyFormatter, dateFormatter } from '../utils';
 
+export enum ColorStatus {
+  TUDO = 'info',
+  ABERTO = 'warning',
+  RECOLHIDO = 'light',
+  CANCELADO = 'danger',
+  PAGO = 'warning2',
+  FINALIZADO = 'success',
+  AGUARDANDO = 'primary',
+}
+
 export type IStatus =
   | 'tudo'
   | 'aberto'
@@ -14,13 +24,22 @@ export interface IOrders {
   date: string | Date;
   price: string | number;
   status: IStatus;
+  color: colorStatusType;
 }
 
 export interface ITableHeads {
   title: string;
 }
 
-export type colorStatusType = 'info' | 'warning' | 'dark' | 'danger' | 'primary' | 'success';
+export type colorStatusType =
+  | 'info'
+  | 'warning'
+  | 'dark'
+  | 'light'
+  | 'danger'
+  | 'primary'
+  | 'success'
+  | 'warning2';
 export interface IReport {
   title: IStatus;
   label: string;
@@ -31,16 +50,58 @@ export interface IReport {
 export const mockDate = dateFormatter(new Date());
 
 export const ORDERS: IOrders[] = [
-  { orderId: 1, date: mockDate, price: currencyFormatter(20), status: 'aberto' },
-  { orderId: 2, date: mockDate, price: currencyFormatter(20), status: 'aberto' },
-  { orderId: 3, date: mockDate, price: currencyFormatter(20), status: 'aberto' },
-  { orderId: 4, date: mockDate, price: currencyFormatter(20), status: 'aguardando' },
-  { orderId: 5, date: mockDate, price: currencyFormatter(30), status: 'recolhido' },
-  { orderId: 6, date: mockDate, price: currencyFormatter(30), status: 'recolhido' },
-  { orderId: 7, date: mockDate, price: currencyFormatter(30), status: 'pago' },
-  { orderId: 8, date: mockDate, price: currencyFormatter(40), status: 'cancelado' },
-  { orderId: 9, date: mockDate, price: currencyFormatter(40), status: 'cancelado' },
-  { orderId: 10, date: mockDate, price: currencyFormatter(50), status: 'finalizado' },
+  { orderId: 1, date: mockDate, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
+  { orderId: 2, date: mockDate, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
+  { orderId: 3, date: mockDate, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
+  {
+    orderId: 4,
+    date: mockDate,
+    price: currencyFormatter(20),
+    status: 'aguardando',
+    color: ColorStatus.AGUARDANDO,
+  },
+  {
+    orderId: 5,
+    date: mockDate,
+    price: currencyFormatter(30),
+    status: 'recolhido',
+    color: ColorStatus.RECOLHIDO,
+  },
+  {
+    orderId: 6,
+    date: mockDate,
+    price: currencyFormatter(30),
+    status: 'recolhido',
+    color: ColorStatus.RECOLHIDO,
+  },
+  {
+    orderId: 7,
+    date: mockDate,
+    price: currencyFormatter(30),
+    status: 'pago',
+    color: ColorStatus.PAGO,
+  },
+  {
+    orderId: 8,
+    date: mockDate,
+    price: currencyFormatter(40),
+    status: 'cancelado',
+    color: ColorStatus.CANCELADO,
+  },
+  {
+    orderId: 9,
+    date: mockDate,
+    price: currencyFormatter(40),
+    status: 'cancelado',
+    color: ColorStatus.CANCELADO,
+  },
+  {
+    orderId: 10,
+    date: mockDate,
+    price: currencyFormatter(50),
+    status: 'finalizado',
+    color: ColorStatus.FINALIZADO,
+  },
 ];
 
 export const TABLEHEADS: ITableHeads[] = [

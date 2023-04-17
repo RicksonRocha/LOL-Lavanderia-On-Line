@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { currencyFormatter, dateFormatter } from '../utils';
-import { IOrders, IStatus, ITableHeads, ORDERS, REPORTS, TABLEHEADS } from './admin.types';
+import {
+  ColorStatus,
+  IOrders,
+  IStatus,
+  ITableHeads,
+  ORDERS,
+  REPORTS,
+  TABLEHEADS,
+  colorStatusType,
+} from './admin.types';
 
 @Component({
   selector: 'app-admin',
@@ -9,6 +18,7 @@ import { IOrders, IStatus, ITableHeads, ORDERS, REPORTS, TABLEHEADS } from './ad
 })
 export class AdminComponent implements OnInit {
   public status: IStatus = 'aberto';
+  public colorStatus: colorStatusType = 'warning';
   public orders: IOrders[];
   public tableHeads: ITableHeads[];
   public reports: any[];
@@ -29,6 +39,8 @@ export class AdminComponent implements OnInit {
   }
 
   public handleStatus(newStatus: IStatus) {
+    this.status = newStatus;
+    this.colorStatus = ColorStatus[newStatus.toUpperCase()];
     this.orders = this.filterStatus(newStatus);
   }
 
