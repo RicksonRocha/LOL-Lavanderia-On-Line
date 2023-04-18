@@ -13,11 +13,6 @@
                   </h5>
                   <span class="h2 font-weight-bold mb-0">{{ report.total }}</span>
                 </div>
-                <!-- <div class="col-auto">
-                    <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                      <i class="fas fa-chart-bar"></i>
-                    </div>
-                  </div> -->
               </div>
             </div>
           </div>
@@ -89,6 +84,9 @@
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
                       <a class="dropdown-item" href="javascript:void(0)">Pagar</a>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert2()"
+                        >Cancelar</a
+                      >
                     </div>
                   </div>
                 </td>

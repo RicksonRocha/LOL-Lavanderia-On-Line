@@ -58,11 +58,35 @@
       </tbody>
     </table>
   </div>
-  
 </div>
-
-  <a id="add_row" class="btn btn-primary float-left">Adicionar produto</a>
-  <a class="btn btn-danger float-right">Rejeitar orçamento</a>
-  <a class="btn btn-success float-right">Aceitar orçamento</a>
+<div class="row clearfix">
+  <div class="col-md-12 table-responsive">
+    <table class="table align-items-center">
+      <tbody>
+        <tr id='addr0' data-id="0" class="hidden">
+          <td>
+            <input type="text" name='valorfinal'  placeholder='Valor final' class="form-control float-left" readonly="true"/> 
+          </td>
+          <td>
+            <input type="text" name='prazototal'  placeholder='Prazo total' class="form-control float-left" readonly="true"/>      
+          </td>
+          <td class="float-right">
+            <a id="add_row" class="btn btn-primary">Adicionar produto</a>  
+          </td>
+        </tr> 
+      </tbody> 
+    </table>
+  </div>
 </div>
-
+<br>
+<div class="row clearfix">
+  <div class="col-md-12 table-responsive">
+    <a class="btn btn-danger float-left" id="autoclosable-btn-danger" (click)="handleAlert()" routerLinkActive="active" [routerLink]="['/client']">
+      Rejeitar orçamento
+    </a>
+    <a class="btn btn-success float-right"  id="autoclosable-btn-success" (click)="handleAlert2()" routerLinkActive="active" [routerLink]="['/client']">
+      Aceitar orçamento
+    </a>
+  </div>
+</div>
+</div>

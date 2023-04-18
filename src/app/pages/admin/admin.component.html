@@ -1,0 +1,173 @@
+<div class="header bg-gradient-danger pb-7 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <div class="row">
+        <div class="col" *ngFor="let report of reports">
+          <div class="card card-stats mb-4 mb-xl-0 border border-5 border-{{ report.color }}">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-{{ report.color }} mb-0">
+                    {{ report.label }}
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0">{{ report.total }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="row d-flex align-items-center mb-2">
+          <div class="col-auto">
+            <div class="icon icon-shape bg-white text-danger rounded-circle shadow">
+              <i class="fa fa-search"></i>
+            </div>
+          </div>
+          <div class="col">
+            <h2 class="text-white">Filtre os pedidos</h2>
+          </div>
+        </div>
+
+        <div class="card card-stats mb-4 mb-xl-0 border border-5 border-primary">
+          <div class="card-body">
+            <form role="form">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio1"
+                      value="option1"
+                    />
+                    <label class="form-check-label" for="inlineRadio1">Todos os pedidos</label>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio2"
+                      value="option2"
+                    />
+                    <label class="form-check-label" for="inlineRadio2">Pedidos de hoje</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label class="custom-label">Data de início</label>
+                  <input class="form-control input-sm" id="start-date" type="date" />
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="custom-label">Data de fim</label>
+                  <input class="form-control input-sm" id="end-date" type="date" />
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn btn-primary my-1">Pesquisar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--7">
+  <!-- Table -->
+
+  <!-- Dark table -->
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">
+            Pedidos
+            <!-- Example split danger button -->
+            <div class="btn-group float-right" ngbDropdown>
+              <button type="button" class="btn btn-{{ colorStatus }}">
+                Fitrar pedidos: <span class="text-uppercase">{{ status }}</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-{{ colorStatus }} btn-icon-only text-light"
+                ngbDropdownToggle
+              >
+                <i class="fa fa-chevron-circle-down"></i>
+              </button>
+              <div class="dropdown-menu" ngbDropdownMenu>
+                <a class="dropdown-item" (click)="handleStatus('tudo')">Tudo</a>
+                <a class="dropdown-item" (click)="handleStatus('aberto')">Aberto</a>
+                <a class="dropdown-item" (click)="handleStatus('recolhido')">Recolhido</a>
+                <a class="dropdown-item" (click)="handleStatus('aguardando')">Aguardando</a>
+                <a class="dropdown-item" (click)="handleStatus('pago')">Pago</a>
+                <a class="dropdown-item" (click)="handleStatus('finalizado')">Finalizado</a>
+              </div>
+            </div>
+          </h3>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                  {{ head.title }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders; index as i; first as isFirst">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm badge badge-pill text-{{ order.color }}">{{
+                        order.orderId
+                      }}</span>
+                    </div>
+                  </div>
+                </th>
+                <td>{{ order.date }}</td>
+                <td>
+                  <span class="text-{{ order.color }} text-uppercase">{{ order.status }}</span>
+                </td>
+                <td>
+                  <span class="badge badge-dot mr-4">
+                    {{ order.price }}
+                  </span>
+                </td>
+                <td class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert()"
+                        >Confirmar retirada</a
+                      >
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert2()"
+                        >Confirmar lavagem</a
+                      >
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert3()"
+                        >Confirmar pagamento</a
+                      >
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
