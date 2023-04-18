@@ -47,57 +47,64 @@ export interface IReport {
   color: colorStatusType;
 }
 
-export const mockDate = dateFormatter(new Date());
+const today = new Date();
+const yesterday = new Date(Date.now() - 86400000);
 
 export const ORDERS: IOrders[] = [
-  { orderId: 1, date: mockDate, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
-  { orderId: 2, date: mockDate, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
-  { orderId: 3, date: mockDate, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
+  { orderId: 1, date: today, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
+  {
+    orderId: 2,
+    date: yesterday,
+    price: currencyFormatter(20),
+    status: 'aberto',
+    color: 'warning',
+  },
+  { orderId: 3, date: today, price: currencyFormatter(20), status: 'aberto', color: 'warning' },
   {
     orderId: 4,
-    date: mockDate,
+    date: today,
     price: currencyFormatter(20),
     status: 'aguardando',
     color: ColorStatus.AGUARDANDO,
   },
   {
     orderId: 5,
-    date: mockDate,
+    date: yesterday,
     price: currencyFormatter(30),
     status: 'recolhido',
     color: ColorStatus.RECOLHIDO,
   },
   {
     orderId: 6,
-    date: mockDate,
+    date: today,
     price: currencyFormatter(30),
     status: 'recolhido',
     color: ColorStatus.RECOLHIDO,
   },
   {
     orderId: 7,
-    date: mockDate,
+    date: today,
     price: currencyFormatter(30),
     status: 'pago',
     color: ColorStatus.PAGO,
   },
   {
     orderId: 8,
-    date: mockDate,
+    date: today,
     price: currencyFormatter(40),
     status: 'cancelado',
     color: ColorStatus.CANCELADO,
   },
   {
     orderId: 9,
-    date: mockDate,
+    date: today,
     price: currencyFormatter(40),
     status: 'cancelado',
     color: ColorStatus.CANCELADO,
   },
   {
     orderId: 10,
-    date: mockDate,
+    date: today,
     price: currencyFormatter(50),
     status: 'finalizado',
     color: ColorStatus.FINALIZADO,

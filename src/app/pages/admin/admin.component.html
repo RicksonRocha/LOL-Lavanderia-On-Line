@@ -43,7 +43,8 @@
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio1"
-                      value="option1"
+                      value="all"
+                      (change)="handleChangeDate($event)"
                     />
                     <label class="form-check-label" for="inlineRadio1">Todos os pedidos</label>
                   </div>
@@ -55,24 +56,39 @@
                       type="radio"
                       name="inlineRadioOptions"
                       id="inlineRadio2"
-                      value="option2"
+                      value="today"
+                      (change)="handleChangeDate($event)"
                     />
                     <label class="form-check-label" for="inlineRadio2">Pedidos de hoje</label>
                   </div>
                 </div>
               </div>
-              <div class="form-row">
+              <div class="form-row border-top border-light pt-3">
                 <div class="form-group col-md-6">
                   <label class="custom-label">Data de início</label>
-                  <input class="form-control input-sm" id="start-date" type="date" />
+                  <input
+                    class="form-control input-sm"
+                    id="start-date"
+                    type="date"
+                    name="initialDate"
+                    (change)="handleChangeDate($event)"
+                  />
                 </div>
                 <div class="form-group col-md-6">
                   <label class="custom-label">Data de fim</label>
-                  <input class="form-control input-sm" id="end-date" type="date" />
+                  <input
+                    class="form-control input-sm"
+                    id="end-date"
+                    type="date"
+                    name="finalDate"
+                    (change)="handleChangeDate($event)"
+                  />
                 </div>
               </div>
               <div>
-                <button type="button" class="btn btn-primary my-1">Pesquisar</button>
+                <button type="button" (click)="handleClickDates()" class="btn btn-primary my-1">
+                  Pesquisar
+                </button>
               </div>
             </form>
           </div>
