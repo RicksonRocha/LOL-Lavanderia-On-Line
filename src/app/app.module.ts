@@ -13,6 +13,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AdminComponent } from './pages/admin/admin.component';
+import { RoupasComponent } from './pages/roupas/roupas.component';
+import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
+import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
 
 @NgModule({
   imports: [
@@ -25,7 +28,15 @@ import { AdminComponent } from './pages/admin/admin.component';
     RouterModule,
     AppRoutingModule,
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, AdminComponent],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent,
+    AdminComponent,
+    RoupasComponent,
+    FuncionariosComponent,
+    RelatoriosComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

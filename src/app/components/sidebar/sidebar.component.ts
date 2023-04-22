@@ -12,6 +12,14 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'Pedido Online', icon: 'fa fa-shopping-cart text-green', class: '' },
   { path: '/purchase', title: 'Consulta Pedido', icon: 'ni ni-shop text-red', class: '' },
   { path: '/admin', title: 'Pagina Inicial Funcionario', icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/roupas', title: 'Roupas', icon: 'ni ni-shop text-red', class: '' },
+  {
+    path: '/funcionarios',
+    title: 'Funcionários',
+    icon: 'fa fa-shopping-cart text-green',
+    class: '',
+  },
+  { path: '/relatorios', title: 'Relatórios', icon: 'ni-tv-2 text-primary', class: '' },
 ];
 
 @Component({
