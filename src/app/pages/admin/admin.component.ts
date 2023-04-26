@@ -100,6 +100,6 @@ export class AdminComponent implements OnInit {
   }
 
   public handleAlert3() {
-    alert('Pedido pago!');
+    alert('Pedido finalizado!');
   }
 }
