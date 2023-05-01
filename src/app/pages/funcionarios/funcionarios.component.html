@@ -136,4 +136,41 @@
       </a>
     </div>
   </div>
+  <br>
+  <div class="row clearfix">
+    <div class="col-md-12 table-responsive">
+      <a class="btn btn-success float-right"  id="autoclosable-btn-success" (click)="handleSearch()">
+        Listar Funcionários
+      </a>
+    </div>
+  </div>
+
+  <br>
+  <div class="table-responsive" *ngIf="isTableVisible">
+    <table class="table align-items-center table-dark table-flush">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+            {{ head.title }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <div *ngIf="isTableVisible"> -->
+          <tr *ngFor="let func of funcionario; index as i;  first as isFirst">
+            <td scope="row">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <span class="mb-0 text-sm">{{ func.id }}</span>
+                </div>
+              </div>
+            </td>
+            <td>{{ func.name }}</td>
+            <td>{{ func.email }}</td>
+            <td>{{ func.birthDate }}</td>
+          </tr>
+        <!-- </div> -->
+      </tbody>
+    </table>
+  </div>
   </div>
