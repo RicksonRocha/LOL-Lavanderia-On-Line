@@ -1,6 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { ITableHeads } from '../purchase/purchase.component';
+import { dateFormatter } from '../utils';
 
 declare var $: any;
+
+const today = dateFormatter(new Date());
+
+export const TABLEHEADS: ITableHeads[] = [
+  { title: 'ID' },
+  { title: 'Nome' },
+  { title: 'E-mail' },
+  { title: 'Data de Nascimento' }
+];
+
+export type IFuncionario= {
+  id: number;
+  name: string;
+  email: string;
+  birthDate: Date | string;
+};
+
+const FUNCIONARIOS: IFuncionario[] = [
+  { id: 1, name: 'Harry', email: "harry.potter@mail.com", birthDate: today },
+  { id: 2, name: 'Hermione', email: "hermione.granger@mail.com", birthDate: today },
+  { id: 3, name: 'Rony', email: "rony.weasley@mail.com", birthDate: today },
+];
 
 @Component({
   selector: 'app-funcionarios',
@@ -8,9 +32,15 @@ declare var $: any;
   styleUrls: ['./funcionarios.component.scss'],
 })
 export class FuncionariosComponent implements OnInit {
+  public tableHeads: ITableHeads[];
+  public isTableVisible: boolean = false;
+  public funcionario: IFuncionario[];
+  
   constructor() {}
 
   ngOnInit() {
+    this.tableHeads = TABLEHEADS;
+    this.funcionario = FUNCIONARIOS;
     $(document).ready(function () {
       $(document).on('click', '.close', function () {
         $(this).parent().hide();
@@ -94,4 +124,10 @@ export class FuncionariosComponent implements OnInit {
   public handleAlert() {
     alert('Alterações salvas!');
   }
+
+  public handleSearch() {
+    this.isTableVisible = !this.isTableVisible;
+  }
+
+
 }
