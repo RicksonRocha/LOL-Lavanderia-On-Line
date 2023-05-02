@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ITableHeads } from '../purchase/purchase.component';
+import { PURCHASE } from '../purchase/purchase.types';
+import { IPurchase } from '../purchase/purchase.types';
 
 declare var $: any;
+
+export const CLOTHESHEADS: ITableHeads[] = [
+  { title: 'Nome' },
+  { title: 'Quantidade' },
+  { title: 'Preço' },
+  { title: 'Prazo' },
+  { title: 'Ações' },
+];
 
 @Component({
   selector: 'app-roupas',
@@ -8,9 +19,14 @@ declare var $: any;
   styleUrls: ['./roupas.component.scss'],
 })
 export class RoupasComponent implements OnInit {
+  public clothesHeads: ITableHeads[];
+  public purchase: IPurchase;
   constructor() {}
 
   ngOnInit() {
+    this.purchase = PURCHASE;
+    this.clothesHeads = CLOTHESHEADS;
+
     $(document).ready(function () {
       $(document).on('click', '.close', function () {
         $(this).parent().hide();
@@ -92,6 +108,14 @@ export class RoupasComponent implements OnInit {
   }
 
   public handleAlert() {
-    alert('Alterações salvas!');
+    alert('Alterações salvas com sucesso!');
+  }
+
+  public handleEdit() {
+    alert('Editando');
+  }
+
+  public handleDelete() {
+    confirm('Deseja excluir essa roupa?');
   }
 }

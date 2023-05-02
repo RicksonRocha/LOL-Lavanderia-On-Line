@@ -1,96 +1,80 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-    <div class="container-fluid">
-      <div class="header-body">
-      
-        
-      </div>
-    </div>
-  </div>
-  
-  <div class="container-fluid mt--7">
-    
-  </div>
-  
-  <div class="container">
-    <div class="row clearfix">
-      <div class="col-md-12 table-responsive">
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+
+<div class="container-fluid mt--9"></div>
+
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 table-responsive">
       <table class="table align-items-center table-dark table-flush" id="tab_logic">
         <thead class="thead-dark">
-          <tr >
-            <th class="text-center">
-              Roupa
-            </th>
-            <th class="text-center">
-              Valor unitário
-            </th>
-            <th class="text-center">
-              Prazo
-            </th>
-            <th class="text-center">
-            </th>
+          <tr>
+            <th class="text-center">Roupa</th>
+            <th class="text-center">Valor unitário</th>
+            <th class="text-center">Prazo</th>
+            <th class="text-center"></th>
           </tr>
         </thead>
         <tbody>
-          <tr id='addr0' data-id="0" class="hidden">
+          <tr id="addr0" data-id="0" class="hidden">
             <td data-name="name">
-              <input type="text" name='roupa' placeholder='Roupa' class="form-control"/>
+              <input type="text" name="roupa" placeholder="Roupa" class="form-control" />
             </td>
             <td data-name="name">
-              <input type="float" name='valor' placeholder='Valor unitário' class="form-control"/>
+              <input type="float" name="valor" placeholder="Valor unitário" class="form-control" />
             </td>
             <td data-name="desc">
-              <input type="number" name='prazo'  placeholder='Prazo' class="form-control"/>  
+              <input type="number" name="prazo" placeholder="Prazo" class="form-control" />
             </td>
             <td data-name="del">
-              <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'>
+              <button name="del0" class="btn btn-danger glyphicon glyphicon-remove row-remove">
                 <span aria-hidden="true">×</span>
               </button>
             </td>
           </tr>
-          <tr id='addr0' data-id="0" class="hidden">
+          <tr id="addr0" data-id="0" class="hidden">
             <td data-name="name">
-              <input type="text" name='roupa' placeholder='Roupa' class="form-control"/>
+              <input type="text" name="roupa" placeholder="Roupa" class="form-control" />
             </td>
             <td data-name="name">
-              <input type="float" name='valor' placeholder='Valor unitário' class="form-control"/>
+              <input type="float" name="valor" placeholder="Valor unitário" class="form-control" />
             </td>
             <td data-name="desc">
-              <input type="number" name='prazo'  placeholder='Prazo' class="form-control"/>  
+              <input type="number" name="prazo" placeholder="Prazo" class="form-control" />
             </td>
             <td data-name="del">
-              <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'>
+              <button name="del0" class="btn btn-danger glyphicon glyphicon-remove row-remove">
                 <span aria-hidden="true">×</span>
               </button>
             </td>
           </tr>
-          <tr id='addr0' data-id="0" class="hidden">
+          <tr id="addr0" data-id="0" class="hidden">
             <td data-name="name">
-              <input type="text" name='roupa' placeholder='Roupa' class="form-control"/>
+              <input type="text" name="roupa" placeholder="Roupa" class="form-control" />
             </td>
             <td data-name="name">
-              <input type="float" name='valor' placeholder='Valor unitário' class="form-control"/>
+              <input type="float" name="valor" placeholder="Valor unitário" class="form-control" />
             </td>
             <td data-name="desc">
-              <input type="number" name='prazo'  placeholder='Prazo' class="form-control"/>  
+              <input type="number" name="prazo" placeholder="Prazo" class="form-control" />
             </td>
             <td data-name="del">
-              <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'>
+              <button name="del0" class="btn btn-danger glyphicon glyphicon-remove row-remove">
                 <span aria-hidden="true">×</span>
               </button>
             </td>
           </tr>
-          <tr id='addr0' data-id="0" class="hidden">
+          <tr id="addr0" data-id="0" class="hidden">
             <td data-name="name">
-              <input type="text" name='roupa' placeholder='Roupa' class="form-control"/>
+              <input type="text" name="roupa" placeholder="Roupa" class="form-control" />
             </td>
             <td data-name="name">
-              <input type="float" name='valor' placeholder='Valor unitário' class="form-control"/>
+              <input type="float" name="valor" placeholder="Valor unitário" class="form-control" />
             </td>
             <td data-name="desc">
-              <input type="number" name='prazo'  placeholder='Prazo' class="form-control"/>  
+              <input type="number" name="prazo" placeholder="Prazo" class="form-control" />
             </td>
             <td data-name="del">
-              <button name="del0" class='btn btn-danger glyphicon glyphicon-remove row-remove'>
+              <button name="del0" class="btn btn-danger glyphicon glyphicon-remove row-remove">
                 <span aria-hidden="true">×</span>
               </button>
             </td>
@@ -103,22 +87,76 @@
     <div class="col-md-12 table-responsive">
       <table class="table align-items-center">
         <tbody>
-          <tr id='addr0' data-id="0" class="hidden">
+          <tr id="addr0" data-id="0" class="hidden">
             <td class="float-right">
-              <a id="add_row" class="btn btn-primary">Adicionar roupa</a>  
+              <a id="add_row" class="btn btn-primary">Adicionar roupa</a>
+              <a
+                class="btn btn-success float-right"
+                id="autoclosable-btn-success"
+                (click)="handleAlert()"
+                routerLinkActive="active"
+                [routerLink]="['/admin']"
+              >
+                Salvar alterações
+              </a>
             </td>
-          </tr> 
-        </tbody> 
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
+</div>
 
-  <br>
-  <div class="row clearfix">
-    <div class="col-md-12 table-responsive">
-      <a class="btn btn-success float-right"  id="autoclosable-btn-success" (click)="handleAlert()" routerLinkActive="active" [routerLink]="['/admin']">
-        Salvar alterações
-      </a>
+<div class="container-fluid mt--5">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">Roupas registradas</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" *ngFor="let head of clothesHeads; index as i; first as isFirst">
+                  {{ head.title }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of purchase.items; index as i; first as isFirst">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{ item.name }}</span>
+                    </div>
+                  </div>
+                </th>
+                <td>
+                  {{ item.quantity }}
+                </td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.deadline }}</td>
+                <td>
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleEdit()"
+                        >Editar</a
+                      >
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleDelete()"
+                        >Excluir</a
+                      >
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
+</div>
