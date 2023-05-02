@@ -143,8 +143,12 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)">Editar</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Excluir</a>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleEdit()"
+                        >Editar</a
+                      >
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleDelete()"
+                        >Excluir</a
+                      >
                     </div>
                   </div>
                 </td>

@@ -108,6 +108,14 @@ export class RoupasComponent implements OnInit {
   }
 
   public handleAlert() {
-    alert('Alterações salvas!');
+    alert('Alterações salvas com sucesso!');
+  }
+
+  public handleEdit() {
+    alert('Editando');
+  }
+
+  public handleDelete() {
+    confirm('Deseja excluir essa roupa?');
   }
 }
