@@ -28,6 +28,34 @@ export class AdminComponent implements OnInit {
 
   constructor() {}
 
+  showModalRetirar = false;
+  showModalLavar = false;
+  showModalFinalizar = false;
+
+  openModalRetirar() {
+    this.showModalRetirar = true;
+  }
+
+  closeModalRetirar() {
+    this.showModalRetirar = false;
+  }
+
+  openModalLavar() {
+    this.showModalLavar = true;
+  }
+
+  closeModalLavar() {
+    this.showModalLavar = false;
+  }
+
+  openModalFinalizar() {
+    this.showModalFinalizar = true;
+  }
+
+  closeModalFinalizar() {
+    this.showModalFinalizar = false;
+  }
+
   ngOnInit() {
     this.orders = ORDERS.filter((order) => order.status === this.status);
     this.formatDate();
@@ -89,17 +117,5 @@ export class AdminComponent implements OnInit {
       return orderDate >= start && orderDate <= end;
     });
     this.formatDate();
-  }
-
-  public handleAlert() {
-    alert('Pedido retirado!');
-  }
-
-  public handleAlert2() {
-    alert('Pedido lavado!');
-  }
-
-  public handleAlert3() {
-    alert('Pedido finalizado!');
   }
 }

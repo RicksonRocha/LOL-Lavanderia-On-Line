@@ -83,10 +83,8 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)">Pagar</a>
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="handleAlert2()"
-                        >Cancelar</a
-                      >
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalPagar()">Pagar</a>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalCancelar()">Cancelar</a>
                     </div>
                   </div>
                 </td>
@@ -98,3 +96,36 @@
     </div>
   </div>
 </div>
+
+<div class="modal" [ngClass]="{'d-block': showModalPagar}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Deseja realmente confirmar o pagemento deste pedido?</h5>
+        <button type="button" class="close" (click)="closeModalPagar()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModalPagar()">Cancelar</button>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalPagar()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [ngClass]="{'d-block': showModalCancelar}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Deseja realmente confirmar o cancelamento deste pedido?</h5>
+        <button type="button" class="close" (click)="closeModalCancelar()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModalCancelar()">Cancelar</button>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalCancelar()">Confirmar</button>
+      </div>
+    </div>
+  </div>

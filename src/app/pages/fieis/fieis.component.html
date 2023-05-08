@@ -1,0 +1,61 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">        
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid mt--7">
+    
+  </div>
+  
+  <div class="container-fluid mt--5">
+    <div class="row mt-5">
+      <div class="col">
+        <div class="card bg-default shadow">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="text-white mb-0">3 clientes mais fieis</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-dark table-flush">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                    {{ head.title }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fieis of fieis; index as i;  first as isFirst">
+                  <td scope="row">
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <span class="mb-0 text-sm">{{ fieis.codigo }}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{ fieis.nome }}</td>
+                  <td>{{ fieis.email }}</td>
+                  <td>{{ fieis.quantidade }}</td>
+                  <td>{{ fieis.valor }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-12 table-responsive">
+        <table class="table align-items-center">
+          <tbody>
+            <tr id='addr0' data-id="0" class="hidden">
+              <td class="float-right">
+                <a id="add_row" class="btn btn-primary">Gerar relatório PDF</a>  
+              </td>
+            </tr> 
+          </tbody> 
+        </table>
+      </div>
+    </div>
+  </div>
