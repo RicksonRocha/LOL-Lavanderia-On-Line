@@ -15,6 +15,25 @@ export class ClientComponent implements OnInit {
 
   constructor() {}
 
+  showModalPagar = false;
+  showModalCancelar = false;
+
+  openModalPagar() {
+    this.showModalPagar = true;
+  }
+
+  closeModalPagar() {
+    this.showModalPagar = false;
+  }
+
+  openModalCancelar() {
+    this.showModalCancelar = true;
+  }
+
+  closeModalCancelar() {
+    this.showModalCancelar = false;
+  }
+
   ngOnInit() {
     this.orders = ORDERS.filter((order) => order.status === this.status);
     this.tableHeads = TABLEHEADS.filter((head) => head);
@@ -34,13 +53,5 @@ export class ClientComponent implements OnInit {
 
   public lengthByStatus(status: IStatus) {
     return this.filterStatus(status).length;
-  }
-
-  public handleAlert() {
-    alert('Pagamento efetuado!');
-  }
-
-  public handleAlert2() {
-    alert('Pedido cancelado!');
   }
 }

@@ -16,6 +16,9 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { RoupasComponent } from './pages/roupas/roupas.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
+import { ReceitaComponent } from './pages/receita/receita.component';
+import { ClientesComponent } from './pages/clientes/clientes.component';
+import { FieisComponent } from './pages/fieis/fieis.component';
 
 @NgModule({
   imports: [
@@ -36,6 +39,9 @@ import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
     RoupasComponent,
     FuncionariosComponent,
     RelatoriosComponent,
+    ReceitaComponent,
+    ClientesComponent,
+    FieisComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

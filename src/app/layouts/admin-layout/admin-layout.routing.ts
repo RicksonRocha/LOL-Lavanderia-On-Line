@@ -7,6 +7,9 @@ import { AdminComponent } from 'src/app/pages/admin/admin.component';
 import { RoupasComponent } from 'src/app/pages/roupas/roupas.component';
 import { FuncionariosComponent } from 'src/app/pages/funcionarios/funcionarios.component';
 import { RelatoriosComponent } from 'src/app/pages/relatorios/relatorios.component';
+import { ReceitaComponent } from 'src/app/pages/receita/receita.component';
+import { ClientesComponent } from 'src/app/pages/clientes/clientes.component';
+import { FieisComponent } from 'src/app/pages/fieis/fieis.component';
 
 export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -16,4 +19,7 @@ export const AdminLayoutRoutes: Routes = [
   { path: 'roupas', component: RoupasComponent },
   { path: 'funcionarios', component: FuncionariosComponent },
   { path: 'relatorios', component: RelatoriosComponent },
+  { path: 'receita', component: ReceitaComponent },
+  { path: 'clientes', component: ClientesComponent },
+  { path: 'fieis', component: FieisComponent },
 ];

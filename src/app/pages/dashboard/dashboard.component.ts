@@ -28,6 +28,25 @@ export class DashboardComponent implements OnInit {
     this.options = OPTIONS;
   }
 
+  showModalRejeitar = false;
+  showModalAprovar = false;
+
+  openModalRejeitar() {
+    this.showModalRejeitar = true;
+  }
+
+  closeModalRejeitar() {
+    this.showModalRejeitar = false;
+  }
+
+  openModalAprovar() {
+    this.showModalAprovar = true;
+  }
+
+  closeModalAprovar() {
+    this.showModalAprovar = false;
+  }
+
   ngOnInit() {
     $(document).ready(function () {
       $(document).on('click', '.close', function () {
@@ -107,13 +126,5 @@ export class DashboardComponent implements OnInit {
 
       $('#add_row').trigger('click');
     });
-  }
-
-  public handleAlert() {
-    alert('Orçamento rejeitado!');
-  }
-
-  public handleAlert2() {
-    alert('Orçamento aceito!');
   }
 }

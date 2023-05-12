@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div>
-                <button type="button" class="btn btn-primary my-1" (click)="handleDownload()">
+                <button type="button" class="btn btn-primary my-1" routerLinkActive="active" [routerLink]="['/receita']">
                   Gerar relatório
                 </button>
               </div>
@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div>
-                <button type="button" class="btn btn-primary my-1" (click)="handleDownload()">
+                <button type="button" class="btn btn-primary my-1" routerLinkActive="active" [routerLink]="['/clientes']">
                   Gerar relatório
                 </button>
               </div>
@@ -75,7 +75,7 @@
                 </div>
               </div>
               <div>
-                <button type="button" class="btn btn-primary my-1" (click)="handleDownload()">
+                <button type="button" class="btn btn-primary my-1" (click)="handleDownload()" routerLinkActive="active" [routerLink]="['/fieis']">
                   Gerar relatório
                 </button>
               </div>
