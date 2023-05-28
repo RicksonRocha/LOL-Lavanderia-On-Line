@@ -8,6 +8,7 @@
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0">
           <h3 class="text-white mb-0">Roupas registradas</h3>
+          <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()">Adicionar roupa</a>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-dark table-flush">
@@ -35,8 +36,15 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalEditar()">Editar</a>
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalExcluir()">Excluir</a>
+                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalEditar()"
+                        >Editar</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        (click)="openModalExcluir()"
+                        >Excluir</a
+                      >
                     </div>
                   </div>
                 </td>
@@ -53,14 +61,9 @@
         <tbody>
           <tr id="addr0" data-id="0" class="hidden">
             <td class="float-right">
-              <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()">Adicionar roupa</a>
-              <a
-                class="btn btn-success float-right"
-                id="autoclosable-btn-success"
-                (click)="openModalSalvar()"
+              <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()"
+                >Adicionar roupa</a
               >
-                Salvar alterações
-              </a>
             </td>
           </tr>
         </tbody>
@@ -69,7 +72,7 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalEditar}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalEditar }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,33 +85,27 @@
         <div class="col-md-12 table-responsive">
           <table class="table align-items-center table-flush" id="tab_logic">
             <tr class="hidden">
-              <th class="text-center">
-                Nome
-              </th>
+              <th class="text-center">Nome</th>
             </tr>
             <tr class="hidden">
               <td data-name="nome">
-                <input type="name" name='nome' placeholder='Nome' class="form-control"/>
+                <input type="name" name="nome" placeholder="Nome" class="form-control" />
               </td>
             </tr>
             <tr class="hidden">
-              <th class="text-center">
-                Preço
-              </th>
+              <th class="text-center">Preço</th>
             </tr>
             <tr class="hidden">
               <td data-name="preco">
-                <input type="number" name='preco' placeholder='Preço' class="form-control"/>
+                <input type="number" name="preco" placeholder="Preço" class="form-control" />
               </td>
             </tr>
             <tr class="hidden">
-              <th class="text-center">
-                Prazo
-              </th>
+              <th class="text-center">Prazo</th>
             </tr>
             <tr class="hidden">
               <td data-name="prazo">
-                <input type="number" name='prazo'  placeholder='Prazo' class="form-control"/>  
+                <input type="number" name="prazo" placeholder="Prazo" class="form-control" />
               </td>
             </tr>
           </table>
@@ -116,13 +113,15 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="closeModalEditar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalEditar()">Salvar</button>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalEditar()">
+          Salvar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalExcluir}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalExcluir }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -133,79 +132,69 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="closeModalExcluir()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalExcluir()">Confirmar</button>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalExcluir()">
+          Confirmar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalAdicionar}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalAdicionar }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Adicionar nova roupa</h5>
+        <h2>Adicionar nova roupa</h2>
         <button type="button" class="close" (click)="closeModalAdicionar()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="col-md-12 table-responsive">
-          <table class="table align-items-center table-flush" id="tab_logic">
-            <tr class="hidden">
-              <th class="text-center">
-                Nome
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nome">
-                <input type="name" name='nome' placeholder='Nome' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Preço
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="preco">
-                <input type="number" name='preco' placeholder='Preço' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Prazo
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="prazo">
-                <input type="number" name='prazo'  placeholder='Prazo' class="form-control"/>  
-              </td>
-            </tr>
-          </table>
-        </div>
+        <form>
+          <div class="form-row">
+            <div data-name="nome" class="form-group col-md-12">
+              <label for="name">Nome</label>
+              <input
+                id="name"
+                type="name"
+                name="nome"
+                placeholder="Nome da nova peça"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div data-name="preco" class="form-group col-md-6">
+              <label for="price">Preço</label>
+              <input
+                id="price"
+                type="number"
+                name="preco"
+                placeholder="Preço em reais"
+                class="form-control"
+              />
+            </div>
+            <div data-name="prazo" class="form-group col-md-6">
+              <label for="prazo">Prazo</label>
+              <input
+                id="prazo"
+                type="number"
+                name="prazo"
+                placeholder="Prazo em número de dias"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalAdicionar()">Adicionar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" [ngClass]="{'d-block': showModalSalvar}" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Deseja salvar as alterações realizadas?</h5>
-        <button type="button" class="close" (click)="closeModalSalvar()">
-          <span>&times;</span>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalAdicionar()">
+          Adicionar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">
+          Cancelar
         </button>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalSalvar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalSalvar()" routerLinkActive="active" [routerLink]="['/admin']">Confirmar</button>
-      </div>
     </div>
   </div>
 </div>
-
