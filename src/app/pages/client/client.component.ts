@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { currencyFormatter, dateFormatter } from '../utils';
-import { IOrders, IStatus, ITableHeads, ORDERS, REPORTS, TABLEHEADS } from './client.types';
+import {
+  IOrders,
+  IStatus,
+  ITableHeads,
+  ORDERS,
+  REPORTS,
+  TABLEHEADS,
+  colorStatusType,
+} from './client.types';
+import { ColorStatus } from '../admin/admin.types';
 
 @Component({
   selector: 'app-client',
@@ -12,6 +21,7 @@ export class ClientComponent implements OnInit {
   public orders: IOrders[];
   public tableHeads: ITableHeads[];
   public reports: any[];
+  public colorStatus: colorStatusType = 'warning';
 
   constructor() {}
 
@@ -48,6 +58,8 @@ export class ClientComponent implements OnInit {
   }
 
   public handleStatus(newStatus: IStatus) {
+    this.status = newStatus;
+    this.colorStatus = ColorStatus[newStatus.toUpperCase()];
     this.orders = this.filterStatus(newStatus);
   }
 

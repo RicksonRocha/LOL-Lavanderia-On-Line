@@ -1,37 +1,7 @@
-<div class="header bg-gradient-danger pb-7 pt-5 pt-md-8">
+<div class="header bg-gradient-danger pb-7 pt-md-7">
   <div class="container-fluid">
-    <div class="header-body">
-      <!-- Card stats -->
-      <div class="row">
-        <div class="col" *ngFor="let report of reports">
-          <div class="card card-stats mb-4 mb-xl-0 border border-5 border-{{ report.color }}">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-{{ report.color }} mb-0">
-                    {{ report.label }}
-                  </h5>
-                  <span class="h2 font-weight-bold mb-0">{{ report.total }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="row">
       <div class="col-6">
-        <div class="row d-flex align-items-center mb-2">
-          <div class="col-auto">
-            <div class="icon icon-shape bg-white text-danger rounded-circle shadow">
-              <i class="fa fa-search"></i>
-            </div>
-          </div>
-          <div class="col">
-            <h2 class="text-white">Filtre os pedidos</h2>
-          </div>
-        </div>
-
         <div class="card card-stats mb-4 mb-xl-0 border border-5 border-primary">
           <div class="card-body">
             <form role="form">
@@ -63,7 +33,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-row border-top border-light pt-3">
+              <div class="form-row">
                 <div class="form-group col-md-6">
                   <label class="custom-label">Data de início</label>
                   <input
@@ -111,7 +81,8 @@
             <!-- Example split danger button -->
             <div class="btn-group float-right" ngbDropdown>
               <button type="button" class="btn btn-{{ colorStatus }}">
-                Fitrar pedidos: <span class="text-uppercase">{{ status }}</span>
+                Fitrar pedidos:
+                <span class="text-uppercase">{{ status }} - {{ lengthByStatus(status) }}</span>
               </button>
               <button
                 type="button"
@@ -167,13 +138,19 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalRetirar()"
+                      <a
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        (click)="openModalRetirar()"
                         >Confirmar retirada</a
                       >
                       <a class="dropdown-item" href="javascript:void(0)" (click)="openModalLavar()"
                         >Confirmar lavagem</a
                       >
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalFinalizar()"
+                      <a
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        (click)="openModalFinalizar()"
                         >Finalizar pedido</a
                       >
                     </div>
@@ -188,7 +165,7 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalRetirar}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalRetirar }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -199,13 +176,15 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="closeModalRetirar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalRetirar()">Confirmar</button>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalRetirar()">
+          Confirmar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalLavar}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalLavar }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -216,13 +195,15 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="closeModalLavar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalLavar()">Confirmar</button>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalLavar()">
+          Confirmar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalFinalizar}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalFinalizar }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -232,8 +213,12 @@
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalFinalizar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalFinalizar()">Confirmar</button>
+        <button type="button" class="btn btn-danger" (click)="closeModalFinalizar()">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-success float-right" (click)="closeModalFinalizar()">
+          Confirmar
+        </button>
       </div>
     </div>
   </div>
