@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 import { ITableHeads } from '../purchase/purchase.component';
 import { dateFormatter } from '../utils';
 
@@ -32,6 +34,7 @@ const RECEITAS: IReceita[] = [
   styleUrls: ['./receita.component.scss'],
 })
 export class ReceitaComponent implements OnInit {
+  @ViewChild('conteudo', { static: false }) conteudo: ElementRef;
   public tableHeads: ITableHeads[];
   public receita: IReceita[];
 
@@ -40,5 +43,20 @@ export class ReceitaComponent implements OnInit {
   ngOnInit() {
     this.tableHeads = TABLEHEADS;
     this.receita = RECEITAS;
+  }
+
+  gerarPDF() {
+    const doc = new jsPDF();
+
+    const conteudo = this.conteudo.nativeElement;
+
+    html2canvas(conteudo).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdfWidth = doc.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      doc.save('Relatório de Receita.pdf');
+    });
   }
 }
