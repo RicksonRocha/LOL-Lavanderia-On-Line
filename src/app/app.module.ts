@@ -18,6 +18,7 @@ import { FuncionariosComponent } from './pages/funcionarios/funcionarios.compone
 import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
 import { ReceitaComponent } from './pages/receita/receita.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
+import { InitialClientComponent } from './pages/initial-client/client.component';
 import { FieisComponent } from './pages/fieis/fieis.component';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { FieisComponent } from './pages/fieis/fieis.component';
     ReceitaComponent,
     ClientesComponent,
     FieisComponent,
+    InitialClientComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
