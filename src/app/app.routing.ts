@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { LoginRoutes } from './auth/auth-routing.module';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
+  // ...LoginRoutes,
   {
     path: '',
     component: AdminLayoutComponent,
