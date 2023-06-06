@@ -13,11 +13,8 @@ import { RegisterComponent } from '../../pages/register/register.component';
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
-    // NgbModule
+    NgbModule,
   ],
-  declarations: [
-    LoginComponent,
-    RegisterComponent
-  ]
+  declarations: [LoginComponent, RegisterComponent],
 })
-export class AuthLayoutModule { }
+export class AuthLayoutModule {}

@@ -20,6 +20,8 @@ import { ReceitaComponent } from './pages/receita/receita.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { InitialClientComponent } from './pages/initial-client/client.component';
 import { FieisComponent } from './pages/fieis/fieis.component';
+import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared';
 
 @NgModule({
   imports: [
@@ -31,6 +33,8 @@ import { FieisComponent } from './pages/fieis/fieis.component';
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    AuthModule,
+    SharedModule,
   ],
   declarations: [
     AppComponent,

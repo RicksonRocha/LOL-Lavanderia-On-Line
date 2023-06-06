@@ -11,11 +11,19 @@ import { RelatoriosComponent } from 'src/app/pages/relatorios/relatorios.compone
 import { ReceitaComponent } from 'src/app/pages/receita/receita.component';
 import { ClientesComponent } from 'src/app/pages/clientes/clientes.component';
 import { FieisComponent } from 'src/app/pages/fieis/fieis.component';
+import { AuthGuard } from '../auth-layout/auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'client', component: ClientComponent },
-  { path: 'initial-client', component: InitialClientComponent },
+  {
+    path: 'initial-client',
+    component: InitialClientComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: 'admin, gerente, func',
+    },
+  },
   { path: 'purchase', component: PurchaseComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'roupas', component: RoupasComponent },
