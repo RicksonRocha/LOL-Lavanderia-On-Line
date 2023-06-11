@@ -22,14 +22,13 @@ export class LoginService {
   }
 
   login(login: Login): Observable<User | null> {
-    let user = new User(1, 'Rickson - Func', login.login, login.password, 'func');
+    let user = new User(1, 'Usuário - Cliente', login.login, login.password, 'cliente');
 
     if (login.login == login.password) {
       if (login.login == 'admin') {
-        user = new User(1, 'Rickson - Admin', login.login, login.password, 'admin');
-        user = new User();
+        user = new User(2, 'Usuário - Admin', login.login, login.password, 'admin');
       } else if (login.login == 'gerente') {
-        user = new User(1, 'Rickson - Gerente', login.login, login.password, 'gerente');
+        user = new User(3, 'Usuário - Gerente', login.login, login.password, 'func');
       }
       return of(user);
     } else {
