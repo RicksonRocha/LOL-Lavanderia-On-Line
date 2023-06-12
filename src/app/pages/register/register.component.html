@@ -11,13 +11,17 @@
           </div>
 
           <form role="form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-            
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                 </div>
-                <input class="form-control" placeholder="Nome" type="text" formControlName="username">
+                <input
+                  class="form-control"
+                  placeholder="Nome"
+                  type="text"
+                  formControlName="username"
+                />
               </div>
             </div>
 
@@ -26,10 +30,15 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" formControlName="email">
+                <input
+                  class="form-control"
+                  placeholder="Email"
+                  type="email"
+                  formControlName="email"
+                />
               </div>
-            </div> 
-            
+            </div>
+
             <div class="row">
               <div class="col">
                 <div class="form-group">
@@ -37,9 +46,14 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                     </div>
-                    <input class="form-control" placeholder="CPF" type="text" formControlName="cpf">
+                    <input
+                      class="form-control"
+                      placeholder="CPF"
+                      type="text"
+                      formControlName="cpf"
+                    />
                   </div>
-                </div> 
+                </div>
               </div>
               <div class="col">
                 <div class="form-group">
@@ -47,21 +61,32 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Telefone" type="tel" formControlName="tel">
+                    <input
+                      class="form-control"
+                      placeholder="Telefone"
+                      type="tel"
+                      formControlName="tel"
+                    />
                   </div>
                 </div>
               </div>
-            </div>   
-            
+            </div>
+
             <div formGroupName="address">
-              <div class="row">            
+              <div class="row">
                 <div class="col-8">
                   <div class="form-group">
                     <div class="input-group input-group-alternative mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
                       </div>
-                      <input class="form-control" placeholder="CEP" type="text" formControlName="cep" (blur)="onBlur($event)">
+                      <input
+                        class="form-control"
+                        placeholder="CEP"
+                        type="text"
+                        formControlName="cep"
+                        (blur)="onBlur($event)"
+                      />
                     </div>
                   </div>
                 </div>
@@ -71,41 +96,61 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
                       </div>
-                      <input class="form-control" placeholder="UF" type="text" formControlName="state">
-                    </div>
-                  </div>
-                </div>
-              </div>  
-              
-              <div class="row">              
-                <div class="col">
-                  <div class="form-group">
-                    <div class="input-group input-group-alternative mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
-                      </div>
-                      <input class="form-control" placeholder="Cidade" type="text" formControlName="city">
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="form-group">
-                    <div class="input-group input-group-alternative mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
-                      </div>
-                      <input class="form-control" placeholder="Bairro" type="text" formControlName="neighborhood">
+                      <input
+                        class="form-control"
+                        placeholder="UF"
+                        type="text"
+                        formControlName="state"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
-                          
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Cidade"
+                        type="text"
+                        formControlName="city"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <div class="input-group input-group-alternative mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Bairro"
+                        type="text"
+                        formControlName="neighborhood"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div class="form-group">
                 <div class="input-group input-group-alternative mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-pin-3"></i></span>
                   </div>
-                  <input class="form-control" placeholder="Rua" type="text" formControlName="street">
+                  <input
+                    class="form-control"
+                    placeholder="Rua"
+                    type="text"
+                    formControlName="street"
+                  />
                 </div>
               </div>
             </div>
@@ -113,16 +158,18 @@
             <div class="row my-4">
               <div class="col-12">
                 <div class="custom-control custom-control-alternative custom-checkbox">
-                  <input class="custom-control-input" id="customCheckRegister" type="checkbox">
+                  <input class="custom-control-input" id="customCheckRegister" type="checkbox" />
                   <label class="custom-control-label" for="customCheckRegister">
-                    <span class="text-muted">Li e concordo com os <a href="#!">Termos de Privacidade</a></span>
+                    <span class="text-muted"
+                      >Li e concordo com os <a href="#!">Termos de Privacidade</a></span
+                    >
                   </label>
                 </div>
               </div>
             </div>
 
             <div class="text-center">
-              <button type="button" class="btn btn-primary mt-4">Criar conta</button>
+              <button type="submit" class="btn btn-primary mt-4">Criar conta</button>
             </div>
           </form>
         </div>

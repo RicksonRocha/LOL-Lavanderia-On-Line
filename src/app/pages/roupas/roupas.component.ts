@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ITableHeads } from '../purchase/purchase.component';
 import { PURCHASE } from '../purchase/purchase.types';
 import { IPurchase } from '../purchase/purchase.types';
+import { RoupaService } from './service/roupa.service';
+import { Roupa } from 'src/app/shared/models/roupa.model';
+import { NgForm } from '@angular/forms';
 
 export const CLOTHESHEADS: ITableHeads[] = [
   { title: 'Nome' },
@@ -16,10 +19,13 @@ export const CLOTHESHEADS: ITableHeads[] = [
   styleUrls: ['./roupas.component.scss'],
 })
 export class RoupasComponent implements OnInit {
+  @ViewChild('formRoupa') formRoupa!: NgForm;
+  roupa: Roupa = new Roupa();
   public clothesHeads: ITableHeads[];
-  public purchase: IPurchase;
+  public roupas: Roupa[];
+  public roupaSelecionada: number | null;
 
-  constructor() {}
+  constructor(private roupaService: RoupaService) {}
 
   showModalEditar = false;
   showModalExcluir = false;
@@ -34,20 +40,35 @@ export class RoupasComponent implements OnInit {
     this.showModalEditar = false;
   }
 
-  openModalExcluir() {
-    this.showModalExcluir = true;
+  toggleExcluir(id?: number) {
+    if (id) {
+      this.roupaSelecionada = id;
+    } else {
+      this.roupaSelecionada = null;
+    }
+    this.showModalExcluir = !this.showModalExcluir;
   }
 
-  closeModalExcluir() {
-    this.showModalExcluir = false;
+  confirmacaoExcluir(confirmacao: boolean) {
+    if (confirmacao) {
+      this.roupaService.remover(this.roupaSelecionada).subscribe((roupa) => {
+        alert('deletada com sucesso');
+        this.listarRoupas();
+      });
+    }
+    this.toggleExcluir();
   }
 
-  openModalAdicionar() {
-    this.showModalAdicionar = true;
-  }
-
-  closeModalAdicionar() {
-    this.showModalAdicionar = false;
+  toggleAdicionar(confirmacao?: boolean) {
+    if (confirmacao) {
+      const { name, price, deadline } = this.formRoupa.form.value;
+      let roupaNova = new Roupa(null, name, price, deadline);
+      this.roupaService.inserir(roupaNova).subscribe((roupa) => {
+        alert('adicionado com sucesso');
+        this.listarRoupas();
+      });
+    }
+    this.showModalAdicionar = !this.showModalAdicionar;
   }
 
   openModalSalvar() {
@@ -59,7 +80,14 @@ export class RoupasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.purchase = PURCHASE;
+    this.roupas = [];
+    this.listarRoupas();
     this.clothesHeads = CLOTHESHEADS;
+  }
+
+  listarRoupas(): void {
+    this.roupaService.listarTodos().subscribe((roupas) => {
+      this.roupas = roupas;
+    });
   }
 }

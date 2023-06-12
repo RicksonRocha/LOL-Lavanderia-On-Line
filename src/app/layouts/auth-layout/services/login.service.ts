@@ -8,6 +8,8 @@ const LS_KEY: string = 'userLogged';
   providedIn: 'root',
 })
 export class LoginService {
+  constructor() {}
+
   public get userLogged(): User {
     let user = localStorage[LS_KEY];
     return user ? JSON.parse(user) : null;
@@ -22,17 +24,27 @@ export class LoginService {
   }
 
   login(login: Login): Observable<User | null> {
-    let user = new User(1, 'Usuário - Cliente', login.login, login.password, 'cliente');
+    let user = new User(1, 'Usuário - Func', login.login, login.password, 'func');
 
     if (login.login == login.password) {
       if (login.login == 'admin') {
         user = new User(2, 'Usuário - Admin', login.login, login.password, 'admin');
       } else if (login.login == 'gerente') {
-        user = new User(3, 'Usuário - Gerente', login.login, login.password, 'func');
+        user = new User(3, 'Usuário - Gerente', login.login, login.password, 'gerente');
       }
       return of(user);
     } else {
       return of(null);
     }
+  }
+
+  register(name: string, email: string): void {
+    // let user = new User(1, 'Usuário - Func', login.login, login.password, 'func');
+    // if (login.login == login.password) {
+    //   if (login.login == 'admin') {
+    //     user = new User(2, 'Usuário - Admin', login.login, login.password, 'admin');
+    //   } else if (login.login == 'gerente') {
+    //     user = new User(3, 'Usuário - Gerente', login.login, login.password, 'gerente');
+    //   }
   }
 }
