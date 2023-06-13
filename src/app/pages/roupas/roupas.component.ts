@@ -24,6 +24,8 @@ export class RoupasComponent implements OnInit {
   public clothesHeads: ITableHeads[];
   public roupas: Roupa[];
   public roupaSelecionada: number | null;
+  public showModal: boolean = false;
+  public modalType: 'adicionar' | 'editar' = 'adicionar';
 
   constructor(private roupaService: RoupaService) {}
 
@@ -59,24 +61,31 @@ export class RoupasComponent implements OnInit {
     this.toggleExcluir();
   }
 
-  toggleAdicionar(confirmacao?: boolean) {
-    if (confirmacao) {
-      const { name, price, deadline } = this.formRoupa.form.value;
+  toggleSalvar() {
+    const { name, price, deadline } = this.formRoupa.form.value;
+
+    if (this.modalType == 'adicionar') {
       let roupaNova = new Roupa(null, name, price, deadline);
       this.roupaService.inserir(roupaNova).subscribe((roupa) => {
         alert('adicionado com sucesso');
         this.listarRoupas();
       });
+    } else {
+      let roupaEditada = new Roupa(this.roupaSelecionada, name, price, deadline);
+      this.roupaService.alterar(roupaEditada).subscribe((roupa) => {
+        alert('alterado com sucesso');
+        this.listarRoupas();
+      });
     }
-    this.showModalAdicionar = !this.showModalAdicionar;
+    this.toggleModal();
   }
 
-  openModalSalvar() {
-    this.showModalSalvar = true;
-  }
-
-  closeModalSalvar() {
-    this.showModalSalvar = false;
+  toggleModal(type?: 'adicionar' | 'editar', roupaId?: number) {
+    if (type) {
+      this.modalType = type;
+      if (roupaId) this.roupaSelecionada = roupaId;
+    }
+    this.showModal = !this.showModal;
   }
 
   ngOnInit() {

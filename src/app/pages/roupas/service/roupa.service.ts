@@ -27,4 +27,12 @@ export class RoupaService {
   inserir(roupa: Roupa): Observable<Roupa> {
     return this.httpClient.post<Roupa>(this.BASE_URL, JSON.stringify(roupa), this.httpOptions);
   }
+
+  alterar(roupa: Roupa): Observable<Roupa> {
+    return this.httpClient.put<Roupa>(
+      this.BASE_URL + roupa.id,
+      JSON.stringify(roupa),
+      this.httpOptions
+    );
+  }
 }
