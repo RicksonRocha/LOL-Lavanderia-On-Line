@@ -77,7 +77,7 @@ export class FuncionariosComponent implements OnInit {
 
   confirmacaoExcluir(confirmacao: boolean) {
     if (confirmacao) {
-      this.funcionariosService.remover(this.funcionarioSelecionado).subscribe((roupa) => {
+      this.funcionariosService.remover(this.funcionarioSelecionado).subscribe((funcionario) => {
         alert('deletada com sucesso');
         this.listarFuncionarios();
       });
@@ -108,6 +108,7 @@ export class FuncionariosComponent implements OnInit {
       });
     } else {
       let funcionarioEditado = new Funcionario(this.funcionarioSelecionado, name, email, null, birth_date);
+      console.log(funcionarioEditado);
       this.funcionariosService.alterar(funcionarioEditado).subscribe((funcionario) => {
         alert('alterado com sucesso');
         this.listarFuncionarios();
@@ -117,6 +118,7 @@ export class FuncionariosComponent implements OnInit {
   }
 
   toggleModal(type?: 'adicionar' | 'editar', funcionarioId?: number) {
+    console.log(type);
     if (type) {
       this.modalType = type;
       if (funcionarioId) this.funcionarioSelecionado = funcionarioId;

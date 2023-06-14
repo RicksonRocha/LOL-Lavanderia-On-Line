@@ -7,7 +7,7 @@ import { Funcionario } from 'src/app/shared/models/funcionario.model';
   providedIn: 'root'
 })
 export class FuncionariosService {
-  private BASE_URL = 'http://localhost:3000/funcionarios';
+  private BASE_URL = 'http://localhost:3000/funcionarios/';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

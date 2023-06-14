@@ -71,12 +71,6 @@
       "birth_date": "31/07/1980"
     },
     {
-      "id": 2,
-      "name": "teste",
-      "email": "teste@mail.com",
-      "password": "31/07/1980"
-    },
-    {
       "id": 3,
       "name": "teste 02",
       "email": "teste02@mail.com",
@@ -85,10 +79,10 @@
     },
     {
       "id": 4,
-      "name": "teste03",
-      "email": "teste",
+      "name": "01",
+      "email": "01",
       "password": null,
-      "birth_date": "2000-07-31"
+      "birth_date": "2001-01-01"
     }
   ]
 }

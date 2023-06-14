@@ -45,8 +45,8 @@
                         <i class="fas fa-ellipsis-v"></i>
                       </a>
                       <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="openModalEditar()">Editar</a>
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="openModalExcluir()">Excluir</a>
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="toggleModal('editar', func.id)">Editar</a>
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="toggleExcluir(func.id)">Excluir</a>
                       </div>
                     </div>
                   </td>
@@ -57,90 +57,7 @@
         </div>
       </div>
     </div>
-    <div class="row clearfix">
-      <div class="col-md-12 table-responsive">
-        <table class="table align-items-center">
-          <tbody>
-            <tr id="addr0" data-id="0" class="hidden">
-              <td class="float-right">
-                <a id="add_row" class="btn btn-primary" (click)="toggleModal('adicionar')">Adicionar funcionário</a>
-                <a
-                  class="btn btn-success float-right"
-                  id="autoclosable-btn-success"
-                  (click)="openModalSalvar()"
-                >
-                  Salvar alterações
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
-
-<!-- <div class="modal" [ngClass]="{'d-block': showModalEditar}" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar funcionário</h5>
-        <button type="button" class="close" (click)="closeModalEditar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="col-md-12 table-responsive">
-          <table class="table align-items-center table-flush" id="tab_logic">
-            <tr class="hidden">
-              <th class="text-center">
-                Nome
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="password">
-                <input type="name" name='nome' placeholder='Nome' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                E-mail
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="email">
-                <input type="email" name='preco' placeholder='E-mail' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Senha
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="senha">
-                <input type="password" name='senha'  placeholder='Senha' class="form-control"/>  
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Data de nascimento
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nasc">
-                <input type="date" name='nasc'  placeholder='Data de nascimento' class="form-control"/>  
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalEditar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalEditar()">Salvar</button>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 <div class="modal" [ngClass]="{'d-block': showModalExcluir}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -178,50 +95,6 @@
       </div>
       <div class="modal-body">
         <form #formFuncionario="ngForm">
-          <!-- <div class="col-md-12 table-responsive">
-            <table class="table align-items-center table-flush" id="tab_logic">
-              <tr class="hidden">
-                <th class="text-center">
-                  Nome
-                </th>
-              </tr>
-              <tr class="hidden">
-                <td data-name="nome">
-                  <input type="name" name='nome' placeholder='Nome' class="form-control"/>
-                </td>
-              </tr>
-              <tr class="hidden">
-                <th class="text-center">
-                  E-mail
-                </th>
-              </tr>
-              <tr class="hidden">
-                <td data-name="email">
-                  <input type="email" name='preco' placeholder='E-mail' class="form-control"/>
-                </td>
-              </tr>
-              <tr class="hidden">
-                <th class="text-center">
-                  Senha
-                </th>
-              </tr>
-              <tr class="hidden">
-                <td data-name="senha">
-                  <input type="password" name='senha'  placeholder='Senha' class="form-control"/>  
-                </td>
-              </tr>
-              <tr class="hidden">
-                <th class="text-center">
-                  Data de nascimento
-                </th>
-              </tr>
-              <tr class="hidden">
-                <td data-name="nasc">
-                  <input type="date" name='nasc'  placeholder='Data de nascimento' class="form-control"/>  
-                </td>
-              </tr>
-            </table>
-          </div> -->
           <div class="form-row">
             <div data-name="nome" class="form-group col-md-12">
               <label for="name">Nome</label>
@@ -264,9 +137,6 @@
         
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalAdicionar()">Adicionar</button>
-      </div> -->
         <button type="button" class="btn btn-success float-right" (click)="toggleSalvar()">
           Adicionar
         </button>
@@ -275,20 +145,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div class="modal" [ngClass]="{'d-block': showModalSalvar}" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Deseja salvar as alterações realizadas?</h5>
-        <button type="button" class="close" (click)="closeModalSalvar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalSalvar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalSalvar()" routerLinkActive="active" [routerLink]="['/admin']">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</div> -->
