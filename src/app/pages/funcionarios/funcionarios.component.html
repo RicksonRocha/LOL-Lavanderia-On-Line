@@ -16,7 +16,7 @@
       <div class="col">
         <div class="card bg-default shadow">
           <div class="card-header bg-transparent border-0">
-            <h3 class="text-white mb-0">Funcionários registradas</h3>
+            <h3 class="text-white mb-0">Funcionários registradas - {{ funcionarios.length }}</h3>
           </div>
           <div class="table-responsive">
             <table class="table align-items-center table-dark table-flush">
@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let func of funcionario; index as i;  first as isFirst">
+                <tr *ngFor="let func of funcionarios; index as i;  first as isFirst">
                   <td scope="row">
                     <div class="media align-items-center">
                       <div class="media-body">
@@ -38,8 +38,7 @@
                   </td>
                   <td>{{ func.name }}</td>
                   <td>{{ func.email }}</td>
-                  <td>{{ func.senha }}</td>
-                  <td>{{ func.birthDate }}</td>
+                  <td>{{ func.birth_date }}</td>
                   <td>
                     <div ngbDropdown placement="bottom-right">
                       <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
@@ -64,7 +63,7 @@
           <tbody>
             <tr id="addr0" data-id="0" class="hidden">
               <td class="float-right">
-                <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()">Adicionar funcionário</a>
+                <a id="add_row" class="btn btn-primary" (click)="toggleModal('adicionar')">Adicionar funcionário</a>
                 <a
                   class="btn btn-success float-right"
                   id="autoclosable-btn-success"
@@ -80,7 +79,7 @@
     </div>
   </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalEditar}" tabindex="-1" role="dialog">
+<!-- <div class="modal" [ngClass]="{'d-block': showModalEditar}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -98,7 +97,7 @@
               </th>
             </tr>
             <tr class="hidden">
-              <td data-name="nome">
+              <td data-name="password">
                 <input type="name" name='nome' placeholder='Nome' class="form-control"/>
               </td>
             </tr>
@@ -141,7 +140,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="modal" [ngClass]="{'d-block': showModalExcluir}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -153,77 +152,131 @@
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalExcluir()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalExcluir()">Confirmar</button>
+        <button
+          type="button"
+          class="btn btn-success float-right"
+          (click)="confirmacaoExcluir(true)"
+        >
+          Confirmar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirmacaoExcluir(false)">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalAdicionar}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{'d-block': showModal }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Adicionar novo funcionário</h5>
-        <button type="button" class="close" (click)="closeModalAdicionar()">
+        <h2>{{ modalType == 'adicionar' ? 'Adicionar novo funcionário' : 'Edição de funcionário' }}</h2>
+        <button type="button" class="close" (click)="toggleModal()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="col-md-12 table-responsive">
-          <table class="table align-items-center table-flush" id="tab_logic">
-            <tr class="hidden">
-              <th class="text-center">
-                Nome
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nome">
-                <input type="name" name='nome' placeholder='Nome' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                E-mail
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="email">
-                <input type="email" name='preco' placeholder='E-mail' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Senha
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="senha">
-                <input type="password" name='senha'  placeholder='Senha' class="form-control"/>  
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Data de nascimento
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nasc">
-                <input type="date" name='nasc'  placeholder='Data de nascimento' class="form-control"/>  
-              </td>
-            </tr>
-          </table>
-        </div>
+        <form #formFuncionario="ngForm">
+          <!-- <div class="col-md-12 table-responsive">
+            <table class="table align-items-center table-flush" id="tab_logic">
+              <tr class="hidden">
+                <th class="text-center">
+                  Nome
+                </th>
+              </tr>
+              <tr class="hidden">
+                <td data-name="nome">
+                  <input type="name" name='nome' placeholder='Nome' class="form-control"/>
+                </td>
+              </tr>
+              <tr class="hidden">
+                <th class="text-center">
+                  E-mail
+                </th>
+              </tr>
+              <tr class="hidden">
+                <td data-name="email">
+                  <input type="email" name='preco' placeholder='E-mail' class="form-control"/>
+                </td>
+              </tr>
+              <tr class="hidden">
+                <th class="text-center">
+                  Senha
+                </th>
+              </tr>
+              <tr class="hidden">
+                <td data-name="senha">
+                  <input type="password" name='senha'  placeholder='Senha' class="form-control"/>  
+                </td>
+              </tr>
+              <tr class="hidden">
+                <th class="text-center">
+                  Data de nascimento
+                </th>
+              </tr>
+              <tr class="hidden">
+                <td data-name="nasc">
+                  <input type="date" name='nasc'  placeholder='Data de nascimento' class="form-control"/>  
+                </td>
+              </tr>
+            </table>
+          </div> -->
+          <div class="form-row">
+            <div data-name="nome" class="form-group col-md-12">
+              <label for="name">Nome</label>
+              <input
+                id="name"
+                name="name"
+                placeholder="Nome do funcionario"
+                class="form-control"
+                type="text"
+                [(ngModel)]="funcionario.name"
+                #name="ngModel"
+              />
+            </div>
+            <div data-name="email" class="form-group col-md-12">
+              <label for="email">E-mail</label>
+              <input
+                id="email"
+                name="email"
+                placeholder="E-mail do funcionario"
+                class="form-control"
+                type="email"
+                [(ngModel)]="funcionario.email"
+                #email="ngModel"
+              />
+            </div>
+            <div data-name="birth_date" class="form-group col-md-12">
+              <label for="birth_date">Data de nascimento do funcionário</label>
+              <input
+                id="birth_date"
+                name="birth_date"
+                placeholder="Data de nascimento do funcionario"
+                class="form-control"
+                type="date"
+                [(ngModel)]="funcionario.birth_date"
+                #birth_date="ngModel"
+              />
+            </div>
+          </div>
+        </form>
+        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">Cancelar</button>
+        <!-- <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">Cancelar</button>
         <button type="button" class="btn btn-success float-right" (click)="closeModalAdicionar()">Adicionar</button>
+      </div> -->
+        <button type="button" class="btn btn-success float-right" (click)="toggleSalvar()">
+          Adicionar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="toggleModal()">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalSalvar}" tabindex="-1" role="dialog">
+<!-- <div class="modal" [ngClass]="{'d-block': showModalSalvar}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -238,4 +291,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ITableHeads } from '../purchase/purchase.component';
 import { dateFormatter } from '../utils';
+import { FuncionariosService } from './service/funcionarios.service';
+import { Funcionario } from 'src/app/shared/models/funcionario.model';
+import { NgForm } from '@angular/forms';
 
 const today = dateFormatter(new Date());
 
@@ -8,7 +11,6 @@ export const TABLEHEADS: ITableHeads[] = [
   { title: 'ID' },
   { title: 'Nome' },
   { title: 'E-mail' },
-  { title: 'Senha' },
   { title: 'Data de Nascimento' },
   { title: 'Ações' },
 ];
@@ -33,10 +35,15 @@ const FUNCIONARIOS: IFuncionario[] = [
   styleUrls: ['./funcionarios.component.scss'],
 })
 export class FuncionariosComponent implements OnInit {
+  @ViewChild('formFuncionario') formFuncionario!: NgForm;
+  funcionario: Funcionario = new Funcionario();
   public tableHeads: ITableHeads[];
-  public funcionario: IFuncionario[];
+  public funcionarios: Funcionario[];
+  public funcionarioSelecionado: number | null;
+  public showModal: boolean = false;
+  public modalType: 'adicionar' | 'editar' = 'adicionar';
 
-  constructor() {}
+  constructor(private funcionariosService: FuncionariosService) {}
 
   showModalEditar = false;
   showModalExcluir = false;
@@ -59,12 +66,62 @@ export class FuncionariosComponent implements OnInit {
     this.showModalExcluir = false;
   }
 
-  openModalAdicionar() {
-    this.showModalAdicionar = true;
+  toggleExcluir(id?: number) {
+    if (id) {
+      this.funcionarioSelecionado = id;
+    } else {
+      this.funcionarioSelecionado = null;
+    }
+    this.showModalExcluir = !this.showModalExcluir;
   }
 
-  closeModalAdicionar() {
-    this.showModalAdicionar = false;
+  confirmacaoExcluir(confirmacao: boolean) {
+    if (confirmacao) {
+      this.funcionariosService.remover(this.funcionarioSelecionado).subscribe((roupa) => {
+        alert('deletada com sucesso');
+        this.listarFuncionarios();
+      });
+    }
+    this.toggleExcluir();
+  }
+
+  // toggleAdicionar(confirmacao?: boolean) {
+  //   if (confirmacao) {
+  //     const { name, email, password, birth_date } = this.formFuncionario.form.value;
+  //     let funcionarioNovo = new Funcionario(null, name, email, password, birth_date);
+  //     this.funcionariosService.inserir(funcionarioNovo).subscribe((funcionario) => {
+  //       alert('adicionado com sucesso');
+  //       this.listarFuncionarios();
+  //     });
+  //   }
+  //   this.showModalAdicionar = !this.showModalAdicionar;
+  // }
+
+  toggleSalvar() {
+    const { name, email, birth_date } = this.formFuncionario.form.value;
+    
+    if (this.modalType == 'adicionar') {
+      let funcionarioNovo = new Funcionario(null, name, email, null, birth_date);
+      this.funcionariosService.inserir(funcionarioNovo).subscribe((funcionario) => {
+        alert('adicionado com sucesso');
+        this.listarFuncionarios();
+      });
+    } else {
+      let funcionarioEditado = new Funcionario(this.funcionarioSelecionado, name, email, null, birth_date);
+      this.funcionariosService.alterar(funcionarioEditado).subscribe((funcionario) => {
+        alert('alterado com sucesso');
+        this.listarFuncionarios();
+      });
+    }
+    this.toggleModal();
+  }
+
+  toggleModal(type?: 'adicionar' | 'editar', funcionarioId?: number) {
+    if (type) {
+      this.modalType = type;
+      if (funcionarioId) this.funcionarioSelecionado = funcionarioId;
+    }
+    this.showModal = !this.showModal;
   }
 
   openModalSalvar() {
@@ -77,6 +134,13 @@ export class FuncionariosComponent implements OnInit {
 
   ngOnInit() {
     this.tableHeads = TABLEHEADS;
-    this.funcionario = FUNCIONARIOS;
+    this.listarFuncionarios();
+    this.funcionarios = FUNCIONARIOS;
+  }
+
+  listarFuncionarios(): void {
+    this.funcionariosService.listarTodos().subscribe((funcionarios) => {
+      this.funcionarios = funcionarios;
+    });
   }
 }

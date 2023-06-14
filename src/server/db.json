@@ -61,5 +61,34 @@
       "price": 123,
       "deadline": 34
     }
+  ],
+  "funcionarios": [
+    {
+      "id": 1,
+      "name": "Harry",
+      "email": "harry.potter@mail.com",
+      "password": "1234",
+      "birth_date": "31/07/1980"
+    },
+    {
+      "id": 2,
+      "name": "teste",
+      "email": "teste@mail.com",
+      "password": "31/07/1980"
+    },
+    {
+      "id": 3,
+      "name": "teste 02",
+      "email": "teste02@mail.com",
+      "password": null,
+      "birth_date": "31/07/2009"
+    },
+    {
+      "id": 4,
+      "name": "teste03",
+      "email": "teste",
+      "password": null,
+      "birth_date": "2000-07-31"
+    }
   ]
 }
