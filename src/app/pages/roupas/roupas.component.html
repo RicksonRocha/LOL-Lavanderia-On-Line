@@ -62,55 +62,6 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{ 'd-block': showModalEditar }" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar roupa</h5>
-        <button type="button" class="close" (click)="closeModalEditar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="col-md-12 table-responsive">
-          <table class="table align-items-center table-flush" id="tab_logic">
-            <tr class="hidden">
-              <th class="text-center">Nome</th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nome">
-                <input type="name" name="nome" placeholder="Nome" class="form-control" />
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">Preço</th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="preco">
-                <input type="number" name="preco" placeholder="Preço" class="form-control" />
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">Prazo</th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="prazo">
-                <input type="number" name="prazo" placeholder="Prazo" class="form-control" />
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalEditar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalEditar()">
-          Salvar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="modal" [ngClass]="{ 'd-block': showModalExcluir }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

@@ -25,21 +25,15 @@ export class RoupasComponent implements OnInit {
   public roupas: Roupa[];
   public roupaSelecionada: number | null;
   public showModal: boolean = false;
+  public showModalExcluir: boolean = false;
   public modalType: 'adicionar' | 'editar' = 'adicionar';
 
   constructor(private roupaService: RoupaService) {}
 
-  showModalEditar = false;
-  showModalExcluir = false;
-  showModalAdicionar = false;
-  showModalSalvar = false;
-
-  openModalEditar() {
-    this.showModalEditar = true;
-  }
-
-  closeModalEditar() {
-    this.showModalEditar = false;
+  ngOnInit() {
+    this.roupas = [];
+    this.listarRoupas();
+    this.clothesHeads = CLOTHESHEADS;
   }
 
   toggleExcluir(id?: number) {
@@ -86,12 +80,6 @@ export class RoupasComponent implements OnInit {
       if (roupaId) this.roupaSelecionada = roupaId;
     }
     this.showModal = !this.showModal;
-  }
-
-  ngOnInit() {
-    this.roupas = [];
-    this.listarRoupas();
-    this.clothesHeads = CLOTHESHEADS;
   }
 
   listarRoupas(): void {
