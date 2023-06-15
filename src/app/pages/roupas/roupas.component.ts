@@ -72,13 +72,15 @@ export class RoupasComponent implements OnInit {
       });
     }
     this.toggleModal();
+    this.setFormValue();
   }
 
   toggleModal(type?: 'adicionar' | 'editar', roupaId?: number) {
     if (type) {
       this.modalType = type;
-      if (roupaId) this.roupaSelecionada = roupaId;
     }
+    this.roupaSelecionada = roupaId ? roupaId : null;
+    this.setFormValue();
     this.showModal = !this.showModal;
   }
 
@@ -86,5 +88,13 @@ export class RoupasComponent implements OnInit {
     this.roupaService.listarTodos().subscribe((roupas) => {
       this.roupas = roupas;
     });
+  }
+
+  setFormValue(): void {
+    if (this.roupaSelecionada) {
+      this.roupa = this.roupas.find((roupa) => roupa.id === this.roupaSelecionada);
+    } else {
+      this.roupa = { id: undefined, name: undefined, price: undefined, deadline: undefined };
+    }
   }
 }

@@ -38,28 +38,28 @@
   ],
   "roupas": [
     {
-      "id": 5,
-      "name": "roupa x 42",
-      "price": 123,
-      "deadline": 34
-    },
-    {
-      "id": 7,
-      "name": "wef9ahuds",
-      "price": null,
-      "deadline": 1233
-    },
-    {
-      "id": 8,
-      "name": "Nova roupa",
-      "price": 12,
-      "deadline": 34
-    },
-    {
       "id": 9,
-      "name": "jeans",
+      "name": "jeans 2",
       "price": 123,
-      "deadline": 34
+      "deadline": 5
+    },
+    {
+      "id": 10,
+      "name": "Camisa",
+      "price": 2,
+      "deadline": 4
+    },
+    {
+      "id": 15,
+      "name": "jaqueta",
+      "price": 4,
+      "deadline": 2
+    },
+    {
+      "id": 16,
+      "name": "meia",
+      "price": 42,
+      "deadline": 8
     }
   ]
 }
