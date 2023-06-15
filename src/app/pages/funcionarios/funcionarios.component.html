@@ -1,22 +1,14 @@
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-    <div class="container-fluid">
-      <div class="header-body">
-      
-        
-      </div>
-    </div>
-  </div>
-  
-  <div class="container-fluid mt--7">
-    
-  </div>
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
+
+<div class="container-fluid mt--9"></div>
   
   <div class="container-fluid mt--5">
     <div class="row mt-5">
       <div class="col">
         <div class="card bg-default shadow">
-          <div class="card-header bg-transparent border-0">
+          <div class="card-header bg-transparent border-0 d-flex justify-content-between">
             <h3 class="text-white mb-0">Funcionários registradas</h3>
+            <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()">Adicionar funcionário</a>
           </div>
           <div class="table-responsive">
             <table class="table align-items-center table-dark table-flush">
@@ -56,26 +48,6 @@
             </table>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row clearfix">
-      <div class="col-md-12 table-responsive">
-        <table class="table align-items-center">
-          <tbody>
-            <tr id="addr0" data-id="0" class="hidden">
-              <td class="float-right">
-                <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()">Adicionar funcionário</a>
-                <a
-                  class="btn btn-success float-right"
-                  id="autoclosable-btn-success"
-                  (click)="openModalSalvar()"
-                >
-                  Salvar alterações
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
@@ -218,23 +190,6 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">Cancelar</button>
         <button type="button" class="btn btn-success float-right" (click)="closeModalAdicionar()">Adicionar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" [ngClass]="{'d-block': showModalSalvar}" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Deseja salvar as alterações realizadas?</h5>
-        <button type="button" class="close" (click)="closeModalSalvar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalSalvar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalSalvar()" routerLinkActive="active" [routerLink]="['/admin']">Confirmar</button>
       </div>
     </div>
   </div>
