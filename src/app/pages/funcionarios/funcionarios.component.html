@@ -1,121 +1,66 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8"></div>
 
 <div class="container-fluid mt--9"></div>
-  
-  <div class="container-fluid mt--5">
-    <div class="row mt-5">
-      <div class="col">
-        <div class="card bg-default shadow">
-          <div class="card-header bg-transparent border-0 d-flex justify-content-between">
-            <h3 class="text-white mb-0">Funcionários registradas</h3>
-            <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()">Adicionar funcionário</a>
-          </div>
-          <div class="table-responsive">
-            <table class="table align-items-center table-dark table-flush">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
-                    {{ head.title }}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let func of funcionario; index as i;  first as isFirst">
-                  <td scope="row">
-                    <div class="media align-items-center">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">{{ func.id }}</span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>{{ func.name }}</td>
-                  <td>{{ func.email }}</td>
-                  <td>{{ func.senha }}</td>
-                  <td>{{ func.birthDate }}</td>
-                  <td>
-                    <div ngbDropdown placement="bottom-right">
-                      <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="openModalEditar()">Editar</a>
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="openModalExcluir()">Excluir</a>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalEditar}" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar funcionário</h5>
-        <button type="button" class="close" (click)="closeModalEditar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="col-md-12 table-responsive">
-          <table class="table align-items-center table-flush" id="tab_logic">
-            <tr class="hidden">
-              <th class="text-center">
-                Nome
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nome">
-                <input type="name" name='nome' placeholder='Nome' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                E-mail
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="email">
-                <input type="email" name='preco' placeholder='E-mail' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Senha
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="senha">
-                <input type="password" name='senha'  placeholder='Senha' class="form-control"/>  
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Data de nascimento
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nasc">
-                <input type="date" name='nasc'  placeholder='Data de nascimento' class="form-control"/>  
-              </td>
-            </tr>
+<div class="container-fluid mt--5">
+  <div class="row mt-5">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">Funcionários registradas - {{ funcionarios.length }}</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-dark table-flush">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                  {{ head.title }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let func of funcionarios; index as i; first as isFirst">
+                <td scope="row">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{ func.id }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ func.name }}</td>
+                <td>{{ func.email }}</td>
+                <td>{{ func.birth_date }}</td>
+                <td>
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
+                      <a
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        (click)="toggleModal('editar', func.id)"
+                        >Editar</a
+                      >
+                      <a
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        (click)="toggleExcluir(func.id)"
+                        >Excluir</a
+                      >
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalEditar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalEditar()">Salvar</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalExcluir}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalExcluir }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -125,71 +70,79 @@
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalExcluir()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalExcluir()">Confirmar</button>
+        <button
+          type="button"
+          class="btn btn-success float-right"
+          (click)="confirmacaoExcluir(true)"
+        >
+          Confirmar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirmacaoExcluir(false)">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{'d-block': showModalAdicionar}" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModal }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Adicionar novo funcionário</h5>
-        <button type="button" class="close" (click)="closeModalAdicionar()">
+        <h2>
+          {{ modalType == 'adicionar' ? 'Adicionar novo funcionário' : 'Edição de funcionário' }}
+        </h2>
+        <button type="button" class="close" (click)="toggleModal()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="col-md-12 table-responsive">
-          <table class="table align-items-center table-flush" id="tab_logic">
-            <tr class="hidden">
-              <th class="text-center">
-                Nome
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nome">
-                <input type="name" name='nome' placeholder='Nome' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                E-mail
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="email">
-                <input type="email" name='preco' placeholder='E-mail' class="form-control"/>
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Senha
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="senha">
-                <input type="password" name='senha'  placeholder='Senha' class="form-control"/>  
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">
-                Data de nascimento
-              </th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nasc">
-                <input type="date" name='nasc'  placeholder='Data de nascimento' class="form-control"/>  
-              </td>
-            </tr>
-          </table>
-        </div>
+        <form #formFuncionario="ngForm">
+          <div class="form-row">
+            <div data-name="nome" class="form-group col-md-12">
+              <label for="name">Nome</label>
+              <input
+                id="name"
+                name="name"
+                placeholder="Nome do funcionario"
+                class="form-control"
+                type="text"
+                [(ngModel)]="funcionario.name"
+                #name="ngModel"
+              />
+            </div>
+            <div data-name="email" class="form-group col-md-12">
+              <label for="email">E-mail</label>
+              <input
+                id="email"
+                name="email"
+                placeholder="E-mail do funcionario"
+                class="form-control"
+                type="email"
+                [(ngModel)]="funcionario.email"
+                #email="ngModel"
+              />
+            </div>
+            <div data-name="birth_date" class="form-group col-md-12">
+              <label for="birth_date">Data de nascimento do funcionário</label>
+              <input
+                id="birth_date"
+                name="birth_date"
+                placeholder="Data de nascimento do funcionario"
+                class="form-control"
+                type="date"
+                [(ngModel)]="funcionario.birth_date"
+                #birth_date="ngModel"
+              />
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalAdicionar()">Adicionar</button>
+        <button type="button" class="btn btn-success float-right" (click)="toggleSalvar()">
+          Adicionar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="toggleModal()">Cancelar</button>
       </div>
     </div>
   </div>
