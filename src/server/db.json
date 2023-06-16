@@ -38,14 +38,8 @@
   ],
   "roupas": [
     {
-      "id": 9,
-      "name": "jeans 2",
-      "price": 123,
-      "deadline": 5
-    },
-    {
       "id": 10,
-      "name": "Camisa",
+      "name": "Camisa 2",
       "price": 2,
       "deadline": 4
     },
@@ -71,18 +65,11 @@
       "birth_date": "31/07/1980"
     },
     {
-      "id": 3,
-      "name": "teste 02",
-      "email": "teste02@mail.com",
-      "password": null,
-      "birth_date": "31/07/2009"
-    },
-    {
       "id": 4,
-      "name": "01",
-      "email": "01",
+      "name": "Hermione",
+      "email": "hermione@email.com",
       "password": null,
-      "birth_date": "2001-01-01"
+      "birth_date": "2003-09-12"
     }
   ]
 }
