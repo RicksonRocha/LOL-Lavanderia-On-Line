@@ -10,6 +10,8 @@ import {
   colorStatusType,
 } from './client.types';
 import { ColorStatus } from '../admin/admin.types';
+import { User } from 'src/app/shared';
+import { UsuarioService } from 'src/app/auth/services/usuario.service';
 
 @Component({
   selector: 'app-client',
@@ -23,7 +25,9 @@ export class InitialClientComponent implements OnInit {
   public reports: any[];
   public colorStatus: colorStatusType = 'warning';
 
-  constructor() {}
+  usuarios: User[] = [];
+
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit() {
     this.orders = ORDERS.filter((order) => order.status === this.status);
@@ -32,6 +36,22 @@ export class InitialClientComponent implements OnInit {
       ...report,
       total: this.lengthByStatus(report.title),
     }));
+
+    this.listarTodos();
+  }
+
+  listarTodos(): User[] {
+    this.usuarioService.listarTodos().subscribe({
+      next: (data: User[]) => {
+        console.log('recebendo data', data);
+        if (data == null) {
+          this.usuarios = [];
+        } else {
+          this.usuarios = data;
+        }
+      },
+    });
+    return this.usuarios;
   }
 
   private filterStatus(status: IStatus) {

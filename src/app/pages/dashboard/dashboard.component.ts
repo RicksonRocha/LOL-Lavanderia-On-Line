@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Roupa } from 'src/app/shared/models/roupa.model';
 
 const OPTIONS = [
   { value: '', label: 'Selecione uma opção' },
@@ -23,6 +24,7 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
   public options: any;
+  public roupas: Roupa[] = [];
 
   constructor() {
     this.options = OPTIONS;

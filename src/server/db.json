@@ -1,0 +1,65 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "name": "Func",
+      "login": "func",
+      "password": "func",
+      "profile": "func"
+    },
+    {
+      "id": 2,
+      "name": "Admin",
+      "login": "admin",
+      "password": "admin",
+      "profile": "admin"
+    },
+    {
+      "id": 3,
+      "name": "Gerente",
+      "login": "gerente",
+      "password": "gerente",
+      "profile": "gerente"
+    },
+    {
+      "id": 5,
+      "name": "Rickson Rocha",
+      "login": "rickson@email.com",
+      "password": "123",
+      "profile": "func"
+    },
+    {
+      "id": 6,
+      "name": "Usuário",
+      "login": "usuario@email.com",
+      "password": "123",
+      "profile": "func"
+    }
+  ],
+  "roupas": [
+    {
+      "id": 9,
+      "name": "jeans 2",
+      "price": 123,
+      "deadline": 5
+    },
+    {
+      "id": 10,
+      "name": "Camisa",
+      "price": 2,
+      "deadline": 4
+    },
+    {
+      "id": 15,
+      "name": "jaqueta",
+      "price": 4,
+      "deadline": 2
+    },
+    {
+      "id": 16,
+      "name": "meia",
+      "price": 42,
+      "deadline": 8
+    }
+  ]
+}

@@ -7,8 +7,10 @@
     <div class="col">
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0 d-flex justify-content-between">
-          <h3 class="text-white mb-0">Roupas registradas</h3>
-          <a id="add_row" class="btn btn-primary" (click)="openModalAdicionar()">Adicionar roupa</a>
+          <h3 class="text-white mb-0">Roupas registradas - {{ roupas.length }}</h3>
+          <a id="add_row" class="btn btn-primary" (click)="toggleModal('adicionar')"
+            >Adicionar roupa</a
+          >
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-dark table-flush">
@@ -20,7 +22,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of purchase.items; index as i; first as isFirst">
+              <tr *ngFor="let item of roupas; index as i; first as isFirst">
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
@@ -36,13 +38,16 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalEditar()"
+                      <a
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        (click)="toggleModal('editar', item.id)"
                         >Editar</a
                       >
                       <a
                         class="dropdown-item"
                         href="javascript:void(0)"
-                        (click)="openModalExcluir()"
+                        (click)="toggleExcluir(item.id)"
                         >Excluir</a
                       >
                     </div>
@@ -57,94 +62,53 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{ 'd-block': showModalEditar }" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar roupa</h5>
-        <button type="button" class="close" (click)="closeModalEditar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="col-md-12 table-responsive">
-          <table class="table align-items-center table-flush" id="tab_logic">
-            <tr class="hidden">
-              <th class="text-center">Nome</th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="nome">
-                <input type="name" name="nome" placeholder="Nome" class="form-control" />
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">Preço</th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="preco">
-                <input type="number" name="preco" placeholder="Preço" class="form-control" />
-              </td>
-            </tr>
-            <tr class="hidden">
-              <th class="text-center">Prazo</th>
-            </tr>
-            <tr class="hidden">
-              <td data-name="prazo">
-                <input type="number" name="prazo" placeholder="Prazo" class="form-control" />
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalEditar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalEditar()">
-          Salvar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="modal" [ngClass]="{ 'd-block': showModalExcluir }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Deseja realmente excluir está roupa?</h5>
-        <button type="button" class="close" (click)="closeModalExcluir()">
+        <button type="button" class="close" (click)="toggleExcluir()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalExcluir()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalExcluir()">
+        <button
+          type="button"
+          class="btn btn-success float-right"
+          (click)="confirmacaoExcluir(true)"
+        >
           Confirmar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirmacaoExcluir(false)">
+          Cancelar
         </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{ 'd-block': showModalAdicionar }" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModal }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>Adicionar nova roupa</h2>
-        <button type="button" class="close" (click)="closeModalAdicionar()">
+        <h2>{{ modalType == 'adicionar' ? 'Adicionar nova roupa' : 'Edição de roupa' }}</h2>
+        <button type="button" class="close" (click)="toggleModal()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form #formRoupa="ngForm">
           <div class="form-row">
             <div data-name="nome" class="form-group col-md-12">
               <label for="name">Nome</label>
               <input
                 id="name"
-                type="name"
-                name="nome"
+                name="name"
                 placeholder="Nome da nova peça"
                 class="form-control"
+                type="text"
+                [(ngModel)]="roupa.name"
+                #name="ngModel"
               />
             </div>
           </div>
@@ -154,31 +118,33 @@
               <input
                 id="price"
                 type="number"
-                name="preco"
+                name="price"
                 placeholder="Preço em reais"
                 class="form-control"
+                [(ngModel)]="roupa.price"
+                #price="ngModel"
               />
             </div>
             <div data-name="prazo" class="form-group col-md-6">
               <label for="prazo">Prazo</label>
               <input
-                id="prazo"
+                id="deadline"
                 type="number"
-                name="prazo"
+                name="deadline"
                 placeholder="Prazo em número de dias"
                 class="form-control"
+                [(ngModel)]="roupa.deadline"
+                #deadline="ngModel"
               />
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success float-right" (click)="closeModalAdicionar()">
+        <button type="button" class="btn btn-success float-right" (click)="toggleSalvar()">
           Adicionar
         </button>
-        <button type="button" class="btn btn-danger" (click)="closeModalAdicionar()">
-          Cancelar
-        </button>
+        <button type="button" class="btn btn-danger" (click)="toggleModal()">Cancelar</button>
       </div>
     </div>
   </div>
