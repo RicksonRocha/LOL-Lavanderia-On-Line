@@ -85,6 +85,8 @@ export class DashboardComponent implements OnInit {
     if (newAction) {
       this.action = newAction;
 
+      if (!this.pedido.price) return;
+
       if (newAction == 'aceitar') {
         this.pedido.status = 'EM ABERTO';
       } else {
