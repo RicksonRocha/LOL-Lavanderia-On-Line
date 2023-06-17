@@ -1,20 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ItemRoupa, Pedido } from 'src/app/shared/models/pedido.model';
 import { Roupa } from 'src/app/shared/models/roupa.model';
-
-const OPTIONS = [
-  { value: '', label: 'Selecione uma opção' },
-  { value: '1', label: 'Jeans' },
-  { value: '2', label: 'Camisa' },
-  { value: '3', label: 'Camiseta' },
-  { value: '4', label: 'Calça' },
-  { value: '5', label: 'Bermuda' },
-  { value: '6', label: 'Moleton' },
-  { value: '7', label: 'Roupa de cama' },
-  { value: '8', label: 'Panos' },
-  { value: '9', label: 'Roupa íntima' },
-  { value: '10', label: 'Meias' },
-  { value: '11', label: 'Sapato' },
-];
+import { RoupaService } from '../roupas/service/roupa.service';
+import { NgForm } from '@angular/forms';
+import { PedidoService } from './service/pedido.service';
 
 declare var $: any;
 @Component({
@@ -23,110 +12,90 @@ declare var $: any;
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  public options: any;
-  public roupas: Roupa[] = [];
+  @ViewChild('formRoupa') formRoupa!: NgForm;
+  itemRoupa: ItemRoupa = new ItemRoupa();
 
-  constructor() {
-    this.options = OPTIONS;
-  }
+  public options: Roupa[];
+  public pedido: Pedido = new Pedido();
+  public itemsPedido: ItemRoupa[] = [];
+  public showModal: boolean = false;
+  public showModalAction: boolean = false;
+  public action: 'aceitar' | 'rejeitar' = 'aceitar';
+  public numeroPedido: number;
 
-  showModalRejeitar = false;
-  showModalAprovar = false;
-
-  openModalRejeitar() {
-    this.showModalRejeitar = true;
-  }
-
-  closeModalRejeitar() {
-    this.showModalRejeitar = false;
-  }
-
-  openModalAprovar() {
-    this.showModalAprovar = true;
-  }
-
-  closeModalAprovar() {
-    this.showModalAprovar = false;
-  }
+  constructor(private roupaService: RoupaService, private pedidoService: PedidoService) {}
 
   ngOnInit() {
-    $(document).ready(function () {
-      $(document).on('click', '.close', function () {
-        $(this).parent().hide();
-      });
-
-      $('#add_row').on('click', function () {
-        // Dynamic Rows Code
-
-        // Get max row id and set new id
-        var newid = 0;
-        $.each($('#tab_logic tr'), function () {
-          if (parseInt($(this).data('id')) > newid) {
-            newid = parseInt($(this).data('id'));
-          }
-        });
-        newid++;
-
-        var tr = $('<tr></tr>', {
-          id: 'addr' + newid,
-          'data-id': newid,
-        });
-
-        // loop through each td and create new elements with name of newid
-        $.each($('#tab_logic tbody tr:nth(0) td'), function () {
-          var td;
-          var cur_td = $(this);
-
-          var children = cur_td.children();
-
-          // add new td and element if it has a nane
-          if ($(this).data('name') !== undefined) {
-            td = $('<td></td>', {
-              'data-name': $(cur_td).data('name'),
-            });
-
-            var c = $(cur_td).find($(children[0]).prop('tagName')).clone().val('');
-            c.attr('name', $(cur_td).data('name') + newid);
-            c.appendTo($(td));
-            td.appendTo($(tr));
-          } else {
-            td = $('<td></td>', {
-              text: $('#tab_logic tr').length,
-            }).appendTo($(tr));
-          }
-        });
-
-        // add the new row
-        $(tr).appendTo($('#tab_logic'));
-
-        $(tr)
-          .find('td button.row-remove')
-          .on('click', function () {
-            $(this).closest('tr').remove();
-          });
-      });
-
-      // Sortable Code
-      var fixHelperModified = function (e, tr) {
-        var $originals = tr.children();
-        var $helper = tr.clone();
-
-        $helper.children().each(function (index) {
-          $(this).width($originals.eq(index).width());
-        });
-
-        return $helper;
-      };
-
-      $('.table-sortable tbody')
-        .sortable({
-          helper: fixHelperModified,
-        })
-        .disableSelection();
-
-      $('.table-sortable thead').disableSelection();
-
-      $('#add_row').trigger('click');
+    this.roupaService.listarTodos().subscribe((roupas) => {
+      this.options = roupas;
     });
+  }
+
+  setFormValue(): void {
+    this.itemRoupa = {
+      id: undefined,
+      name: undefined,
+      price: undefined,
+      deadline: undefined,
+      quantity: undefined,
+      totalPrice: undefined,
+    };
+  }
+
+  toggleModal() {
+    this.setFormValue();
+    this.showModal = !this.showModal;
+  }
+
+  toggleSalvarItem() {
+    const { id, quantity } = this.formRoupa.form.value;
+    if (!id) return;
+    const roupaPedido = this.options.find((option) => option.id == id);
+    this.itemsPedido.push({
+      ...roupaPedido,
+      quantity,
+      totalPrice: Number((roupaPedido.price * quantity).toFixed(2)),
+    });
+    this.toggleModal();
+    this.updatePedido();
+  }
+
+  removeItem(id: number) {
+    this.itemsPedido = this.itemsPedido.filter((item) => item.id != id);
+    this.updatePedido();
+  }
+
+  updatePedido() {
+    const totalPricePedido = this.itemsPedido.reduce((prev, curr) => prev + curr.totalPrice, 0);
+    const maiorPrazo = this.itemsPedido.reduce(
+      (prev, curr) => (prev > curr.deadline ? prev : curr.deadline),
+      0
+    );
+    this.pedido = new Pedido(
+      null,
+      new Date(),
+      null,
+      totalPricePedido,
+      maiorPrazo,
+      this.itemsPedido
+    );
+  }
+
+  toggleModalAction(newAction?: 'aceitar' | 'rejeitar') {
+    if (newAction) {
+      this.action = newAction;
+
+      if (newAction == 'aceitar') {
+        this.pedido.status = 'EM ABERTO';
+      } else {
+        this.pedido.status = 'REJEITADO';
+      }
+
+      this.pedidoService.inserir(this.pedido).subscribe((pedido) => {
+        this.numeroPedido = newAction == 'aceitar' ? pedido.id : undefined;
+      });
+    }
+
+    this.showModalAction = !this.showModalAction;
   }
 }

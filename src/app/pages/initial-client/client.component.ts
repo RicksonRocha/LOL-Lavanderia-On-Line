@@ -1,17 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { currencyFormatter, dateFormatter } from '../utils';
-import {
-  IOrders,
-  IStatus,
-  ITableHeads,
-  ORDERS,
-  REPORTS,
-  TABLEHEADS,
-  colorStatusType,
-} from './client.types';
+import { ITableHeads, TABLEHEADS, colorStatusType } from './client.types';
 import { ColorStatus } from '../admin/admin.types';
 import { User } from 'src/app/shared';
-import { UsuarioService } from 'src/app/auth/services/usuario.service';
+import { PedidoService } from '../dashboard/service/pedido.service';
+import { Pedido, StatusType } from 'src/app/shared/models/pedido.model';
 
 @Component({
   selector: 'app-client',
@@ -19,52 +11,32 @@ import { UsuarioService } from 'src/app/auth/services/usuario.service';
   styleUrls: ['./client.component.scss'],
 })
 export class InitialClientComponent implements OnInit {
-  public status: IStatus = 'aberto';
-  public orders: IOrders[];
+  public status: StatusType = 'EM ABERTO';
+  public orders: Pedido[];
   public tableHeads: ITableHeads[];
-  public reports: any[];
   public colorStatus: colorStatusType = 'warning';
 
-  usuarios: User[] = [];
-
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private pedidoService: PedidoService) {}
 
   ngOnInit() {
-    this.orders = ORDERS.filter((order) => order.status === this.status);
-    this.tableHeads = TABLEHEADS.filter((head) => head);
-    this.reports = REPORTS.map((report) => ({
-      ...report,
-      total: this.lengthByStatus(report.title),
-    }));
-
-    this.listarTodos();
+    this.tableHeads = TABLEHEADS;
+    this.orders = this.listarPedidos();
   }
 
-  listarTodos(): User[] {
-    this.usuarioService.listarTodos().subscribe({
-      next: (data: User[]) => {
-        console.log('recebendo data', data);
-        if (data == null) {
-          this.usuarios = [];
+  listarPedidos(): Pedido[] {
+    this.pedidoService.listarTodos().subscribe({
+      next: (pedidos) => {
+        if (pedidos.length == 0) {
+          this.orders = [];
         } else {
-          this.usuarios = data;
+          this.orders = pedidos.filter((pedido) => pedido.status == this.status);
         }
       },
     });
-    return this.usuarios;
+    return this.orders;
   }
 
-  private filterStatus(status: IStatus) {
-    return ORDERS.filter((order) => (status === 'tudo' ? order : order.status === status));
-  }
-
-  public handleStatus(newStatus: IStatus) {
-    this.status = newStatus;
-    this.colorStatus = ColorStatus[newStatus.toUpperCase()];
-    this.orders = this.filterStatus(newStatus);
-  }
-
-  public lengthByStatus(status: IStatus) {
-    return this.filterStatus(status).length;
+  public lengthByStatus() {
+    return this.orders.filter((order) => order.status == this.status).length;
   }
 }

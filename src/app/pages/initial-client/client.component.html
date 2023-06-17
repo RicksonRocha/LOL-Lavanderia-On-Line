@@ -6,34 +6,35 @@
     <div class="col">
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0">
-          <h3 class="text-white mb-0">Pedidos Abertos - {{ lengthByStatus(status) }}</h3>
+          <h3 class="text-white mb-0">Pedidos Abertos - {{ lengthByStatus() }}</h3>
         </div>
 
         <div class="table-responsive">
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                <th
+                  class="text-center"
+                  scope="col"
+                  *ngFor="let head of tableHeads; index as i; first as isFirst"
+                >
                   {{ head.title }}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let order of orders; index as i; first as isFirst">
-                <th scope="row">
+                <th class="text-center" scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{ order.orderId }}</span>
+                      <span class="mb-0 text-sm">{{ order.id }}</span>
                     </div>
                   </div>
                 </th>
-                <td>{{ order.date }}</td>
-                <td>{{ order.status }}</td>
-                <td>
-                  <span class="badge badge-dot mr-4">
-                    {{ order.price }}
-                  </span>
-                </td>
+                <td class="text-center">{{ order.data }}</td>
+                <td class="text-center">{{ order.deadline }}</td>
+                <td class="text-center">{{ order.status }}</td>
+                <td class="text-center">R$ {{ order.price }}</td>
               </tr>
             </tbody>
           </table>
