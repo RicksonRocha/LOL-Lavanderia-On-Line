@@ -1,13 +1,5 @@
+import { StatusType } from 'src/app/shared/models/pedido.model';
 import { currencyFormatter, dateFormatter } from '../utils';
-
-export type IStatus = 'tudo' | 'aberto' | 'rejeitado' | 'cancelado' | 'aguardando';
-
-export interface IOrders {
-  orderId: string | number;
-  date: string | Date;
-  price: string | number;
-  status: IStatus;
-}
 
 export interface ITableHeads {
   title: string;
@@ -15,39 +7,17 @@ export interface ITableHeads {
 
 export type colorStatusType = 'info' | 'warning' | 'error' | 'primary' | 'success';
 export interface IReport {
-  title: IStatus;
+  title: StatusType;
   label: string;
   total: number;
   color: colorStatusType;
 }
 
-export const mockDate = dateFormatter(new Date());
-
-export const ORDERS: IOrders[] = [
-  { orderId: 1, date: mockDate, price: currencyFormatter(20), status: 'aberto' },
-  { orderId: 2, date: mockDate, price: currencyFormatter(20), status: 'aberto' },
-  { orderId: 3, date: mockDate, price: currencyFormatter(20), status: 'aberto' },
-  { orderId: 4, date: mockDate, price: currencyFormatter(20), status: 'aberto' },
-  { orderId: 5, date: mockDate, price: currencyFormatter(30), status: 'aguardando' },
-  { orderId: 6, date: mockDate, price: currencyFormatter(30), status: 'aguardando' },
-  { orderId: 7, date: mockDate, price: currencyFormatter(30), status: 'aguardando' },
-  { orderId: 8, date: mockDate, price: currencyFormatter(40), status: 'cancelado' },
-  { orderId: 9, date: mockDate, price: currencyFormatter(40), status: 'cancelado' },
-  { orderId: 10, date: mockDate, price: currencyFormatter(50), status: 'rejeitado' },
-];
-
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Número do pedido' },
   { title: 'Data' },
+  { title: 'Prazo' },
   { title: 'Status' },
   { title: 'Valor' },
-  { title: '' },
-];
-
-export const REPORTS: IReport[] = [
-  { title: 'tudo', label: 'Total', total: 1, color: 'info' },
-  { title: 'aberto', label: 'Abertos', total: 1, color: 'warning' },
-  { title: 'rejeitado', label: 'Rejeitados', total: 1, color: 'error' },
-  { title: 'cancelado', label: 'Cancelados', total: 1, color: 'primary' },
-  { title: 'aguardando', label: 'Aguardando pagamento', total: 1, color: 'success' },
+  { title: 'Ação' },
 ];

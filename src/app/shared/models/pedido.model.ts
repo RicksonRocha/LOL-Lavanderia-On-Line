@@ -1,6 +1,24 @@
 import { Roupa } from './roupa.model';
 
-export type StatusType = 'EM ABERTO' | 'REJEITADO' | 'CANCELADO' | 'AGUARDANDO';
+export enum ColorStatus {
+  TUDO = 'info',
+  EM_ABERTO = 'warning',
+  REJEITADO = 'danger',
+  CANCELADO = 'danger',
+  RECOLHIDO = 'light',
+  AGUARDANDO = 'primary',
+  PAGO = 'warning2',
+  FINALIZADO = 'success',
+}
+
+export type StatusType =
+  | 'EM ABERTO'
+  | 'REJEITADO'
+  | 'CANCELADO'
+  | 'RECOLHIDO'
+  | 'AGUARDANDO'
+  | 'PAGO'
+  | 'FINALIZADO';
 
 export class ItemRoupa extends Roupa {
   public quantity?: number;

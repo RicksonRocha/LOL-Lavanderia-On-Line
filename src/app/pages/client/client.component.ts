@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { currencyFormatter, dateFormatter } from '../utils';
-import {
-  IOrders,
-  IStatus,
-  ITableHeads,
-  ORDERS,
-  REPORTS,
-  TABLEHEADS,
-  colorStatusType,
-} from './client.types';
-import { ColorStatus } from '../admin/admin.types';
+import { ITableHeads, TABLEHEADS, colorStatusType } from './client.types';
+import { PedidoService } from '../dashboard/service/pedido.service';
+import { ColorStatus, Pedido, StatusType } from 'src/app/shared/models/pedido.model';
 
 @Component({
   selector: 'app-client',
@@ -17,53 +9,71 @@ import { ColorStatus } from '../admin/admin.types';
   styleUrls: ['./client.component.scss'],
 })
 export class ClientComponent implements OnInit {
-  public status: IStatus = 'aberto';
-  public orders: IOrders[];
+  public status: StatusType | 'TUDO' = 'TUDO';
+  public colorStatus: colorStatusType = ColorStatus['TUDO'];
+
+  public orders: Pedido[];
+  public ordersFiltered: Pedido[];
   public tableHeads: ITableHeads[];
-  public reports: any[];
-  public colorStatus: colorStatusType = 'warning';
 
-  constructor() {}
+  public showModal = false;
+  public modalType: 'pagar' | 'cancelar' = 'pagar';
+  public pedidoSelecionado: number | undefined;
 
-  showModalPagar = false;
-  showModalCancelar = false;
-
-  openModalPagar() {
-    this.showModalPagar = true;
-  }
-
-  closeModalPagar() {
-    this.showModalPagar = false;
-  }
-
-  openModalCancelar() {
-    this.showModalCancelar = true;
-  }
-
-  closeModalCancelar() {
-    this.showModalCancelar = false;
-  }
+  constructor(private pedidoService: PedidoService) {}
 
   ngOnInit() {
-    this.orders = ORDERS.filter((order) => order.status === this.status);
-    this.tableHeads = TABLEHEADS.filter((head) => head);
-    this.reports = REPORTS.map((report) => ({
-      ...report,
-      total: this.lengthByStatus(report.title),
-    }));
+    this.tableHeads = TABLEHEADS;
+    this.listarPedidos();
   }
 
-  private filterStatus(status: IStatus) {
-    return ORDERS.filter((order) => (status === 'tudo' ? order : order.status === status));
+  listarPedidos() {
+    this.pedidoService.listarTodos().subscribe({
+      next: (pedidos) => {
+        if (pedidos.length == 0) {
+          this.orders = [];
+        } else {
+          this.orders = pedidos;
+        }
+
+        this.handleStatus('TUDO');
+      },
+    });
   }
 
-  public handleStatus(newStatus: IStatus) {
+  private filterStatus(status: StatusType | 'TUDO') {
+    if (status === 'TUDO') return this.orders;
+    return this.orders.filter((order) => order.status === status);
+  }
+
+  public handleStatus(newStatus: StatusType | 'TUDO') {
     this.status = newStatus;
-    this.colorStatus = ColorStatus[newStatus.toUpperCase()];
-    this.orders = this.filterStatus(newStatus);
+    this.colorStatus = ColorStatus[newStatus.replace(' ', '_').toUpperCase()];
+    this.ordersFiltered = this.filterStatus(newStatus);
   }
 
-  public lengthByStatus(status: IStatus) {
+  public lengthByStatus(status: StatusType | 'TUDO') {
     return this.filterStatus(status).length;
+  }
+
+  public confirmarAcao() {
+    if (this.pedidoSelecionado) {
+      let pedidoAlterado = this.orders.find((order) => order.id == this.pedidoSelecionado);
+      pedidoAlterado.status = this.modalType == 'pagar' ? 'PAGO' : 'CANCELADO';
+      this.pedidoService.alterar(pedidoAlterado).subscribe({
+        next: () => {
+          alert('Alterado com sucesso!');
+        },
+      });
+    }
+    this.toggleModal();
+  }
+
+  public toggleModal(type?: 'pagar' | 'cancelar', id?: number) {
+    if (type) {
+      this.modalType = type;
+      this.pedidoSelecionado = id;
+    }
+    this.showModal = !this.showModal;
   }
 }
