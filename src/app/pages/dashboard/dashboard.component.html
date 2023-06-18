@@ -9,58 +9,77 @@
         >
           <h2 class="text-white mb-0">Faça seu pedido</h2>
           <div class="p-2">
-            <a id="add_row" class="btn btn-primary">Adicionar produto no pedido</a>
+            <button class="btn btn-primary" (click)="toggleModal()">
+              Adicionar roupa no pedido
+            </button>
           </div>
         </div>
         <div class="col-md-12 table-responsive">
           <table class="table align-items-center table-dark table-flush" id="tab_logic">
             <thead class="thead-dark">
               <tr>
-                <th class="text-center">Produto</th>
+                <th class="text-center">Roupa</th>
                 <th class="text-center">Quantidade</th>
-                <th class="text-center">Valor</th>
+                <th class="text-center">Valor unitário</th>
+                <th class="text-center">Valor total</th>
                 <th class="text-center">Prazo em dias</th>
-                <th class="text-center"></th>
+                <th class="text-center">Remover</th>
               </tr>
             </thead>
             <tbody>
-              <tr id="addr0" data-id="0" class="hidden">
-                <td data-name="name">
-                  <select name="sel0" class="form-control">
-                    <option *ngFor="let option of options" value="{{ option.value }}">
-                      {{ option.label }}
-                    </option>
-                  </select>
-                </td>
-                <td data-name="name">
+              <tr *ngFor="let item of itemsPedido">
+                <td>
                   <input
-                    type="number"
-                    name="quantidade"
-                    placeholder="Quantidade"
-                    class="form-control"
+                    class="text-center"
+                    type="text"
+                    name="name"
+                    value="{{ item.name }}"
+                    readonly
+                    class="form-control text-center"
                   />
                 </td>
-                <td data-name="desc">
+                <td>
                   <input
+                    class="text-center"
                     type="text"
-                    name="valor"
-                    placeholder="Valor"
-                    class="form-control"
-                    readonly="true"
+                    name="quantity"
+                    value="{{ item.quantity }}"
+                    readonly
+                    class="form-control text-center"
                   />
                 </td>
-                <td data-name="sel">
+                <td>
+                  <input
+                    class="text-center"
+                    type="text"
+                    name="price"
+                    value="R$ {{ item.price }}"
+                    readonly
+                    class="form-control text-center"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="text-center"
+                    type="text"
+                    name="price"
+                    value="R$ {{ item.totalPrice }}"
+                    readonly
+                    class="form-control text-center"
+                  />
+                </td>
+                <td>
                   <input
                     type="text"
-                    name="prazo"
-                    placeholder="Prazo"
-                    class="form-control"
-                    readonly="true"
+                    name="deadline"
+                    value="{{ item.deadline }}"
+                    readonly
+                    class="form-control text-center"
                   />
                 </td>
                 <td data-name="del">
-                  <button name="del0" class="btn btn-danger glyphicon glyphicon-remove row-remove">
-                    <span aria-hidden="true">Remover</span>
+                  <button class="btn btn-danger" (click)="removeItem(item.id)">
+                    <span>&times;</span>
                   </button>
                 </td>
               </tr>
@@ -92,34 +111,36 @@
                     type="text"
                     name="valorfinal"
                     placeholder="Valor final"
-                    class="form-control float-left"
-                    readonly="true"
+                    class="form-control text-center"
+                    value="R$ {{ pedido.price }}"
+                    readonly
                   />
                 </td>
                 <td>
                   <input
                     type="text"
                     name="prazototal"
-                    placeholder="Prazo total"
-                    class="form-control float-left"
-                    readonly="true"
+                    placeholder="Prazo"
+                    class="form-control text-center"
+                    value="{{ pedido.deadline }}"
+                    readonly
                   />
                 </td>
                 <td class="d-flex justify-content-center">
-                  <a
+                  <button
                     class="btn btn-success"
                     id="autoclosable-btn-success"
-                    (click)="openModalAprovar()"
+                    (click)="toggleModalAction('aceitar')"
                   >
                     Aceitar orçamento
-                  </a>
-                  <a
+                  </button>
+                  <button
                     class="btn btn-danger"
                     id="autoclosable-btn-danger"
-                    (click)="openModalRejeitar()"
+                    (click)="toggleModalAction('rejeitar')"
                   >
                     Rejeitar orçamento
-                  </a>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -130,53 +151,81 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{ 'd-block': showModalRejeitar }" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModalAction }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Deseja realmente rejeitar este pedido?</h5>
-        <button type="button" class="close" (click)="closeModalRejeitar()">
+        <h3 class="modal-title">
+          {{
+            action == 'aceitar'
+              ? 'Número do pedido'
+              : 'Deseja realmente
+          rejeitar este pedido?'
+          }}
+          {{ numeroPedido != undefined ? numeroPedido : '' }}
+        </h3>
+        <button type="button" class="close" (click)="toggleModalAction()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalRejeitar()">
-          Cancelar
-        </button>
         <button
           type="button"
           class="btn btn-success float-right"
-          (click)="closeModalRejeitar()"
+          (click)="toggleModalAction()"
           routerLinkActive="active"
           [routerLink]="['/client']"
         >
           Confirmar
         </button>
+        <button type="button" class="btn btn-danger" (click)="toggleModalAction()">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" [ngClass]="{ 'd-block': showModalAprovar }" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModal }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Deseja realmente aprovar este pedido?</h5>
-        <button type="button" class="close" (click)="closeModalAprovar()">
+        <h2>Adicionar roupa no pedido</h2>
+        <button type="button" class="close" (click)="toggleModal()">
           <span>&times;</span>
         </button>
       </div>
+      <div class="modal-body">
+        <form #formRoupa="ngForm">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="id">Roupa</label>
+              <select name="id" [(ngModel)]="itemRoupa.id" #id="ngModel" class="form-control">
+                <option *ngFor="let option of options" value="{{ option.id }}">
+                  {{ option.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="quantity">Quantidade</label>
+              <input
+                id="quantity"
+                type="number"
+                name="quantity"
+                placeholder="Quantidade de peças"
+                class="form-control"
+                [(ngModel)]="itemRoupa.quantity"
+                #quantity="ngModel"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalAprovar()">Cancelar</button>
-        <button
-          type="button"
-          class="btn btn-success float-right"
-          (click)="closeModalAprovar()"
-          routerLinkActive="active"
-          [routerLink]="['/client']"
-        >
-          Confirmar
+        <button type="button" class="btn btn-success float-right" (click)="toggleSalvarItem()">
+          Adicionar
         </button>
+        <button type="button" class="btn btn-danger" (click)="toggleModal()">Cancelar</button>
       </div>
     </div>
   </div>

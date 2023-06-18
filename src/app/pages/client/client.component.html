@@ -7,7 +7,7 @@
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0">
           <h3 class="text-white mb-0">
-            Pedidos
+            Tabela de Pedidos
             <div class="btn-group float-right" ngbDropdown>
               <button type="button" class="btn btn-{{ colorStatus }}">
                 Fitrar pedidos:
@@ -21,11 +21,14 @@
                 <i class="fa fa-chevron-circle-down"></i>
               </button>
               <div class="dropdown-menu" ngbDropdownMenu>
-                <a class="dropdown-item" (click)="handleStatus('tudo')">Tudo</a>
-                <a class="dropdown-item" (click)="handleStatus('aberto')">Aberto</a>
-                <a class="dropdown-item" (click)="handleStatus('rejeitado')">Rejeitado</a>
-                <a class="dropdown-item" (click)="handleStatus('aguardando')">Aguardando</a>
-                <a class="dropdown-item" (click)="handleStatus('cancelado')">Cancelado</a>
+                <a class="dropdown-item" (click)="handleStatus('TUDO')">TUDO</a>
+                <a class="dropdown-item" (click)="handleStatus('EM ABERTO')">EM ABERTO</a>
+                <a class="dropdown-item" (click)="handleStatus('REJEITADO')">REJEITADO</a>
+                <a class="dropdown-item" (click)="handleStatus('CANCELADO')">CANCELADO</a>
+                <a class="dropdown-item" (click)="handleStatus('RECOLHIDO')">RECOLHIDO</a>
+                <a class="dropdown-item" (click)="handleStatus('AGUARDANDO')">AGUARDANDO</a>
+                <a class="dropdown-item" (click)="handleStatus('PAGO')">PAGO</a>
+                <a class="dropdown-item" (click)="handleStatus('FINALIZADO')">FINALIZADO</a>
               </div>
             </div>
           </h3>
@@ -35,40 +38,46 @@
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                <th
+                  class="text-center"
+                  scope="col"
+                  *ngFor="let head of tableHeads; index as i; first as isFirst"
+                >
                   {{ head.title }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let order of orders; index as i; first as isFirst">
-                <th scope="row">
+              <tr *ngFor="let order of ordersFiltered; index as i; first as isFirst">
+                <th scope="row" class="text-center">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{ order.orderId }}</span>
+                      <span class="mb-0 text-sm">{{ order.id }}</span>
                     </div>
                   </div>
                 </th>
-                <td>{{ order.date }}</td>
-                <td>{{ order.status }}</td>
-                <td>
-                  <span class="badge badge-dot mr-4">
-                    {{ order.price }}
-                  </span>
+                <td class="text-center">{{ order.data }}</td>
+                <td class="text-center">{{ order.deadline }}</td>
+                <td class="text-center">{{ order.status }}</td>
+                <td class="text-center">
+                  <span class="badge badge-dot mr-4">R${{ order.price }}</span>
                 </td>
-                <td class="text-right">
+                <td class="text-center">
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalPagar()"
+                      <a
+                        class="dropdown-item"
+                        href="javascript:void(0)"
+                        (click)="toggleModal('pagar', order.id)"
                         >Pagar</a
                       >
                       <a
                         class="dropdown-item"
                         href="javascript:void(0)"
-                        (click)="openModalCancelar()"
+                        (click)="toggleModal('cancelar', order.id)"
                         >Cancelar</a
                       >
                     </div>
@@ -83,41 +92,23 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{ 'd-block': showModalPagar }" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModal }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Deseja realmente confirmar o pagemento deste pedido?</h5>
-        <button type="button" class="close" (click)="closeModalPagar()">
+        <h3 class="modal-title">
+          Deseja realmente confirmar o
+          {{ modalType === 'pagar' ? 'pagamento' : 'cancelamento' }} deste pedido?
+        </h3>
+        <button type="button" class="close" (click)="toggleModal()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalPagar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalPagar()">
+        <button type="button" class="btn btn-success float-right" (click)="confirmarAcao()">
           Confirmar
         </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" [ngClass]="{ 'd-block': showModalCancelar }" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Deseja realmente confirmar o cancelamento deste pedido?</h5>
-        <button type="button" class="close" (click)="closeModalCancelar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalCancelar()">
-          Cancelar
-        </button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalCancelar()">
-          Confirmar
-        </button>
+        <button type="button" class="btn btn-danger" (click)="toggleModal()">Cancelar</button>
       </div>
     </div>
   </div>

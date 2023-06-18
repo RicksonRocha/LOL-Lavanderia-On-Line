@@ -16,23 +16,27 @@
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" *ngFor="let head of clothesHeads; index as i; first as isFirst">
+                <th
+                  class="text-center"
+                  scope="col"
+                  *ngFor="let head of clothesHeads; index as i; first as isFirst"
+                >
                   {{ head.title }}
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of roupas; index as i; first as isFirst">
-                <th scope="row">
+                <th class="text-center" scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
                       <span class="mb-0 text-sm">{{ item.name }}</span>
                     </div>
                   </div>
                 </th>
-                <td>{{ item.price }}</td>
-                <td>{{ item.deadline }}</td>
-                <td>
+                <td class="text-center">R$ {{ item.price }}</td>
+                <td class="text-center">{{ item.deadline }}</td>
+                <td class="text-center">
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                       <i class="fas fa-ellipsis-v"></i>

@@ -54,6 +54,12 @@
       "name": "meia",
       "price": 42,
       "deadline": 8
+    },
+    {
+      "id": 17,
+      "name": "Calça",
+      "price": 2.15,
+      "deadline": 2
     }
   ],
   "funcionarios": [
@@ -70,6 +76,59 @@
       "email": "hermione@email.com",
       "password": null,
       "birth_date": "2003-09-12"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": 1,
+      "data": "2023-06-17T21:06:04.055Z",
+      "status": "CANCELADO",
+      "price": 136,
+      "deadline": 2,
+      "roupas": [
+        {
+          "id": 15,
+          "name": "jaqueta",
+          "price": 4,
+          "deadline": 2,
+          "quantity": 34,
+          "totalPrice": 136
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "data": "2023-06-17T21:11:23.750Z",
+      "status": "PAGO",
+      "price": 966,
+      "deadline": 8,
+      "roupas": [
+        {
+          "id": 16,
+          "name": "meia",
+          "price": 42,
+          "deadline": 8,
+          "quantity": 23,
+          "totalPrice": 966
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "data": "2023-06-17T21:11:42.839Z",
+      "status": "REJEITADO",
+      "price": 10.75,
+      "deadline": 2,
+      "roupas": [
+        {
+          "id": 17,
+          "name": "Calça",
+          "price": 2.15,
+          "deadline": 2,
+          "quantity": 5,
+          "totalPrice": 10.75
+        }
+      ]
     }
   ]
 }
