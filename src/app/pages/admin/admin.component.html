@@ -69,16 +69,13 @@
 </div>
 
 <div class="container-fluid mt--7">
-  <!-- Table -->
-
   <!-- Dark table -->
   <div class="row mt-5">
     <div class="col">
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0">
           <h3 class="text-white mb-0">
-            Pedidos
-            <!-- Example split danger button -->
+            Tabela de Pedidos
             <div class="btn-group float-right" ngbDropdown>
               <button type="button" class="btn btn-{{ colorStatus }}">
                 Fitrar pedidos:
@@ -92,12 +89,16 @@
                 <i class="fa fa-chevron-circle-down"></i>
               </button>
               <div class="dropdown-menu" ngbDropdownMenu>
-                <a class="dropdown-item" (click)="handleStatus('tudo')">Tudo</a>
-                <a class="dropdown-item" (click)="handleStatus('aberto')">Aberto</a>
-                <a class="dropdown-item" (click)="handleStatus('recolhido')">Recolhido</a>
-                <a class="dropdown-item" (click)="handleStatus('aguardando')">Aguardando</a>
-                <a class="dropdown-item" (click)="handleStatus('pago')">Pago</a>
-                <a class="dropdown-item" (click)="handleStatus('finalizado')">Finalizado</a>
+                <a class="dropdown-item" (click)="handleStatus('TUDO')">TUDO</a>
+                <a class="dropdown-item" (click)="handleStatus('EM ABERTO')">EM ABERTO</a>
+                <a class="dropdown-item" (click)="handleStatus('REJEITADO')">REJEITADO</a>
+                <a class="dropdown-item" (click)="handleStatus('CANCELADO')">CANCELADO</a>
+                <a class="dropdown-item" (click)="handleStatus('RECOLHIDO')">RECOLHIDO</a>
+                <a class="dropdown-item" (click)="handleStatus('AGUARDANDO PAGAMENTO')"
+                  >AGUARDANDO PAGAMENTO</a
+                >
+                <a class="dropdown-item" (click)="handleStatus('PAGO')">PAGO</a>
+                <a class="dropdown-item" (click)="handleStatus('FINALIZADO')">FINALIZADO</a>
               </div>
             </div>
           </h3>
@@ -107,52 +108,68 @@
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                <th
+                  class="text-center"
+                  scope="col"
+                  *ngFor="let head of tableHeads; index as i; first as isFirst"
+                >
                   {{ head.title }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let order of orders; index as i; first as isFirst">
-                <th scope="row">
+              <tr *ngFor="let order of ordersFiltered; index as i; first as isFirst">
+                <th scope="row" class="text-center">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="mb-0 text-sm badge badge-pill text-{{ order.color }}">{{
-                        order.orderId
-                      }}</span>
+                      <span class="mb-0 text-sm">{{ order.id }}</span>
                     </div>
                   </div>
                 </th>
-                <td>{{ order.date }}</td>
-                <td>
-                  <span class="text-{{ order.color }} text-uppercase">{{ order.status }}</span>
-                </td>
-                <td>
-                  <span class="badge badge-dot mr-4">
-                    {{ order.price }}
-                  </span>
-                </td>
-                <td class="text-right">
-                  <div ngbDropdown placement="bottom-right">
+                <td class="text-center">{{ order.data }}</td>
+                <td class="text-center">{{ order.deadline }}</td>
+                <td class="text-center">{{ order.status }}</td>
+                <td class="text-center">R${{ order.price }}</td>
+                <td class="text-center">
+                  <div
+                    *ngIf="
+                      order.status == 'EM ABERTO' ||
+                      order.status == 'RECOLHIDO' ||
+                      order.status == 'PAGO'
+                    "
+                    ngbDropdown
+                    placement="bottom-right"
+                  >
                     <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class="dropdown-menu-right dropdown-menu-arrow">
-                      <a
+                      <button
                         class="dropdown-item"
                         href="javascript:void(0)"
-                        (click)="openModalRetirar()"
-                        >Confirmar retirada</a
+                        (click)="
+                          toggleModal(
+                            order.id,
+                            order.status == 'EM ABERTO'
+                              ? 'RECOLHIDO'
+                              : order.status == 'RECOLHIDO'
+                              ? 'AGUARDANDO PAGAMENTO'
+                              : order.status == 'PAGO'
+                              ? 'FINALIZADO'
+                              : undefined
+                          )
+                        "
                       >
-                      <a class="dropdown-item" href="javascript:void(0)" (click)="openModalLavar()"
-                        >Confirmar lavagem</a
-                      >
-                      <a
-                        class="dropdown-item"
-                        href="javascript:void(0)"
-                        (click)="openModalFinalizar()"
-                        >Finalizar pedido</a
-                      >
+                        {{
+                          order.status == 'EM ABERTO'
+                            ? 'Recolher pedido'
+                            : order.status == 'RECOLHIDO'
+                            ? 'Confirmar lavagem'
+                            : order.status == 'PAGO'
+                            ? 'Finalizar pedido'
+                            : 'Sem ação'
+                        }}
+                      </button>
                     </div>
                   </div>
                 </td>
@@ -165,60 +182,30 @@
   </div>
 </div>
 
-<div class="modal" [ngClass]="{ 'd-block': showModalRetirar }" tabindex="-1" role="dialog">
+<div class="modal" [ngClass]="{ 'd-block': showModal }" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Deseja realmente confirmar a retirada deste pedido?</h5>
-        <button type="button" class="close" (click)="closeModalRetirar()">
+        <h3 class="modal-title">
+          Deseja realmente confirmar
+          {{
+            modalType === 'RECOLHIDO'
+              ? 'recolhimento'
+              : modalType === 'AGUARDANDO PAGAMENTO'
+              ? 'lavagem'
+              : 'finalização'
+          }}
+          deste pedido?
+        </h3>
+        <button type="button" class="close" (click)="toggleModal()">
           <span>&times;</span>
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalRetirar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalRetirar()">
+        <button type="button" class="btn btn-success float-right" (click)="confirmarAcao()">
           Confirmar
         </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" [ngClass]="{ 'd-block': showModalLavar }" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Deseja realmente confirmar a lavagem deste pedido?</h5>
-        <button type="button" class="close" (click)="closeModalLavar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalLavar()">Cancelar</button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalLavar()">
-          Confirmar
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal" [ngClass]="{ 'd-block': showModalFinalizar }" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Deseja realmente finalizar este pedido?</h5>
-        <button type="button" class="close" (click)="closeModalFinalizar()">
-          <span>&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closeModalFinalizar()">
-          Cancelar
-        </button>
-        <button type="button" class="btn btn-success float-right" (click)="closeModalFinalizar()">
-          Confirmar
-        </button>
+        <button type="button" class="btn btn-danger" (click)="toggleModal()">Cancelar</button>
       </div>
     </div>
   </div>

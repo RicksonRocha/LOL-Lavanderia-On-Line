@@ -129,6 +129,40 @@
           "totalPrice": 10.75
         }
       ]
+    },
+    {
+      "id": 4,
+      "data": "2023-06-19T22:40:47.826Z",
+      "status": "RECOLHIDO",
+      "price": 4,
+      "deadline": 2,
+      "roupas": [
+        {
+          "id": 15,
+          "name": "jaqueta",
+          "price": 4,
+          "deadline": 2,
+          "quantity": 1,
+          "totalPrice": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "data": "2023-06-19T23:52:38.128Z",
+      "status": "FINALIZADO",
+      "price": 92,
+      "deadline": 2,
+      "roupas": [
+        {
+          "id": 15,
+          "name": "jaqueta",
+          "price": 4,
+          "deadline": 2,
+          "quantity": 23,
+          "totalPrice": 92
+        }
+      ]
     }
   ]
 }

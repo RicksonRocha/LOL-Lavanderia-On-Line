@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ITableHeads, TABLEHEADS, colorStatusType } from './client.types';
+import { ITableHeads, TABLEHEADS, colorStatusType } from './initial-employee.types';
 import { PedidoService } from '../dashboard/service/pedido.service';
 import { Pedido, StatusType } from 'src/app/shared/models/pedido.model';
 
 @Component({
-  selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.scss'],
+  selector: 'app-initial-employee',
+  templateUrl: './initial-employee.component.html',
+  styleUrls: ['./initial-employee.component.scss'],
 })
-export class InitialClientComponent implements OnInit {
+export class InitialEmployeeComponent implements OnInit {
   public status: StatusType = 'EM ABERTO';
   public orders: Pedido[];
   public tableHeads: ITableHeads[];
   public colorStatus: colorStatusType = 'warning';
+
+  public pedido: Pedido = new Pedido();
+  public showModal: boolean = false;
+  public showModalAction: boolean = false;
 
   constructor(private pedidoService: PedidoService) {}
 
@@ -36,5 +40,21 @@ export class InitialClientComponent implements OnInit {
 
   public lengthByStatus() {
     return this.orders.filter((order) => order.status == this.status).length;
+  }
+
+  toggleModal(id?: number) {
+    if (id) {
+      console.log(id);
+      this.pedido = this.orders.find((pedido) => pedido.id == id);
+    }
+    this.showModal = !this.showModal;
+  }
+
+  confirmacaoRecolhimento() {
+    this.pedido.status = 'RECOLHIDO';
+    this.pedidoService.alterar(this.pedido).subscribe((pedido) => {
+      alert('Pedido recolhido');
+    });
+    this.toggleModal();
   }
 }

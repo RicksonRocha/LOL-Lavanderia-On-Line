@@ -19,6 +19,7 @@ import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
 import { ReceitaComponent } from './pages/receita/receita.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { InitialClientComponent } from './pages/initial-client/client.component';
+import { InitialEmployeeComponent } from './pages/initial-employee/initial-employee.component';
 import { FieisComponent } from './pages/fieis/fieis.component';
 import { SharedModule } from './shared';
 
@@ -46,6 +47,7 @@ import { SharedModule } from './shared';
     ClientesComponent,
     FieisComponent,
     InitialClientComponent,
+    InitialEmployeeComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
