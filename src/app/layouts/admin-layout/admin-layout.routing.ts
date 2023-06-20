@@ -12,6 +12,7 @@ import { ReceitaComponent } from 'src/app/pages/receita/receita.component';
 import { ClientesComponent } from 'src/app/pages/clientes/clientes.component';
 import { FieisComponent } from 'src/app/pages/fieis/fieis.component';
 import { AuthGuard } from '../auth-layout/auth.guard';
+import { InitialEmployeeComponent } from 'src/app/pages/initial-employee/initial-employee.component';
 
 export const AdminLayoutRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -22,6 +23,14 @@ export const AdminLayoutRoutes: Routes = [
     canActivate: [AuthGuard],
     data: {
       role: 'admin, gerente, func',
+    },
+  },
+  {
+    path: 'initial-employee',
+    component: InitialEmployeeComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: 'admin, func',
     },
   },
   { path: 'purchase', component: PurchaseComponent },

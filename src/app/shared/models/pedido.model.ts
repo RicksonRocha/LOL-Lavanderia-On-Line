@@ -6,7 +6,7 @@ export enum ColorStatus {
   REJEITADO = 'danger',
   CANCELADO = 'danger',
   RECOLHIDO = 'light',
-  AGUARDANDO = 'primary',
+  AGUARDANDO_PAGAMENTO = 'primary',
   PAGO = 'warning2',
   FINALIZADO = 'success',
 }
@@ -16,7 +16,7 @@ export type StatusType =
   | 'REJEITADO'
   | 'CANCELADO'
   | 'RECOLHIDO'
-  | 'AGUARDANDO'
+  | 'AGUARDANDO PAGAMENTO'
   | 'PAGO'
   | 'FINALIZADO';
 
