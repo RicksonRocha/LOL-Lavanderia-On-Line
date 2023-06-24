@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Roupa } from 'src/app/shared/models/roupa.model';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoupaService {
-  private BASE_URL = 'http://localhost:8080/api/roupas';
+  private BASE_URL = env.BASE_URL + 'roupas';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
