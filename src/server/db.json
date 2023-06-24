@@ -99,7 +99,7 @@
     {
       "id": 2,
       "data": "2023-06-17T21:11:23.750Z",
-      "status": "PAGO",
+      "status": "FINALIZADO",
       "price": 966,
       "deadline": 8,
       "roupas": [
@@ -133,7 +133,7 @@
     {
       "id": 4,
       "data": "2023-06-19T22:40:47.826Z",
-      "status": "RECOLHIDO",
+      "status": "AGUARDANDO PAGAMENTO",
       "price": 4,
       "deadline": 2,
       "roupas": [

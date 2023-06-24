@@ -7,7 +7,7 @@ import { Pedido } from 'src/app/shared/models/pedido.model';
   providedIn: 'root',
 })
 export class PedidoService {
-  private BASE_URL = 'http://localhost:3000/pedidos/';
+  private BASE_URL = 'http://localhost:8080/api/pedidos';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export class PedidoService {
   }
 
   remover(id: number): Observable<Pedido> {
-    return this.httpClient.delete<Pedido>(this.BASE_URL + id, this.httpOptions);
+    return this.httpClient.delete<Pedido>(this.BASE_URL + '/' + id, this.httpOptions);
   }
 
   inserir(pedido: Pedido): Observable<Pedido> {
@@ -30,7 +30,7 @@ export class PedidoService {
 
   alterar(pedido: Pedido): Observable<Pedido> {
     return this.httpClient.put<Pedido>(
-      this.BASE_URL + pedido.id,
+      this.BASE_URL + '/' + pedido.id,
       JSON.stringify(pedido),
       this.httpOptions
     );
