@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
     );
     this.pedido = new Pedido(
       null,
-      new Date(),
+      new Date().toLocaleDateString().split('/').reverse().join('-'),
       null,
       totalPricePedido,
       maiorPrazo,

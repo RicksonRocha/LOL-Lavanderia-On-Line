@@ -89,37 +89,43 @@ export class AdminComponent implements OnInit {
       .map((o) => ({ ...o, date: dateFormatter(new Date(o.deadline)) }));
   }
 
-  private filterDate(dateStatus) {
-    switch (dateStatus) {
-      case 'all':
-        return this.ordersFiltered;
-
-      case 'today':
-        return this.ordersFiltered.filter(
-          (o, i) => new Date(o.deadline).getDate() == new Date().getDate()
-        );
+  private filtrarPedidosTipo(type: 'all' | 'today') {
+    if (type === 'all') {
+      this.ordersFiltered = this.orders;
+    } else {
+      this.ordersFiltered = this.orders.filter((order) => {
+        const today = new Date().toLocaleDateString().split('/').reverse().join('-');
+        if (order.data === today) {
+          return order;
+        }
+      });
     }
+  }
+
+  private filtrarPedidosDatas(initialDate, finalDate) {
+    this.ordersFiltered = this.orders.filter((order) => {
+      const orderDate = new Date(order.data).getTime();
+      const startDate = new Date(initialDate).getTime();
+      const endDate = new Date(finalDate).getTime();
+      const isBetweenDates = orderDate >= startDate && orderDate <= endDate;
+      if (isBetweenDates) {
+        return order;
+      }
+    });
   }
 
   public handleChangeDate(event) {
     const { name, value } = event.target;
-    if (name == 'initialDate') {
+    if (name === 'inlineRadio') {
+      this.filtrarPedidosTipo(value);
+    } else if (name === 'initialDate') {
       this.initialDate = value;
-    } else if (name == 'finalDate') {
-      this.finalDate = value;
     } else {
-      this.ordersFiltered = this.filterDate(value);
-      this.formatDate();
+      this.finalDate = value;
     }
   }
 
   public handleClickDates() {
-    this.ordersFiltered = this.orders.filter((o) => {
-      const orderDate = new Date(o.deadline).getTime();
-      const start = new Date(this.initialDate).getTime();
-      const end = new Date(this.finalDate).getTime();
-      return orderDate >= start && orderDate <= end;
-    });
-    this.formatDate();
+    this.filtrarPedidosDatas(this.initialDate, this.finalDate);
   }
 }

@@ -68,7 +68,7 @@
       "name": "Harry",
       "email": "harry.potter@mail.com",
       "password": "1234",
-      "birth_date": "31/07/1980"
+      "birth_date": "2003-06-24"
     },
     {
       "id": 4,
@@ -81,7 +81,7 @@
   "pedidos": [
     {
       "id": 1,
-      "data": "2023-06-17T21:06:04.055Z",
+      "data": "2023-06-17",
       "status": "CANCELADO",
       "price": 136,
       "deadline": 2,
@@ -98,7 +98,7 @@
     },
     {
       "id": 2,
-      "data": "2023-06-17T21:11:23.750Z",
+      "data": "2023-06-17",
       "status": "FINALIZADO",
       "price": 966,
       "deadline": 8,
@@ -115,7 +115,7 @@
     },
     {
       "id": 3,
-      "data": "2023-06-17T21:11:42.839Z",
+      "data": "2023-06-17",
       "status": "REJEITADO",
       "price": 10.75,
       "deadline": 2,
@@ -132,7 +132,7 @@
     },
     {
       "id": 4,
-      "data": "2023-06-19T22:40:47.826Z",
+      "data": "2023-06-19",
       "status": "AGUARDANDO PAGAMENTO",
       "price": 4,
       "deadline": 2,
@@ -149,7 +149,7 @@
     },
     {
       "id": 5,
-      "data": "2023-06-19T23:52:38.128Z",
+      "data": "2023-06-19",
       "status": "FINALIZADO",
       "price": 92,
       "deadline": 2,
@@ -166,7 +166,7 @@
     },
     {
       "id": 6,
-      "data": "2023-06-24T18:13:42.741Z",
+      "data": "2023-06-24",
       "status": "EM ABERTO",
       "price": 16,
       "deadline": 4,
@@ -186,6 +186,40 @@
           "deadline": 2,
           "quantity": 3,
           "totalPrice": 12
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "data": "2023-06-24",
+      "status": "EM ABERTO",
+      "price": 84,
+      "deadline": 8,
+      "roupas": [
+        {
+          "id": 16,
+          "name": "meia",
+          "price": 42,
+          "deadline": 8,
+          "quantity": 2,
+          "totalPrice": 84
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "data": "2023-06-24",
+      "status": "EM ABERTO",
+      "price": 126,
+      "deadline": 8,
+      "roupas": [
+        {
+          "id": 16,
+          "name": "meia",
+          "price": 42,
+          "deadline": 8,
+          "quantity": 3,
+          "totalPrice": 126
         }
       ]
     }
