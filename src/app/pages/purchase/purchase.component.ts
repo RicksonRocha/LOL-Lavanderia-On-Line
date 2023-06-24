@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPurchase, PURCHASE } from './purchase.types';
+import { PedidoService } from '../dashboard/service/pedido.service';
+import { Pedido } from 'src/app/shared/models/pedido.model';
 export interface ITableHeads {
   title: string;
 }
@@ -24,20 +26,32 @@ export const CLOTHESHEADS: ITableHeads[] = [
   styleUrls: ['./purchase.component.scss'],
 })
 export class PurchaseComponent implements OnInit {
+  @ViewChild('selectElement') myDOMEle: ElementRef;
   public tableHeads: ITableHeads[];
   public clothesHeads: ITableHeads[];
-  public purchase: IPurchase;
+  public pedidos: Pedido[];
   public isTableVisible: boolean = false;
 
-  constructor() {}
+  constructor(private pedidoService: PedidoService) {}
 
   ngOnInit(): void {
-    this.purchase = PURCHASE;
     this.tableHeads = TABLEHEADS;
     this.clothesHeads = CLOTHESHEADS;
+    this.listarPedidos();
   }
 
+  private listarPedidos() {
+    this.pedidoService.listarTodos().subscribe((pedidos) => {
+      this.pedidos = pedidos;
+    });
+  }
+
+  private buscarPedido(id: number) {}
+
   public handleSearch() {
-    this.isTableVisible = !this.isTableVisible;
+    let pedidoId = this.myDOMEle.nativeElement.value;
+    if (pedidoId) {
+      this.buscarPedido(pedidoId);
+    }
   }
 }
