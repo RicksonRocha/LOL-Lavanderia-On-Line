@@ -11,12 +11,21 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-search"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Pedido" type="number" min="1" />
+                    <select
+                      id="#pedido-selecionado"
+                      #selectElement
+                      class="form-control"
+                      placeholder="Pedido"
+                    >
+                      <option *ngFor="let pedido of pedidos" [value]="pedido.id">
+                        Pedido número {{ pedido.id }} - Data: {{ pedido.data }}
+                      </option>
+                    </select>
                   </div>
                 </div>
                 <div>
                   <button type="button" class="btn btn-primary my-4" (click)="handleSearch()">
-                    Pesquisar
+                    Buscar
                   </button>
                 </div>
               </form>
@@ -28,7 +37,7 @@
   </div>
 </div>
 
-<div class="container-fluid mt--7">
+<!-- <div class="container-fluid mt--7">
   <div class="row mt-5">
     <div class="col">
       <div class="card bg-default shadow">
@@ -101,4 +110,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

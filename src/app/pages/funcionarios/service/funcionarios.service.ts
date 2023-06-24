@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Funcionario } from 'src/app/shared/models/funcionario.model';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FuncionariosService {
-  private BASE_URL = 'http://localhost:8080/api/funcionario';
+  private BASE_URL = env.BASE_URL + 'funcionario';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
