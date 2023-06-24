@@ -9,6 +9,7 @@ export interface ITableHeads {
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Número do pedido' },
   { title: 'Data' },
+  { title: 'Prazo' },
   { title: 'Status' },
   { title: 'Preço total' },
 ];
@@ -30,7 +31,7 @@ export class PurchaseComponent implements OnInit {
   public tableHeads: ITableHeads[];
   public clothesHeads: ITableHeads[];
   public pedidos: Pedido[];
-  public isTableVisible: boolean = false;
+  public pedidoDetalhe: Pedido | undefined = undefined;
 
   constructor(private pedidoService: PedidoService) {}
 
@@ -46,7 +47,12 @@ export class PurchaseComponent implements OnInit {
     });
   }
 
-  private buscarPedido(id: number) {}
+  private buscarPedido(id: number) {
+    this.pedidoService.buscarPorId(id).subscribe((pedido) => {
+      this.pedidoDetalhe = pedido;
+      console.log('pedido deatlhe', this.pedidoDetalhe);
+    });
+  }
 
   public handleSearch() {
     let pedidoId = this.myDOMEle.nativeElement.value;
