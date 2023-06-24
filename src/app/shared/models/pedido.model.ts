@@ -28,7 +28,7 @@ export class ItemRoupa extends Roupa {
 export class Pedido {
   public constructor(
     public id?: number,
-    public data?: Date,
+    public data?: Date | string,
     public status?: StatusType,
     public price?: number,
     public deadline?: number,
