@@ -62,7 +62,7 @@
       "deadline": 2
     }
   ],
-  "funcionarios": [
+  "funcionario": [
     {
       "id": 1,
       "name": "Harry",
