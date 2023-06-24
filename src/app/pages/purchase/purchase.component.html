@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<!-- <div class="container-fluid mt--7">
+<div class="container-fluid mt--7">
   <div class="row mt-5">
     <div class="col">
       <div class="card bg-default shadow">
@@ -45,31 +45,30 @@
           <h3 class="text-white mb-0">Detalhes do pedido</h3>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="pedidoDetalhe !== undefined">
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                <th
+                  class="text-center"
+                  scope="col"
+                  *ngFor="let head of tableHeads; index as i; first as isFirst"
+                >
                   {{ head.title }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngIf="isTableVisible">
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">{{ purchase.id }}</span>
-                    </div>
-                  </div>
+              <tr>
+                <th class="text-center" scope="row">
+                  {{ pedidoDetalhe.id }}
                 </th>
-                <td>{{ purchase.deadline }}</td>
-                <td>
-                  <span class="badge badge-dot mr-4">
-                    {{ purchase.status }}
-                  </span>
+                <td class="text-center">{{ pedidoDetalhe.data }}</td>
+                <td class="text-center">{{ pedidoDetalhe.deadline }}</td>
+                <td class="text-center">
+                  {{ pedidoDetalhe.status }}
                 </td>
-                <td>{{ purchase.price }}</td>
+                <td class="text-center">{{ pedidoDetalhe.price }}</td>
               </tr>
             </tbody>
           </table>
@@ -78,31 +77,29 @@
         <div class="card-header bg-transparent border-0">
           <h3 class="text-white mb-0">Roupas do pedido</h3>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="pedidoDetalhe !== undefined">
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" *ngFor="let head of clothesHeads; index as i; first as isFirst">
+                <th
+                  class="text-center"
+                  scope="col"
+                  *ngFor="let head of clothesHeads; index as i; first as isFirst"
+                >
                   {{ head.title }}
                 </th>
               </tr>
             </thead>
-            <tbody *ngIf="isTableVisible">
-              <tr *ngFor="let item of purchase.items; index as i; first as isFirst">
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">{{ item.name }}</span>
-                    </div>
-                  </div>
+            <tbody>
+              <tr *ngFor="let roupa of pedidoDetalhe.roupas; index as i; first as isFirst">
+                <th class="text-center" scope="row">
+                  {{ roupa.name }}
                 </th>
-                <td>
-                  <span class="badge badge-dot mr-4">
-                    {{ item.quantity }}
-                  </span>
+                <td class="text-center">
+                  {{ roupa.quantity }}
                 </td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.deadline }}</td>
+                <td class="text-center">{{ roupa.price }}</td>
+                <td class="text-center">{{ roupa.deadline }}</td>
               </tr>
             </tbody>
           </table>
@@ -110,4 +107,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

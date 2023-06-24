@@ -163,6 +163,31 @@
           "totalPrice": 92
         }
       ]
+    },
+    {
+      "id": 6,
+      "data": "2023-06-24T18:13:42.741Z",
+      "status": "EM ABERTO",
+      "price": 16,
+      "deadline": 4,
+      "roupas": [
+        {
+          "id": 10,
+          "name": "Camisa 2",
+          "price": 2,
+          "deadline": 4,
+          "quantity": 2,
+          "totalPrice": 4
+        },
+        {
+          "id": 15,
+          "name": "jaqueta",
+          "price": 4,
+          "deadline": 2,
+          "quantity": 3,
+          "totalPrice": 12
+        }
+      ]
     }
   ]
 }
