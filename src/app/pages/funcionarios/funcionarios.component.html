@@ -32,7 +32,7 @@
                 </td>
                 <td>{{ func.name }}</td>
                 <td>{{ func.email }}</td>
-                <td>{{ func.birth_date }}</td>
+                <td>{{ func.birth_date | date:'yyyy-MM-dd'}}</td>
                 <td>
                   <div ngbDropdown placement="bottom-right">
                     <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>

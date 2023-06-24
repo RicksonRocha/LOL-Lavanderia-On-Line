@@ -7,7 +7,7 @@ import { Roupa } from 'src/app/shared/models/roupa.model';
   providedIn: 'root',
 })
 export class RoupaService {
-  private BASE_URL = 'http://localhost:3000/roupas/';
+  private BASE_URL = 'http://localhost:8080/api/roupas';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export class RoupaService {
   }
 
   remover(id: number): Observable<Roupa> {
-    return this.httpClient.delete<Roupa>(this.BASE_URL + id, this.httpOptions);
+    return this.httpClient.delete<Roupa>(this.BASE_URL + '/' + id, this.httpOptions);
   }
 
   inserir(roupa: Roupa): Observable<Roupa> {
@@ -30,7 +30,7 @@ export class RoupaService {
 
   alterar(roupa: Roupa): Observable<Roupa> {
     return this.httpClient.put<Roupa>(
-      this.BASE_URL + roupa.id,
+      this.BASE_URL + '/' + roupa.id,
       JSON.stringify(roupa),
       this.httpOptions
     );

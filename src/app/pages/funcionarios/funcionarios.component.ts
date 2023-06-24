@@ -15,20 +15,6 @@ export const TABLEHEADS: ITableHeads[] = [
   { title: 'Ações' },
 ];
 
-export type IFuncionario = {
-  id: number;
-  name: string;
-  email: string;
-  senha: string;
-  birthDate: Date | string;
-};
-
-const FUNCIONARIOS: IFuncionario[] = [
-  { id: 1, name: 'Harry', email: 'harry.potter@mail.com', senha: '1234', birthDate: today },
-  { id: 2, name: 'Hermione', email: 'hermione.granger@mail.com', senha: '1234', birthDate: today },
-  { id: 3, name: 'Rony', email: 'rony.weasley@mail.com', senha: '1234', birthDate: today },
-];
-
 @Component({
   selector: 'app-funcionarios',
   templateUrl: './funcionarios.component.html',
@@ -99,7 +85,7 @@ export class FuncionariosComponent implements OnInit {
 
   toggleSalvar() {
     const { name, email, birth_date } = this.formFuncionario.form.value;
-    
+
     if (this.modalType == 'adicionar') {
       let funcionarioNovo = new Funcionario(null, name, email, null, birth_date);
       this.funcionariosService.inserir(funcionarioNovo).subscribe((funcionario) => {
@@ -107,7 +93,13 @@ export class FuncionariosComponent implements OnInit {
         this.listarFuncionarios();
       });
     } else {
-      let funcionarioEditado = new Funcionario(this.funcionarioSelecionado, name, email, null, birth_date);
+      let funcionarioEditado = new Funcionario(
+        this.funcionarioSelecionado,
+        name,
+        email,
+        null,
+        birth_date
+      );
       console.log(funcionarioEditado);
       this.funcionariosService.alterar(funcionarioEditado).subscribe((funcionario) => {
         alert('alterado com sucesso');
@@ -137,7 +129,6 @@ export class FuncionariosComponent implements OnInit {
   ngOnInit() {
     this.tableHeads = TABLEHEADS;
     this.listarFuncionarios();
-    this.funcionarios = FUNCIONARIOS;
   }
 
   listarFuncionarios(): void {
