@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioService } from 'src/app/auth/services/usuario.service';
 import { LoginService } from 'src/app/layouts/auth-layout/services/login.service';
 import { Login } from 'src/app/shared';
 
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private loginService: LoginService,
+    private userService: UsuarioService,
     private route: ActivatedRoute
   ) {
     if (this.loginService.userLogged) {
@@ -35,11 +37,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     const { login, password } = this.formLogin.form.value;
     if (login !== undefined && password !== undefined) {
-      this.loginService.login({ login, password }).subscribe((usu) => {
+      this.userService.login({ login, password }).subscribe((usu) => {
+        console.log('usuario login', usu);
         if (usu != null) {
           this.loginService.userLogged = usu;
           this.loading = false;
-          this.router.navigate(['/initial-client']);
+          const isUserClient = this.loginService.userLogged.profile === 'cliente';
+          this.router.navigate([isUserClient ? '/initial-client' : 'initial-employee']);
         } else {
           this.message = 'Usuário/Senha inválidos.';
         }

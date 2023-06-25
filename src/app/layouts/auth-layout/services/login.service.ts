@@ -23,25 +23,4 @@ export class LoginService {
   logout() {
     delete localStorage[LS_KEY];
   }
-
-  login(login: Login): Observable<User | null> {
-    this.usuarioService.existeUsuario(login).subscribe((usuario) => {
-      console.log(usuario);
-    });
-
-    // let user = new User(1, 'Usuário - Func', login.login, login.password, 'cliente');
-
-    // if (login.login == login.password) {
-    //   if (login.login == 'admin') {
-    //     user = new User(2, 'Usuário - Admin', login.login, login.password, 'administrador');
-    //   } else if (login.login == 'gerente') {
-    //     user = new User(3, 'Usuário - Gerente', login.login, login.password, 'funcionário');
-    //   }
-    //   return of(user);
-    // } else {
-    //   return of(null);
-    // }
-
-    return of(null);
-  }
 }

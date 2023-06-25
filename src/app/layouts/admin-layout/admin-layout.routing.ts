@@ -22,7 +22,7 @@ export const AdminLayoutRoutes: Routes = [
     component: InitialClientComponent,
     canActivate: [AuthGuard],
     data: {
-      role: 'admin, gerente, func',
+      role: 'administrador, cliente',
     },
   },
   {
@@ -30,7 +30,7 @@ export const AdminLayoutRoutes: Routes = [
     component: InitialEmployeeComponent,
     canActivate: [AuthGuard],
     data: {
-      role: 'admin, func',
+      role: 'administrador, funcionário',
     },
   },
   { path: 'purchase', component: PurchaseComponent },
