@@ -23,7 +23,9 @@ export class AuthGuard implements CanActivate {
     let url = state.url;
 
     if (usuarioLogado) {
+      console.log('usuario logado', usuarioLogado.profile);
       const role = route.data?.['role'];
+      console.log('role', role);
       if (role && role.indexOf(usuarioLogado.profile) === -1) {
         // Se o perfil do usuário não está no perfil da rota
         // vai para login

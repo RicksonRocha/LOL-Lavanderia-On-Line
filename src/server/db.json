@@ -14,6 +14,36 @@
       "city": "Curitiba",
       "state": "PR",
       "cep": "82840180"
+    },
+    {
+      "id": 2,
+      "name": "Pedro",
+      "login": "pedro@email.com",
+      "password": "123",
+      "profile": "funcionário",
+      "cpf": "123123",
+      "tel": "123123",
+      "number": "",
+      "street": "Rua Gastão Luiz Cruls",
+      "neighborhood": "Bairro Alto",
+      "city": "Curitiba",
+      "state": "PR",
+      "cep": "82840180"
+    },
+    {
+      "id": 3,
+      "name": "Admin",
+      "login": "pedro@email.com",
+      "password": "123",
+      "profile": "administrador",
+      "cpf": "123123",
+      "tel": "123123",
+      "number": "",
+      "street": "Rua Gastão Luiz Cruls",
+      "neighborhood": "Bairro Alto",
+      "city": "Curitiba",
+      "state": "PR",
+      "cep": "82840180"
     }
   ],
   "roupas": [

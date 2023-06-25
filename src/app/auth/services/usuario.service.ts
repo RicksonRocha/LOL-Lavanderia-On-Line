@@ -42,10 +42,10 @@ export class UsuarioService {
     );
   }
 
-  existeUsuario(login: Login): Observable<User> {
-    let queryParams = new HttpParams();
-    queryParams.append('email', login.login);
-    queryParams.append('password', login.password);
-    return this.httpClient.get<User>(this.BASE_URL, { ...this.httpOptions, params: queryParams });
+  login(login: Login): Observable<User | null> {
+    return this.buscarPorId(3);
+
+    // const params = new HttpParams().set('email', login.login).set('password', login.password);
+    // return this.httpClient.get<User | null>(this.BASE_URL, { ...this.httpOptions, params });
   }
 }
