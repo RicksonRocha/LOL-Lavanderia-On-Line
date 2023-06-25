@@ -23,7 +23,10 @@ export class ReceitaComponent implements OnInit {
   @ViewChild('conteudo', { static: false }) conteudo: ElementRef;
   public tableHeads: ITableHeads[];
   public receita: Pedido[];
+  public receitaFiltrada: Pedido[];
   public finalPrice: number;
+  public initialDate: string;
+  public finalDate: string;
 
   constructor(private pedidoService: PedidoService, private router: Router) {}
 
@@ -32,12 +35,43 @@ export class ReceitaComponent implements OnInit {
     this.listarPedidosReceita();
   }
 
+  private updateFinalPrice(pedidos) {
+    this.finalPrice = pedidos.reduce((prev, pedido) => prev + pedido.price, 0);
+  }
+
   private listarPedidosReceita() {
     this.pedidoService.listarTodos().subscribe((pedidos) => {
       const pagos = pedidos.filter((pedido) => pedido.status == 'PAGO');
       this.receita = pagos;
-      this.finalPrice = pagos.reduce((prev, pedido) => prev + pedido.price, 0);
+      this.receitaFiltrada = pagos;
+      this.updateFinalPrice(pagos);
     });
+  }
+
+  private filtrarPedidosDatas(initialDate, finalDate) {
+    this.receitaFiltrada = this.receita.filter((order) => {
+      const orderDate = new Date(order.data).getTime();
+      const startDate = new Date(initialDate).getTime();
+      const endDate = new Date(finalDate).getTime();
+      const isBetweenDates = orderDate >= startDate && orderDate <= endDate;
+      if (isBetweenDates) {
+        return order;
+      }
+    });
+  }
+
+  public handleChangeDate(event) {
+    const { name, value } = event.target;
+    if (name === 'initialDate') {
+      this.initialDate = value;
+    } else {
+      this.finalDate = value;
+    }
+  }
+
+  public handleClickDates() {
+    this.filtrarPedidosDatas(this.initialDate, this.finalDate);
+    this.updateFinalPrice(this.receitaFiltrada);
   }
 
   public voltar() {
@@ -55,7 +89,11 @@ export class ReceitaComponent implements OnInit {
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      doc.save('Relatório de Receita.pdf');
+
+      let title = 'Relatório de Receita';
+      if (this.initialDate) title += ` ${this.initialDate}`;
+      if (this.finalDate) title += ` ${this.finalDate}`;
+      doc.save(`${title}.pdf`);
     });
   }
 }
