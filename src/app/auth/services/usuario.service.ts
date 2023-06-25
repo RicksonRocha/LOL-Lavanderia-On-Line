@@ -43,9 +43,13 @@ export class UsuarioService {
   }
 
   login(login: Login): Observable<User | null> {
-    return this.buscarPorId(1);
+    return this.buscarPorId(3);
 
     // const params = new HttpParams().set('email', login.login).set('password', login.password);
     // return this.httpClient.get<User | null>(this.BASE_URL, { ...this.httpOptions, params });
+  }
+
+  listarUsuariosCliente(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.BASE_URL + 'cliente/', this.httpOptions);
   }
 }

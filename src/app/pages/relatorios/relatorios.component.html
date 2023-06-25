@@ -1,25 +1,11 @@
 <div class="header bg-gradient-danger pb-7 pt-5 pt-md-8">
   <div class="container-fluid">
-    <div class="row d-flex align-items-center mb-2">
-      <div class="col-auto">
-        <div class="icon icon-shape bg-white text-danger rounded-circle shadow">
-          <i class="fa fa-search"></i>
-        </div>
-      </div>
-      <div class="col">
-        <h2 class="text-white">Relatórios</h2>
-      </div>
-    </div>
     <div class="row">
-      <div class="col-6">
+      <div class="col-4">
         <div class="card card-stats mb-4 mb-xl-0 border border-5 border-primary">
           <div class="card-body">
             <form role="form">
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Relatorio de receita</label>
-                </div>
-              </div>
+              <h3>Relatório de Receita</h3>
               <div class="form-row border-top border-light pt-3">
                 <div class="form-group col-md-6">
                   <label class="custom-label">Data de início</label>
@@ -36,7 +22,12 @@
                 </div>
               </div>
               <div>
-                <button type="button" class="btn btn-primary my-1" routerLinkActive="active" [routerLink]="['/receita']">
+                <button
+                  type="button"
+                  class="btn btn-primary my-1"
+                  routerLinkActive="active"
+                  [routerLink]="['/receita']"
+                >
                   Gerar relatório
                 </button>
               </div>
@@ -44,17 +35,18 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-4">
         <div class="card card-stats mb-4 mb-xl-0 border border-5 border-primary">
           <div class="card-body">
             <form role="form">
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Relatorio de clientes</label>
-                </div>
-              </div>
-              <div>
-                <button type="button" class="btn btn-primary my-1" routerLinkActive="active" [routerLink]="['/clientes']">
+              <h3>Relatório de Clientes</h3>
+              <div class="border-top border-light pt-3">
+                <button
+                  type="button"
+                  class="btn btn-primary my-1"
+                  routerLinkActive="active"
+                  [routerLink]="['/clientes']"
+                >
                   Gerar relatório
                 </button>
               </div>
@@ -62,20 +54,18 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="row mt-2">
-      <div class="col-6">
+      <div class="col-4">
         <div class="card card-stats mb-4 mb-xl-0 border border-5 border-primary">
           <div class="card-body">
             <form role="form">
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Relatorio de clientes fiéis</label>
-                </div>
-              </div>
-              <div>
-                <button type="button" class="btn btn-primary my-1" routerLinkActive="active" [routerLink]="['/fieis']">
+              <h3>Relatório de Clientes Fiéis</h3>
+              <div class="border-top border-light pt-3">
+                <button
+                  type="button"
+                  class="btn btn-primary my-1"
+                  routerLinkActive="active"
+                  [routerLink]="['/fieis']"
+                >
                   Gerar relatório
                 </button>
               </div>

@@ -3,29 +3,15 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ITableHeads } from '../purchase/purchase.component';
 import { dateFormatter } from '../utils';
-
-const today = dateFormatter(new Date());
+import { PedidoService } from '../dashboard/service/pedido.service';
+import { Pedido } from 'src/app/shared/models/pedido.model';
+import { Router } from '@angular/router';
 
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Numero pedido' },
   { title: 'Cliente' },
-  { title: 'Valor total' },
-  { title: 'Quantidade de peças' },
   { title: 'Data' },
-];
-
-export type IReceita = {
-  pedido: number;
-  cliente: string;
-  valor: string;
-  quantidade: string;
-  data: Date | string;
-};
-
-const RECEITAS: IReceita[] = [
-  { pedido: 1, cliente: 'Joao', valor: 'R$ 65,00', quantidade: '12', data: today },
-  { pedido: 2, cliente: 'Felipe', valor: 'R$ 45,00', quantidade: '8', data: today },
-  { pedido: 3, cliente: 'Francisco', valor: 'R$ 51,00', quantidade: '10', data: today },
+  { title: 'Preço total do pedido' },
 ];
 
 @Component({
@@ -36,13 +22,26 @@ const RECEITAS: IReceita[] = [
 export class ReceitaComponent implements OnInit {
   @ViewChild('conteudo', { static: false }) conteudo: ElementRef;
   public tableHeads: ITableHeads[];
-  public receita: IReceita[];
+  public receita: Pedido[];
+  public finalPrice: number;
 
-  constructor() {}
+  constructor(private pedidoService: PedidoService, private router: Router) {}
 
   ngOnInit() {
     this.tableHeads = TABLEHEADS;
-    this.receita = RECEITAS;
+    this.listarPedidosReceita();
+  }
+
+  private listarPedidosReceita() {
+    this.pedidoService.listarTodos().subscribe((pedidos) => {
+      const pagos = pedidos.filter((pedido) => pedido.status == 'PAGO');
+      this.receita = pagos;
+      this.finalPrice = pagos.reduce((prev, pedido) => prev + pedido.price, 0);
+    });
+  }
+
+  public voltar() {
+    this.router.navigate(['/relatorios']);
   }
 
   gerarPDF() {

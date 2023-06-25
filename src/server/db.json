@@ -234,7 +234,7 @@
     {
       "id": 8,
       "data": "2023-06-24",
-      "status": "EM ABERTO",
+      "status": "PAGO",
       "price": 126,
       "deadline": 8,
       "roupas": [
@@ -251,7 +251,7 @@
     {
       "id": 9,
       "data": "2023-06-25",
-      "status": "EM ABERTO",
+      "status": "PAGO",
       "price": 4.3,
       "deadline": 2,
       "roupas": [

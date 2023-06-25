@@ -7,30 +7,29 @@
     <div class="col">
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0">
-          <h3 class="text-white mb-0">Receita do dia 07/05/2023 até o dia 16/05/2023</h3>
+          <h3 class="text-white mb-0">Relatório de receita</h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-dark table-flush">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" *ngFor="let head of tableHeads; index as i; first as isFirst">
+                <th
+                  class="text-center"
+                  scope="col"
+                  *ngFor="let head of tableHeads; index as i; first as isFirst"
+                >
                   {{ head.title }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let receita of receita; index as i; first as isFirst">
-                <td scope="row">
-                  <div class="media align-items-center">
-                    <div class="media-body">
-                      <span class="mb-0 text-sm">{{ receita.pedido }}</span>
-                    </div>
-                  </div>
-                </td>
-                <td>{{ receita.cliente }}</td>
-                <td>{{ receita.valor }}</td>
-                <td>{{ receita.quantidade }}</td>
-                <td>{{ receita.data }}</td>
+              <tr *ngFor="let pedido of receita">
+                <th class="text-center" scope="row">
+                  {{ pedido.id }}
+                </th>
+                <td class="text-center">{{ pedido.usuarioId }}</td>
+                <td class="text-center">{{ pedido.data }}</td>
+                <td class="text-center">R${{ pedido.price }}</td>
               </tr>
             </tbody>
           </table>
@@ -44,13 +43,18 @@
         <tbody>
           <tr id="addr0" data-id="0" class="hidden">
             <td>
+              <label for="valorFinal">Receita dos pedidos acima</label>
               <input
-                type="text"
+                id="valorFinal"
                 name="valorfinal"
+                value="R${{ finalPrice }}"
                 placeholder="Valor final total"
                 class="form-control float-left"
-                readonly="true"
+                disabled
               />
+            </td>
+            <td class="float-right">
+              <button class="btn btn-primary" (click)="voltar()">Voltar</button>
             </td>
             <td class="float-right">
               <button class="btn btn-primary" (click)="gerarPDF()">Gerar relatório PDF</button>

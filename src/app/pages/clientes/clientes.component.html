@@ -19,22 +19,23 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cliente of cliente; index as i; first as isFirst">
+              <tr *ngFor="let cliente of clientes; index as i; first as isFirst">
                 <td scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{ cliente.codigo }}</span>
+                      <span class="mb-0 text-sm">{{ cliente.id }}</span>
                     </div>
                   </div>
                 </td>
-                <td>{{ cliente.nome }}</td>
-                <td>{{ cliente.email }}</td>
-                <td>{{ cliente.CPF }}</td>
-                <td>{{ cliente.telefone }}</td>
-                <td>{{ cliente.CEP }}</td>
-                <td>{{ cliente.UF }}</td>
-                <td>{{ cliente.cidade }}</td>
-                <td>{{ cliente.rua }}</td>
+                <td>{{ cliente.name }}</td>
+                <td>{{ cliente.login }}</td>
+                <td>{{ cliente.cpf }}</td>
+                <td>{{ cliente.tel }}</td>
+                <td>{{ cliente.cep }}</td>
+                <td>{{ cliente.state }}</td>
+                <td>{{ cliente.city }}</td>
+                <td>{{ cliente.neighborhood }}</td>
+                <td>{{ cliente.street }}</td>
               </tr>
             </tbody>
           </table>
@@ -47,6 +48,9 @@
       <table class="table align-items-center">
         <tbody>
           <tr id="addr0" data-id="0" class="hidden">
+            <td class="float-right">
+              <button class="btn btn-primary" (click)="voltar()">Voltar</button>
+            </td>
             <td class="float-right">
               <button class="btn btn-primary" (click)="gerarPDF()">Gerar relatório PDF</button>
             </td>

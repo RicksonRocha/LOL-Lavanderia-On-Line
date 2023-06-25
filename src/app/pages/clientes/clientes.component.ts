@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ITableHeads } from '../purchase/purchase.component';
+import { UsuarioService } from 'src/app/auth/services/usuario.service';
+import { User } from 'src/app/shared';
+import { Router } from '@angular/router';
 
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Código' },
@@ -12,6 +15,7 @@ export const TABLEHEADS: ITableHeads[] = [
   { title: 'CEP' },
   { title: 'UF' },
   { title: 'Cidade' },
+  { title: 'Bairro' },
   { title: 'Rua' },
 ];
 
@@ -27,42 +31,6 @@ export type ICliente = {
   rua: string;
 };
 
-const CLIENTES: ICliente[] = [
-  {
-    codigo: 1,
-    nome: 'Fulano',
-    email: 'fulano@gmail.com',
-    CPF: '111.111.111-11',
-    telefone: '(11) 1111-1111',
-    CEP: 80000000,
-    UF: 'SP',
-    cidade: 'São Paulo',
-    rua: 'Rua das almas',
-  },
-  {
-    codigo: 2,
-    nome: 'Beltrano',
-    email: 'beltrano@gmail.com',
-    CPF: '222.222.222-22',
-    telefone: '(22) 2222-2222',
-    CEP: 80000001,
-    UF: 'RJ',
-    cidade: 'Volta Redonda',
-    rua: 'Rua das cruzes',
-  },
-  {
-    codigo: 3,
-    nome: 'Ciclano',
-    email: 'ciclano@gmail.com',
-    CPF: '333.333.333-33',
-    telefone: '(33) 3333-3333',
-    CEP: 80000002,
-    UF: 'MG',
-    cidade: 'Divinópolis',
-    rua: 'Rua das luas',
-  },
-];
-
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -71,16 +39,22 @@ const CLIENTES: ICliente[] = [
 export class ClientesComponent implements OnInit {
   @ViewChild('conteudo', { static: false }) conteudo: ElementRef;
   public tableHeads: ITableHeads[];
-  public cliente: ICliente[];
+  public clientes: User[];
 
-  constructor() {}
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit() {
     this.tableHeads = TABLEHEADS;
-    this.cliente = CLIENTES;
+    this.listarUsuariosCliente();
   }
 
-  gerarPDF() {
+  private listarUsuariosCliente() {
+    this.usuarioService.listarUsuariosCliente().subscribe((usuariosClientes) => {
+      this.clientes = usuariosClientes;
+    });
+  }
+
+  public gerarPDF() {
     const doc = new jsPDF();
 
     const conteudo = this.conteudo.nativeElement;
@@ -91,7 +65,11 @@ export class ClientesComponent implements OnInit {
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      doc.save('Relatório Clientes.pdf');
+      doc.save(`Relatório Clientes - ${new Date().toLocaleDateString()}.pdf`);
     });
+  }
+
+  public voltar() {
+    this.router.navigate(['/relatorios']);
   }
 }
