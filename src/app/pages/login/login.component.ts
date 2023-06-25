@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     const { login, password } = this.formLogin.form.value;
     if (login !== undefined && password !== undefined) {
       this.userService.login({ login, password }).subscribe((usu) => {
-        console.log('usuario login', usu);
         if (usu != null) {
           this.loginService.userLogged = usu;
           this.loading = false;

@@ -37,8 +37,8 @@ export class PedidoService {
     );
   }
 
-  buscarClientePedido(id: number): Observable<Pedido[]> {
-    return this.httpClient.get<Pedido[]>(`${this.BASE_URL}-cliente/${id}`);
+  buscarPedidoCliente(clienteId: number): Observable<Pedido[]> {
+    return this.httpClient.get<Pedido[]>(this.BASE_URL + '/cliente/' + clienteId, this.httpOptions);
   }
 
   buscarPorId(id: number): Observable<Pedido> {

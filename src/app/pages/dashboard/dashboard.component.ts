@@ -4,6 +4,8 @@ import { Roupa } from 'src/app/shared/models/roupa.model';
 import { RoupaService } from '../roupas/service/roupa.service';
 import { NgForm } from '@angular/forms';
 import { PedidoService } from './service/pedido.service';
+import { UsuarioService } from 'src/app/auth/services/usuario.service';
+import { LoginService } from 'src/app/layouts/auth-layout/services/login.service';
 
 declare var $: any;
 @Component({
@@ -23,7 +25,11 @@ export class DashboardComponent implements OnInit {
   public action: 'aceitar' | 'rejeitar' = 'aceitar';
   public numeroPedido: number;
 
-  constructor(private roupaService: RoupaService, private pedidoService: PedidoService) {}
+  constructor(
+    private roupaService: RoupaService,
+    private pedidoService: PedidoService,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit() {
     this.roupaService.listarTodos().subscribe((roupas) => {
@@ -92,6 +98,8 @@ export class DashboardComponent implements OnInit {
       } else {
         this.pedido.status = 'REJEITADO';
       }
+
+      this.pedido.usuarioId = this.loginService.userLogged.id;
 
       this.pedidoService.inserir(this.pedido).subscribe((pedido) => {
         this.numeroPedido = newAction == 'aceitar' ? pedido.id : undefined;

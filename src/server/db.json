@@ -16,6 +16,21 @@
       "cep": "82840180"
     },
     {
+      "id": 4,
+      "name": "Fulano de tal",
+      "login": "rickson@email.com",
+      "password": "123",
+      "profile": "cliente",
+      "cpf": "123123",
+      "tel": "123123",
+      "number": "",
+      "street": "Rua Gastão Luiz Cruls",
+      "neighborhood": "Bairro Alto",
+      "city": "Curitiba",
+      "state": "PR",
+      "cep": "82840180"
+    },
+    {
       "id": 2,
       "name": "Pedro",
       "login": "pedro@email.com",
@@ -232,6 +247,60 @@
           "totalPrice": 126
         }
       ]
+    },
+    {
+      "id": 9,
+      "data": "2023-06-25",
+      "status": "EM ABERTO",
+      "price": 4.3,
+      "deadline": 2,
+      "roupas": [
+        {
+          "id": 17,
+          "name": "Calça",
+          "price": 2.15,
+          "deadline": 2,
+          "quantity": 2,
+          "totalPrice": 4.3
+        }
+      ],
+      "usuarioId": 1
+    },
+    {
+      "id": 10,
+      "data": "2023-06-25",
+      "status": "EM ABERTO",
+      "price": 8,
+      "deadline": 2,
+      "roupas": [
+        {
+          "id": 15,
+          "name": "jaqueta",
+          "price": 4,
+          "deadline": 2,
+          "quantity": 2,
+          "totalPrice": 8
+        }
+      ],
+      "usuarioId": 1
+    },
+    {
+      "id": 11,
+      "data": "2023-06-25",
+      "status": "EM ABERTO",
+      "price": 24,
+      "deadline": 4,
+      "roupas": [
+        {
+          "id": 10,
+          "name": "Camisa 2",
+          "price": 2,
+          "deadline": 4,
+          "quantity": 12,
+          "totalPrice": 24
+        }
+      ],
+      "usuarioId": 4
     }
   ]
 }

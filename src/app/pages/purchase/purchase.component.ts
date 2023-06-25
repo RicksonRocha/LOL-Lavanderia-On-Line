@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPurchase, PURCHASE } from './purchase.types';
 import { PedidoService } from '../dashboard/service/pedido.service';
 import { Pedido } from 'src/app/shared/models/pedido.model';
+import { LoginService } from 'src/app/layouts/auth-layout/services/login.service';
 export interface ITableHeads {
   title: string;
 }
@@ -34,7 +35,7 @@ export class PurchaseComponent implements OnInit {
   public pedidos: Pedido[];
   public pedidoDetalhe: Pedido | undefined = undefined;
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.tableHeads = TABLEHEADS;
@@ -43,7 +44,8 @@ export class PurchaseComponent implements OnInit {
   }
 
   private listarPedidos() {
-    this.pedidoService.listarTodos().subscribe((pedidos) => {
+    const clientId = this.loginService.userLogged.id;
+    this.pedidoService.buscarPedidoCliente(clientId).subscribe((pedidos) => {
       this.pedidos = pedidos;
     });
   }
@@ -51,7 +53,6 @@ export class PurchaseComponent implements OnInit {
   private buscarPedido(id: number) {
     this.pedidoService.buscarPorId(id).subscribe((pedido) => {
       this.pedidoDetalhe = pedido;
-      console.log('pedido deatlhe', this.pedidoDetalhe);
     });
   }
 
