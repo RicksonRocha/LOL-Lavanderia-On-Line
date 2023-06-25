@@ -2,38 +2,18 @@
   "usuarios": [
     {
       "id": 1,
-      "name": "Func",
-      "login": "func",
-      "password": "func",
-      "profile": "func"
-    },
-    {
-      "id": 2,
-      "name": "Admin",
-      "login": "admin",
-      "password": "admin",
-      "profile": "admin"
-    },
-    {
-      "id": 3,
-      "name": "Gerente",
-      "login": "gerente",
-      "password": "gerente",
-      "profile": "gerente"
-    },
-    {
-      "id": 5,
-      "name": "Rickson Rocha",
+      "name": "Rickson",
       "login": "rickson@email.com",
       "password": "123",
-      "profile": "func"
-    },
-    {
-      "id": 6,
-      "name": "Usuário",
-      "login": "usuario@email.com",
-      "password": "123",
-      "profile": "func"
+      "profile": "cliente",
+      "cpf": "123123",
+      "tel": "123123",
+      "number": "",
+      "street": "Rua Gastão Luiz Cruls",
+      "neighborhood": "Bairro Alto",
+      "city": "Curitiba",
+      "state": "PR",
+      "cep": "82840180"
     }
   ],
   "roupas": [

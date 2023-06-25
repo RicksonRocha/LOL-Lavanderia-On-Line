@@ -16,7 +16,7 @@ export interface IReport {
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Número do pedido' },
   { title: 'Data' },
-  { title: 'Prazo' },
+  { title: 'Prazo em dias' },
   { title: 'Status' },
   { title: 'Valor' },
   { title: 'Ação' },

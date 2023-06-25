@@ -4,6 +4,16 @@ export class User {
     public name?: string,
     public login?: string,
     public password?: string,
-    public profile?: string
+    public profile?: 'cliente' | 'funcionário' | 'administrador',
+
+    public cpf?: string,
+    public tel?: string,
+
+    public number?: string,
+    public street?: string,
+    public neighborhood?: string,
+    public city?: string,
+    public state?: string,
+    public cep?: string
   ) {}
 }
