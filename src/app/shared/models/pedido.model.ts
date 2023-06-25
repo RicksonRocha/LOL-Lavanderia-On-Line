@@ -32,6 +32,7 @@ export class Pedido {
     public status?: StatusType,
     public price?: number,
     public deadline?: number,
-    public roupas?: ItemRoupa[]
+    public roupas?: ItemRoupa[],
+    public usuarioId?: number
   ) {}
 }

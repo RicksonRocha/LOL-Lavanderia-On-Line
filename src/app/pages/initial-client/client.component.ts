@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ITableHeads, TABLEHEADS, colorStatusType } from './client.types';
 import { PedidoService } from '../dashboard/service/pedido.service';
 import { Pedido, StatusType } from 'src/app/shared/models/pedido.model';
+import { LoginService } from 'src/app/layouts/auth-layout/services/login.service';
 
 @Component({
   selector: 'app-client',
@@ -14,7 +15,7 @@ export class InitialClientComponent implements OnInit {
   public tableHeads: ITableHeads[];
   public colorStatus: colorStatusType = 'warning';
 
-  constructor(private pedidoService: PedidoService) {}
+  constructor(private pedidoService: PedidoService, private loginService: LoginService) {}
 
   ngOnInit() {
     this.tableHeads = TABLEHEADS;
@@ -22,7 +23,8 @@ export class InitialClientComponent implements OnInit {
   }
 
   listarPedidos(): Pedido[] {
-    this.pedidoService.listarTodos().subscribe({
+    const clientId = this.loginService.userLogged.id;
+    this.pedidoService.buscarPedidoCliente(clientId).subscribe({
       next: (pedidos) => {
         if (pedidos.length == 0) {
           this.orders = [];
