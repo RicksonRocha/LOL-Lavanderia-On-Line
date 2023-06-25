@@ -5,7 +5,7 @@ export interface ITableHeads {
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Número do pedido' },
   { title: 'Data' },
-  { title: 'Prazo' },
+  { title: 'Prazo em dias' },
   { title: 'Status' },
   { title: 'Valor' },
   { title: 'Ações' },

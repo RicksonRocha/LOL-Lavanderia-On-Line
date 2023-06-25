@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Routes } from '@angular/router';
+import { Router } from '@angular/router';
 import axios from 'axios';
 import { UsuarioService } from 'src/app/auth/services/usuario.service';
 import { LoginService } from 'src/app/layouts/auth-layout/services/login.service';
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     }),
   });
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -72,10 +72,31 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit() {
-    const { username, email } = this.profileForm.value;
-    let user = new User(6, username, email, '123', 'func');
+    const {
+      username,
+      email,
+      cpf,
+      tel,
+      address: { number, street, neighborhood, city, state, cep },
+    } = this.profileForm.value;
+    let user = new User(
+      null,
+      username,
+      email,
+      '123',
+      'cliente',
+      cpf,
+      tel,
+      number,
+      street,
+      neighborhood,
+      city,
+      state,
+      cep
+    );
     this.usuarioService.inserir(user).subscribe((usuario) => {
-      alert('Usuário cadastrado!');
+      alert(`Usuário ${usuario.name} criado com sucesso!`);
+      this.router.navigate(['/login']);
     });
   }
 }

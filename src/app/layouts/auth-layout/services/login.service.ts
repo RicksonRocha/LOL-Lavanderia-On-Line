@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { UsuarioService } from 'src/app/auth/services/usuario.service';
 import { Login, User } from 'src/app/shared';
 
 const LS_KEY: string = 'userLogged';
@@ -8,7 +9,7 @@ const LS_KEY: string = 'userLogged';
   providedIn: 'root',
 })
 export class LoginService {
-  constructor() {}
+  constructor(private usuarioService: UsuarioService) {}
 
   public get userLogged(): User {
     let user = localStorage[LS_KEY];
@@ -24,27 +25,23 @@ export class LoginService {
   }
 
   login(login: Login): Observable<User | null> {
-    let user = new User(1, 'Usuário - Func', login.login, login.password, 'func');
+    this.usuarioService.existeUsuario(login).subscribe((usuario) => {
+      console.log(usuario);
+    });
 
-    if (login.login == login.password) {
-      if (login.login == 'admin') {
-        user = new User(2, 'Usuário - Admin', login.login, login.password, 'admin');
-      } else if (login.login == 'gerente') {
-        user = new User(3, 'Usuário - Gerente', login.login, login.password, 'gerente');
-      }
-      return of(user);
-    } else {
-      return of(null);
-    }
-  }
+    // let user = new User(1, 'Usuário - Func', login.login, login.password, 'cliente');
 
-  register(name: string, email: string): void {
-    // let user = new User(1, 'Usuário - Func', login.login, login.password, 'func');
     // if (login.login == login.password) {
     //   if (login.login == 'admin') {
-    //     user = new User(2, 'Usuário - Admin', login.login, login.password, 'admin');
+    //     user = new User(2, 'Usuário - Admin', login.login, login.password, 'administrador');
     //   } else if (login.login == 'gerente') {
-    //     user = new User(3, 'Usuário - Gerente', login.login, login.password, 'gerente');
+    //     user = new User(3, 'Usuário - Gerente', login.login, login.password, 'funcionário');
     //   }
+    //   return of(user);
+    // } else {
+    //   return of(null);
+    // }
+
+    return of(null);
   }
 }

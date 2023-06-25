@@ -9,7 +9,7 @@ export interface ITableHeads {
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Número do pedido' },
   { title: 'Data' },
-  { title: 'Prazo' },
+  { title: 'Prazo em dias' },
   { title: 'Status' },
   { title: 'Preço total' },
 ];
@@ -17,8 +17,9 @@ export const TABLEHEADS: ITableHeads[] = [
 export const CLOTHESHEADS: ITableHeads[] = [
   { title: 'Nome' },
   { title: 'Quantidade' },
-  { title: 'Preço' },
-  { title: 'Prazo' },
+  { title: 'Preço unitário' },
+  { title: 'Preço total' },
+  { title: 'Prazo em dias' },
 ];
 
 @Component({

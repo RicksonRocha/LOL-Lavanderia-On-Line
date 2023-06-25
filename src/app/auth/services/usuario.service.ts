@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/shared';
+import { Login, User } from 'src/app/shared';
+import { environment as env } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuarioService {
-  BASE_URL = 'http://localhost:3000/usuarios/';
+  BASE_URL = env.BASE_URL + 'usuarios/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -39,5 +40,12 @@ export class UsuarioService {
       JSON.stringify(usuario),
       this.httpOptions
     );
+  }
+
+  existeUsuario(login: Login): Observable<User> {
+    let queryParams = new HttpParams();
+    queryParams.append('email', login.login);
+    queryParams.append('password', login.password);
+    return this.httpClient.get<User>(this.BASE_URL, { ...this.httpOptions, params: queryParams });
   }
 }
