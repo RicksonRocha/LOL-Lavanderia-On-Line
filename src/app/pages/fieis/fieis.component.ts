@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ITableHeads } from '../purchase/purchase.component';
+import { FieisService } from './services/fieis.service';
+import { Fieis } from 'src/app/shared/models/fieis.model';
 
 export const TABLEHEADS: ITableHeads[] = [
   { title: 'Código' },
@@ -10,39 +12,6 @@ export const TABLEHEADS: ITableHeads[] = [
   { title: 'Quantidade total de pedidos' },
   { title: 'Valor total comprado' },
 ];
-
-export type IFieis = {
-  codigo: number;
-  nome: string;
-  email: string;
-  quantidade: string;
-  valor: string;
-};
-
-const FIEIS: IFieis[] = [
-  {
-    codigo: 1,
-    nome: 'Fulano',
-    email: 'fulano@gmail.com',
-    quantidade: '20',
-    valor: 'R$ 850,00',
-  },
-  {
-    codigo: 2,
-    nome: 'Beltrano',
-    email: 'beltrano@gmail.com',
-    quantidade: '15',
-    valor: 'R$ 590,00',
-  },
-  {
-    codigo: 3,
-    nome: 'Ciclano',
-    email: 'ciclano@gmail.com',
-    quantidade: '10',
-    valor: 'R$ 420,00',
-  },
-];
-
 @Component({
   selector: 'app-fieis',
   templateUrl: './fieis.component.html',
@@ -51,13 +20,20 @@ const FIEIS: IFieis[] = [
 export class FieisComponent implements OnInit {
   @ViewChild('conteudo', { static: false }) conteudo: ElementRef;
   public tableHeads: ITableHeads[];
-  public fieis: IFieis[];
+  public fieis: Fieis[];
 
-  constructor() {}
+  constructor(private fieisService: FieisService) {}
 
   ngOnInit() {
     this.tableHeads = TABLEHEADS;
-    this.fieis = FIEIS;
+    this.fieis = [];
+    this.listarFieis();
+  }
+
+  listarFieis(): void {
+    this.fieisService.listarTodos().subscribe((fieis) => {
+      this.fieis = fieis;
+    });
   }
 
   gerarPDF() {

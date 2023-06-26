@@ -41,7 +41,7 @@ export class ReceitaComponent implements OnInit {
 
   private listarPedidosReceita() {
     this.pedidoService.listarTodos().subscribe((pedidos) => {
-      const pagos = pedidos.filter((pedido) => pedido.status == 'PAGO');
+      const pagos = pedidos.filter((pedido) => pedido.status == 'FINALIZADO');
       this.receita = pagos;
       this.receitaFiltrada = pagos;
       this.updateFinalPrice(pagos);
